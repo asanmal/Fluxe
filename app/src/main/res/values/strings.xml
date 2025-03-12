@@ -1,3 +1,18 @@
 <resources>
-    <string name="app_name">fluxe</string>
+    <string name="app_name">Fluxe</string>
+
+    <string name="loginBtn">Login</string>
+    <string name="registroBtn">Registrarme</string>
+
+    <!--Datos de registro-->
+    <string name="registroTxt">REGISTRO</string>
+    <string name="username">Username</string>
+    <string name="firstName">First Name</string>
+    <string name="lastName">Last Name</string>
+    <string name="secondName">Second Last Name</string>
+    <string name="birthdate">Birthdate</string>
+    <string name="email">Email</string>
+    <string name="pwd">Password</string>
+    <string name="registrarUsuario">REGISTRARME</string>
+
 </resources>
