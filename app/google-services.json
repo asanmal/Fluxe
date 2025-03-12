@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "755456289980",
+    "project_id": "fluxe-a2d2d",
+    "storage_bucket": "fluxe-a2d2d.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:755456289980:android:a59d03a5b75363bee2b4b9",
+        "android_client_info": {
+          "package_name": "com.tfg"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBgkuUR3E_dKMm2Zet2FlS69zfsdJ0fJtY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
