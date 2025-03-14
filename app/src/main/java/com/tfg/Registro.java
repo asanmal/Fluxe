@@ -47,6 +47,11 @@ public class Registro extends AppCompatActivity {
             actionBar.setDisplayHomeAsUpEnabled(true);
         }
 
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        }
+
+
         username = findViewById(R.id.username);
         firstName = findViewById(R.id.firstName);
         lastName = findViewById(R.id.lastName);
@@ -137,5 +142,12 @@ public class Registro extends AppCompatActivity {
 
                     }
                 });
+    }
+
+    //Accion de retroceso
+    @Override
+    public boolean onSupportNavigateUp(){
+        finish();
+        return super.onSupportNavigateUp();
     }
 }

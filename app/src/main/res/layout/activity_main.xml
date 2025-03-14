@@ -25,9 +25,11 @@
         <Button
             android:id="@+id/loginBtn"
             android:text="@string/loginBtn"
-            android:background="#6E6E6E"
+            android:backgroundTint="#3498db"
+            app:cornerRadius="10dp"
+            android:shape="rectangle"
             android:textColor="#fff"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="50dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
 
@@ -35,7 +37,9 @@
         <Button
             android:id="@+id/registroBtn"
             android:text="@string/registroBtn"
-            android:background="#6E6E6E"
+            android:backgroundTint="#3498db"
+            app:cornerRadius="10dp"
+            android:shape="rectangle"
             android:textColor="#fff"
             android:layout_marginTop="10dp"
             android:layout_width="match_parent"

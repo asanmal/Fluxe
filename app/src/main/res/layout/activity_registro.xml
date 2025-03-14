@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:fillViewport="true"
     android:background="#fff"
     tools:context=".Registro">
@@ -18,36 +18,39 @@
         android:gravity="center_horizontal"
         android:background="@android:color/white">
 
+        <!--Logo-->
+        <androidx.appcompat.widget.AppCompatImageView
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_marginTop="100dp"
+            android:layout_gravity="center"
+            android:src="@drawable/logofluxe"/>
+
         <!--Titulo-->
         <TextView
             android:text="@string/registroTxt"
             android:textStyle="bold"
-            android:textSize="20sp"
-            android:textColor="#000"
+            android:textSize="17sp"
+            android:textColor="#737373"
             android:gravity="center"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
-
-        <!--Logo central-->
-        <androidx.appcompat.widget.AppCompatImageView
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:layout_marginTop="10dp"
-            android:layout_gravity="center"
-            android:src="@drawable/logofluxe"/>
+            android:layout_marginBottom="5dp"
+            android:layout_width="400dp"
+            android:layout_height="50dp"/>
 
         <!--Usuario-->
         <com.google.android.material.textfield.TextInputLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_width="400dp"
+            android:layout_height="50dp"
+            android:layout_marginBottom="5dp">
+
 
             <EditText
                 android:id="@+id/username"
                 android:hint="@string/username"
                 android:inputType="textPersonName"
                 android:autofillHints="username"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_width="400dp"
+                android:layout_height="50dp"
                 android:layout_marginTop="10dp"
                 android:textColorHint="#000"/>
 
@@ -55,97 +58,103 @@
 
         <!--Nombre-->
         <com.google.android.material.textfield.TextInputLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_width="400dp"
+            android:layout_height="50dp"
+            android:layout_marginBottom="5dp">
 
             <EditText
                 android:id="@+id/firstName"
                 android:hint="@string/firstName"
                 android:importantForAutofill="no"
                 android:inputType="textCapWords|textAutoCorrect"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_width="400dp"
+                android:layout_height="50dp"
                 android:textColorHint="#000"/>
 
         </com.google.android.material.textfield.TextInputLayout>
 
         <!--Apellido1-->
         <com.google.android.material.textfield.TextInputLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_width="400dp"
+            android:layout_height="50dp"
+            android:layout_marginBottom="5dp">
 
             <EditText
                 android:id="@+id/lastName"
                 android:hint="@string/lastName"
                 android:importantForAutofill="no"
                 android:inputType="textCapWords|textAutoCorrect"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_width="400dp"
+                android:layout_height="50dp"
                 android:textColorHint="#000"/>
 
         </com.google.android.material.textfield.TextInputLayout>
 
         <!--Apellido2-->
         <com.google.android.material.textfield.TextInputLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_width="400dp"
+            android:layout_height="50dp"
+            android:layout_marginBottom="5dp">
 
             <EditText
                 android:id="@+id/secondName"
                 android:hint="@string/secondName"
                 android:importantForAutofill="no"
                 android:inputType="textCapWords|textAutoCorrect"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_width="400dp"
+                android:layout_height="50dp"
                 android:textColorHint="#000"/>
 
         </com.google.android.material.textfield.TextInputLayout>
 
         <!--Fecha de nacimiento-->
         <com.google.android.material.textfield.TextInputLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_width="400dp"
+            android:layout_height="50dp"
+            android:layout_marginBottom="5dp">
 
             <EditText
                 android:id="@+id/birthdate"
                 android:hint="@string/birthdate"
                 android:importantForAutofill="no"
                 android:inputType="date"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_width="400dp"
+                android:layout_height="50dp"
                 android:textColorHint="#000"/>
 
         </com.google.android.material.textfield.TextInputLayout>
 
         <!--Correo-->
         <com.google.android.material.textfield.TextInputLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_width="400dp"
+            android:layout_height="50dp"
+            android:layout_marginBottom="5dp">
 
             <EditText
                 android:id="@+id/email"
                 android:hint="@string/email"
                 android:inputType="textEmailAddress"
                 android:autofillHints="emailAddress"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_width="400dp"
+                android:layout_height="50dp"
                 android:textColorHint="#000"/>
 
         </com.google.android.material.textfield.TextInputLayout>
 
         <!--Contrasena-->
         <com.google.android.material.textfield.TextInputLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_width="400dp"
+            android:layout_height="50dp">
 
             <EditText
                 android:id="@+id/pwd"
                 android:hint="@string/pwd"
                 android:inputType="textPassword"
                 android:autofillHints="password"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textColorHint="#000"/>
+                android:layout_width="400dp"
+                android:layout_height="50dp"
+                android:textColorHint="#000"
+                app:passwordToggleEnabled="true"/>
 
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -154,12 +163,12 @@
         <Button
             android:id="@+id/registrarUsuario"
             android:text="@string/registrarUsuario"
-            android:backgroundTint="#6E6E6E"
+            android:backgroundTint="#3498db"
             android:textColor="#fff"
             app:cornerRadius="0dp"
             android:layout_marginTop="15dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+            android:layout_width="400dp"
+            android:layout_height="50dp"/>
 
 
     </androidx.appcompat.widget.LinearLayoutCompat>

@@ -2,10 +2,10 @@
     <string name="app_name">Fluxe</string>
 
     <string name="loginBtn">Login</string>
-    <string name="registroBtn">Registrarme</string>
+    <string name="registroBtn">Sign up</string>
 
     <!--Datos de registro-->
-    <string name="registroTxt">REGISTRO</string>
+    <string name="registroTxt">Sign up to share photos and see your friends photos.</string>
     <string name="username">Username</string>
     <string name="firstName">First Name</string>
     <string name="lastName">Last Name</string>
@@ -13,6 +13,11 @@
     <string name="birthdate">Birthdate</string>
     <string name="email">Email</string>
     <string name="pwd">Password</string>
-    <string name="registrarUsuario">REGISTRARME</string>
+    <string name="registrarUsuario">Sign up</string>
+
+    <!--Datos de inicio de sesion-->
+    <string name="emailLogin">Email</string>
+    <string name="pwdLogin">Password</string>
+    <string name="registroLogin">Login</string>
 
 </resources>
