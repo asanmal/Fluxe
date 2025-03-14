@@ -6,6 +6,7 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:fillViewport="true"
     android:background="#fff"
     tools:context=".Registro">
 
@@ -13,8 +14,11 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="10dp"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:gravity="center_horizontal"
+        android:background="@android:color/white">
 
+        <!--Titulo-->
         <TextView
             android:text="@string/registroTxt"
             android:textStyle="bold"
@@ -24,6 +28,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
 
+        <!--Logo central-->
         <androidx.appcompat.widget.AppCompatImageView
             android:layout_width="100dp"
             android:layout_height="100dp"
@@ -40,6 +45,7 @@
                 android:id="@+id/username"
                 android:hint="@string/username"
                 android:inputType="textPersonName"
+                android:autofillHints="username"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
@@ -120,6 +126,7 @@
                 android:id="@+id/email"
                 android:hint="@string/email"
                 android:inputType="textEmailAddress"
+                android:autofillHints="emailAddress"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textColorHint="#000"/>
@@ -135,6 +142,7 @@
                 android:id="@+id/pwd"
                 android:hint="@string/pwd"
                 android:inputType="textPassword"
+                android:autofillHints="password"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textColorHint="#000"/>
@@ -146,8 +154,9 @@
         <Button
             android:id="@+id/registrarUsuario"
             android:text="@string/registrarUsuario"
-            android:background="#6E6E6E"
+            android:backgroundTint="#6E6E6E"
             android:textColor="#fff"
+            app:cornerRadius="0dp"
             android:layout_marginTop="15dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
