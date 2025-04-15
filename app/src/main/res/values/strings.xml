@@ -5,7 +5,7 @@
     <string name="registroBtn">Sign up</string>
 
     <!--Datos de registro-->
-    <string name="registroTxt">Sign up to share photos and see your friends photos.</string>
+    <string name="registerTxt">Sign up to share photos and see your friends photos.</string>
     <string name="username">Username</string>
     <string name="firstName">First Name</string>
     <string name="lastName">Last Name</string>
@@ -13,11 +13,11 @@
     <string name="birthdate">Birthdate</string>
     <string name="email">Email</string>
     <string name="pwd">Password</string>
-    <string name="registrarUsuario">Sign up</string>
+    <string name="singUpUser">Sign up</string>
 
     <!--Datos de inicio de sesion-->
     <string name="emailLogin">Email</string>
     <string name="pwdLogin">Password</string>
-    <string name="registroLogin">Login</string>
+    <string name="registerLogin">Login</string>
 
 </resources>

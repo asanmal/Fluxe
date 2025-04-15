@@ -28,7 +28,7 @@
 
         <!--Titulo-->
         <TextView
-            android:text="@string/registroTxt"
+            android:text="@string/registerTxt"
             android:textStyle="bold"
             android:textSize="17sp"
             android:textColor="#737373"
@@ -161,8 +161,8 @@
 
         <!--Registrar-->
         <Button
-            android:id="@+id/registrarUsuario"
-            android:text="@string/registrarUsuario"
+            android:id="@+id/singUpUser"
+            android:text="@string/singUpUser"
             android:backgroundTint="#3498db"
             android:textColor="#fff"
             app:cornerRadius="0dp"

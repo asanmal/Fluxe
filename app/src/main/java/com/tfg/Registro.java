@@ -30,7 +30,7 @@ import java.util.HashMap;
 public class Registro extends AppCompatActivity {
 
     EditText username, firstName, lastName, secondName, birthdate, email, pwd;
-    Button registrarUsuario;
+    Button singUpUser;
 
     FirebaseAuth firebaseAuth;
 
@@ -59,16 +59,16 @@ public class Registro extends AppCompatActivity {
         birthdate = findViewById(R.id.birthdate);
         email = findViewById(R.id.email);
         pwd = findViewById(R.id.pwd);
-        registrarUsuario = findViewById(R.id.registrarUsuario);
+        singUpUser = findViewById(R.id.singUpUser);
 
         firebaseAuth = FirebaseAuth.getInstance();
 
-        registrarUsuario.setOnClickListener(new View.OnClickListener() {
+        singUpUser.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 String password = pwd.getText().toString();
                 String e_mail = email.getText().toString();
-                String registrar_usuario = registrarUsuario.getText().toString();
+                String singup_user = singUpUser.getText().toString();
 
                 if(!Patterns.EMAIL_ADDRESS.matcher(e_mail).matches()){
                     email.setError("Correo no válido");
@@ -76,14 +76,14 @@ public class Registro extends AppCompatActivity {
                     pwd.setError("Contraseña debe ser mayor de 8");
                     pwd.setFocusable(true);
                 } else {
-                    Registrar(e_mail, password);
+                    SignUp(e_mail, password);
                 }
             }
         });
     }
 
     //Metodo para hacer el registro de usuario
-    private void Registrar(String e_mail, String password){
+    private void SignUp(String e_mail, String password){
         firebaseAuth.createUserWithEmailAndPassword(e_mail, password)
                 .addOnCompleteListener(new OnCompleteListener<AuthResult>(){
                     @Override
