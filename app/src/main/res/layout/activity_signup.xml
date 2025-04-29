@@ -8,7 +8,7 @@
     android:layout_height="wrap_content"
     android:fillViewport="true"
     android:background="#fff"
-    tools:context=".Registro">
+    tools:context=".SignUpActivity">
 
     <androidx.appcompat.widget.LinearLayoutCompat
         android:layout_width="match_parent"

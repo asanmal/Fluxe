@@ -3,6 +3,7 @@
 
     <string name="loginBtn">Login</string>
     <string name="registroBtn">Sign up</string>
+    <string name="signoutBtn">Sign out</string>
 
     <!--Datos de registro-->
     <string name="registerTxt">Sign up to share photos and see your friends photos.</string>
@@ -18,6 +19,14 @@
     <!--Datos de inicio de sesion-->
     <string name="emailLogin">Email</string>
     <string name="pwdLogin">Password</string>
-    <string name="registerLogin">Login</string>
+    <string name="registerLogin">LOGIN</string>
+
+    <!-- Datos de inicio de sesion con google -->
+    <string name="default_web_client_id">755456289980-88kpu8u9s116v2hjv7v47jr6d6419r93.apps.googleusercontent.com</string>
+    <string name="googleLogin">Log in with Google</string>
+
+    <!--Dialogo personalizado de no inicio de sesion-->
+    <string name="noSeason">Could not log in, please try again.</string>
+    <string name="ok_no_season">Ok</string>
 
 </resources>
