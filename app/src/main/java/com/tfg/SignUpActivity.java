@@ -27,7 +27,7 @@ import java.util.HashMap;
 
 public class SignUpActivity extends AppCompatActivity {
 
-    EditText username, firstName, lastName, secondName, birthdate, email, pwd;
+    EditText username, firstName, lastName, secondName, email, pwd;
     Button singUpUser;
 
     FirebaseAuth firebaseAuth;
@@ -37,12 +37,12 @@ public class SignUpActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        EdgeToEdge.enable(this);
+        //EdgeToEdge.enable(this);
         setContentView(R.layout.activity_signup);
 
         ActionBar actionBar = getSupportActionBar();
         if (actionBar != null){
-            actionBar.setTitle("SignUpActivity");
+            actionBar.setTitle("Sign Up");
             actionBar.setDisplayShowHomeEnabled(true);
             actionBar.setDisplayHomeAsUpEnabled(true);
         }
@@ -56,7 +56,6 @@ public class SignUpActivity extends AppCompatActivity {
         firstName = findViewById(R.id.firstName);
         lastName = findViewById(R.id.lastName);
         secondName = findViewById(R.id.secondName);
-        birthdate = findViewById(R.id.birthdate);
         email = findViewById(R.id.email);
         pwd = findViewById(R.id.pwd);
         singUpUser = findViewById(R.id.singUpUser);
@@ -117,7 +116,7 @@ public class SignUpActivity extends AppCompatActivity {
                             UserData.put("secondName", second_Name);
                             UserData.put("email", e_mail);
                             UserData.put("password", password);
-                            UserData.put("profile_picure", "");
+                            UserData.put("profile_picture", "");
 
                             //HomeActivity una instancia de la bbdd
                             FirebaseDatabase database = FirebaseDatabase.getInstance("https://fluxe-a2d2d-default-rtdb.europe-west1.firebasedatabase.app");

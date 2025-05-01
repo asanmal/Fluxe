@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "755456289980",
+    "firebase_url": "https://fluxe-a2d2d-default-rtdb.europe-west1.firebasedatabase.app",
+    "project_id": "fluxe-a2d2d",
+    "storage_bucket": "fluxe-a2d2d.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:755456289980:android:a59d03a5b75363bee2b4b9",
+        "android_client_info": {
+          "package_name": "com.tfg"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "755456289980-0k49e0fcsab7elh8gsgb1lftoe56b29v.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.tfg",
+            "certificate_hash": "8da01ba445d96cac5c5ae0dd2cac0b492bb10eb7"
+          }
+        },
+        {
+          "client_id": "755456289980-88kpu8u9s116v2hjv7v47jr6d6419r93.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBgkuUR3E_dKMm2Zet2FlS69zfsdJ0fJtY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "755456289980-88kpu8u9s116v2hjv7v47jr6d6419r93.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -49,7 +49,7 @@ public class LoginActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        EdgeToEdge.enable(this);
+        //EdgeToEdge.enable(this);
         setContentView(R.layout.activity_login);
 
         ActionBar actionBar = getSupportActionBar();
@@ -135,7 +135,8 @@ public class LoginActivity extends AppCompatActivity {
                 //Ejecucion metodo de login con google
                 firebaseAuthentication(account);
             } catch (ApiException e){
-                Toast.makeText(this, e.getMessage(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "Error de inicio de sesión: " + e.getStatusCode(), Toast.LENGTH_SHORT).show();
+
             }
         }
     }
@@ -167,7 +168,7 @@ public class LoginActivity extends AppCompatActivity {
                                 //UserData.put("secondName", second_Name);
                                 UserData.put("email", email);
                                 //UserData.put("password", password);
-                                UserData.put("profile_picure", "");
+                                UserData.put("profile_picture", "");
 
                                 //HomeActivity una instancia de la bbdd
                                 FirebaseDatabase database = FirebaseDatabase.getInstance("https://fluxe-a2d2d-default-rtdb.europe-west1.firebasedatabase.app");

@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".option.MyDataActivity">
+
+    <!-- Contenido scrollable ocupa -->
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:padding="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:text="@string/dataTxt"
+                android:layout_gravity="center"
+                android:textSize="22sp"
+                android:textColor="#000000"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+            <!-- Imagen de perfil -->
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/dataImg"
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="5dp"
+                android:src="@drawable/login"/>
+
+            <!--USERNAME-->
+            <TextView
+                android:id="@+id/dataUsername"
+                android:text="@string/dataUsername"
+                android:textSize="20sp"
+                android:textColor="#000000"
+                android:layout_marginTop="15dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+            <!--FIRST NAME-->
+            <TextView
+                android:id="@+id/dataFirstName"
+                android:text="@string/dataFirstName"
+                android:textSize="20sp"
+                android:textColor="#000000"
+                android:layout_marginTop="6dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+            <!-- LAST NAME -->
+            <TextView
+                android:id="@+id/dataLastName"
+                android:text="@string/dataLastName"
+                android:textSize="20sp"
+                android:textColor="#000000"
+                android:layout_marginTop="6dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+            <!-- SECOND LAST NAME-->
+            <TextView
+                android:id="@+id/dataSecondName"
+                android:text="@string/dataSecondName"
+                android:textSize="20sp"
+                android:textColor="#000000"
+                android:layout_marginTop="6dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+            <!-- EMAIL -->
+            <TextView
+                android:id="@+id/dataEmail"
+                android:text="@string/dataEmail"
+                android:textSize="20sp"
+                android:textColor="#000000"
+                android:layout_marginTop="6dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+            <!-- PASSWORD-->
+            <TextView
+                android:id="@+id/dataPwd"
+                android:text="@string/dataPwd"
+                android:textSize="20sp"
+                android:textColor="#000000"
+                android:layout_marginTop="6dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+
+
+        </LinearLayout>
+    </ScrollView>
+
+    <!-- Botones abajo, siempre visibles -->
+    <LinearLayout
+        android:orientation="vertical"
+        android:padding="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#FFFFFF">
+
+        <Button
+            android:id="@+id/update"
+            android:text="@string/update"
+            android:backgroundTint="#065064"
+            app:cornerRadius="10dp"
+            android:layout_gravity="center"
+            android:drawableLeft="@drawable/update_icon"
+            android:drawablePadding="15dp"
+            android:padding="10dp"
+            android:textColor="#FFFFFF"
+            android:layout_width="290dp"
+            android:layout_height="wrap_content"/>
+
+        <Button
+            android:id="@+id/updatePwd"
+            android:text="@string/updatePwd"
+            android:backgroundTint="#065064"
+            app:cornerRadius="10dp"
+            android:layout_gravity="center"
+            android:drawableLeft="@drawable/update_icon"
+            android:drawablePadding="10dp"
+            android:padding="10dp"
+            android:textColor="#FFFFFF"
+            android:layout_width="290dp"
+            android:layout_height="wrap_content"/>
+    </LinearLayout>
+
+</LinearLayout>

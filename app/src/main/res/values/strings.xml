@@ -1,9 +1,9 @@
 <resources>
     <string name="app_name">Fluxe</string>
 
+    <!-- Botones principales de inicio de sesion -->
     <string name="loginBtn">Login</string>
     <string name="registroBtn">Sign up</string>
-    <string name="signoutBtn">Sign out</string>
 
     <!--Datos de registro-->
     <string name="registerTxt">Sign up to share photos and see your friends photos.</string>
@@ -11,7 +11,6 @@
     <string name="firstName">First Name</string>
     <string name="lastName">Last Name</string>
     <string name="secondName">Second Last Name</string>
-    <string name="birthdate">Birthdate</string>
     <string name="email">Email</string>
     <string name="pwd">Password</string>
     <string name="singUpUser">Sign up</string>
@@ -28,5 +27,33 @@
     <!--Dialogo personalizado de no inicio de sesion-->
     <string name="noSeason">Could not log in, please try again.</string>
     <string name="ok_no_season">Ok</string>
+
+    <!-- Perfil -->
+    <string name="usernameTxt">Username: </string>
+    <string name="usernameProfile"> -- </string>
+    <string name="emailTxt">Email: </string>
+    <string name="emailProfile"> -- </string>
+    <string name="nameTxt">Name: </string>
+    <string name="nameProfile"> -- </string>
+
+    <!-- Menu -->
+    <string name="aboutMeOption">About Me</string>
+    <string name="newPostOption">New Post</string>
+    <string name="postOption">Posts</string>
+    <string name="userOption">Users</string>
+    <string name="chatsOption">Chats</string>
+    <string name="signoutBtn">Log out</string>
+    
+    <!-- Ajustes de perfil -->
+    <string name="dataTxt">My personal data</string>
+    <string name="dataImg"></string>
+    <string name="dataUsername">Username</string>
+    <string name="dataFirstName">First Name</string>
+    <string name="dataLastName">Last Name</string>
+    <string name="dataSecondName">Second Last Name</string>
+    <string name="dataEmail">Email</string>
+    <string name="dataPwd">Password</string>
+    <string name="update">Update data</string>
+    <string name="updatePwd">Update password</string>
 
 </resources>
