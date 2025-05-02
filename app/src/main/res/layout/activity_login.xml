@@ -36,7 +36,7 @@
         <!--Correo electronico-->
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="400dp"
-            android:layout_height="50dp"
+            android:layout_height="60dp"
             android:layout_marginTop="20dp">
 
             <EditText
@@ -53,7 +53,7 @@
         <!--Password-->
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="400dp"
-            android:layout_height="50dp"
+            android:layout_height="60dp"
             android:layout_marginTop="10dp"
             app:passwordToggleEnabled="true"
             app:passwordToggleTint="@color/appGeneral">

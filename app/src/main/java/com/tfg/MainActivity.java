@@ -1,6 +1,7 @@
 package com.tfg;
 
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -20,6 +21,7 @@ public class MainActivity extends AppCompatActivity {
 
         loginBtn = findViewById(R.id.loginBtn);
         registroBtn = findViewById(R.id.registroBtn);
+        changeFont();
 
         loginBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -34,7 +36,15 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(new Intent(MainActivity.this, SignUpActivity.class));
             }
         });
+    }
 
+    //Metodo para cambiar la  fuente
+    private void changeFont(){
+        //Fuente de letra
+        String locate = "fuente/sans_ligera.ttf";
+        Typeface tf = Typeface.createFromAsset(MainActivity.this.getAssets(), locate);
 
+        loginBtn.setTypeface(tf);
+        registroBtn.setTypeface(tf);
     }
 }

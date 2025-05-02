@@ -2,6 +2,7 @@ package com.tfg;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.util.Patterns;
 import android.view.View;
@@ -63,6 +64,10 @@ public class SignUpActivity extends AppCompatActivity {
         firebaseAuth = FirebaseAuth.getInstance();
         progressDialog = new ProgressDialog(SignUpActivity.this);
 
+        //Metoodo para cambiar la fuente
+        changeFont();
+
+        //Metodo de evento del boton de registro
         singUpUser.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -80,6 +85,21 @@ public class SignUpActivity extends AppCompatActivity {
                 }
             }
         });
+    }
+
+    //Metodo para cambiar la  fuente
+    private void changeFont(){
+        //Fuente de letra
+        String locate = "fuente/sans_ligera.ttf";
+        Typeface tf = Typeface.createFromAsset(SignUpActivity.this.getAssets(), locate);
+
+        username.setTypeface(tf);
+        firstName.setTypeface(tf);
+        lastName.setTypeface(tf);
+        secondName.setTypeface(tf);
+        email.setTypeface(tf);
+        pwd.setTypeface(tf);
+        singUpUser.setTypeface(tf);
     }
 
     //Metodo para hacer el registro de usuario

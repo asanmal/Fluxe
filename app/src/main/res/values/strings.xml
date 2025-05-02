@@ -29,7 +29,8 @@
     <string name="ok_no_season">Ok</string>
 
     <!-- Perfil -->
-    <string name="usernameTxt">Username: </string>
+    <string name="date"> -- </string>
+    <string name="usernameTxt">Welcome: </string>
     <string name="usernameProfile"> -- </string>
     <string name="emailTxt">Email: </string>
     <string name="emailProfile"> -- </string>
@@ -45,15 +46,23 @@
     <string name="signoutBtn">Log out</string>
     
     <!-- Ajustes de perfil -->
-    <string name="dataTxt">My personal data</string>
+    <string name="dataTxt">MY PERSONAL DATA</string>
     <string name="dataImg"></string>
-    <string name="dataUsername">Username</string>
-    <string name="dataFirstName">First Name</string>
-    <string name="dataLastName">Last Name</string>
-    <string name="dataSecondName">Second Last Name</string>
-    <string name="dataEmail">Email</string>
-    <string name="dataPwd">Password</string>
-    <string name="update">Update data</string>
-    <string name="updatePwd">Update password</string>
+    <string name="dataUsername"> -- </string>
+    <string name="dataFirstName"> -- </string>
+    <string name="dataLastName"> -- </string>
+    <string name="dataSecondName"> -- </string>
+    <string name="dataEmail"> -- </string>
+    <string name="dataPwd"> -- </string>
+    <string name="updateBtn">UPDATE DATA</string>
+    <string name="updatePwdBtn">UPDATE PASSWORD</string>
+
+    <!--TexView para editar la informacion-->
+    <string name="dataUsernameTxt">USERNAME: </string>
+    <string name="dataFirstNameTxt">FIRST NAME: </string>
+    <string name="dataLastNameTxt">LAST NAME: </string>
+    <string name="dataSecondNameTxt">SECOND LAST NAME: </string>
+    <string name="dataEmailTxt">EMAIL: </string>
+    <string name="dataPwdTxt">PASSWORD: </string>
 
 </resources>

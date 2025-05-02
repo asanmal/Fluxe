@@ -16,7 +16,7 @@
         <!-- Fondo top -->
         <androidx.appcompat.widget.AppCompatImageView
             android:layout_width="match_parent"
-            android:layout_height="200dp"
+            android:layout_height="150dp"
             android:src="@drawable/portada"
             android:scaleType="center"/>
 
@@ -24,7 +24,7 @@
         <androidx.appcompat.widget.LinearLayoutCompat
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="80dp"
+            android:layout_marginTop="50dp"
             android:orientation="vertical"
             android:padding="8dp">
 
@@ -34,10 +34,33 @@
                 android:layout_width="100dp"
                 android:layout_height="100dp"
                 android:layout_marginStart="20dp"
-                android:layout_marginTop="50dp"
+                android:layout_marginTop="10dp"
                 android:background="#065064"
                 android:padding="4dp"
                 android:scaleType="centerCrop" />
+
+            <!-- FECHA TODAY -->
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="5dp"
+                android:gravity="center">
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:src="@drawable/calendary_icon"/>
+
+                <TextView
+                    android:id="@+id/date"
+                    android:text="@string/date"
+                    android:textColor="#0B2C5B"
+                    android:layout_marginStart="6dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+
+            </androidx.appcompat.widget.LinearLayoutCompat>
 
             <!-- Datos del perfil -->
             <androidx.appcompat.widget.LinearLayoutCompat
@@ -50,9 +73,11 @@
                 <androidx.appcompat.widget.LinearLayoutCompat
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:gravity="center"
                     android:orientation="horizontal">
 
                     <TextView
+                        android:id="@+id/usernameTxt"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/usernameTxt"
@@ -72,9 +97,11 @@
                 <androidx.appcompat.widget.LinearLayoutCompat
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
                     android:orientation="horizontal">
 
                     <TextView
+                        android:id="@+id/emailTxt"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/emailTxt"
@@ -86,8 +113,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="5dp"
-                        android:background="#000000"
-                        android:textColor="#ffffff"/>
+                        android:textColor="#000000"/>
 
                 </androidx.appcompat.widget.LinearLayoutCompat>
 
@@ -98,6 +124,7 @@
                     android:orientation="horizontal">
 
                     <TextView
+                        android:id="@+id/nameTxt"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/nameTxt"

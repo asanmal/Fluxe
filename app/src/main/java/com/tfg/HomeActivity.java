@@ -1,6 +1,7 @@
 package com.tfg;
 
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -24,6 +25,10 @@ import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Picasso;
 import com.tfg.option.MyDataActivity;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
+
 
 public class HomeActivity extends AppCompatActivity {
 
@@ -34,9 +39,8 @@ public class HomeActivity extends AppCompatActivity {
     DatabaseReference DATABASE;
 
     ImageView profile_picture;
-    TextView usernameProfile;
-    TextView emailProfile;
-    TextView nameProfile;
+    TextView usernameTxt, emailTxt, nameTxt;
+    TextView date, usernameProfile, emailProfile, nameProfile;
 
     Button signoutBtn, aboutMeOption, newPostOption, postOption, userOption, chatsOption;
 
@@ -58,9 +62,14 @@ public class HomeActivity extends AppCompatActivity {
         DATABASE = firebaseDatabase.getReference("users");
 
         profile_picture = findViewById(R.id.profile_picture);
+        date = findViewById(R.id.date);
         usernameProfile = findViewById(R.id.usernameProfile);
         emailProfile = findViewById(R.id.emailProfile);
         nameProfile = findViewById(R.id.nameProfile);
+
+        usernameTxt = findViewById(R.id.usernameTxt);
+        emailTxt = findViewById(R.id.emailTxt);
+        nameTxt = findViewById(R.id.nameTxt);
 
         /*OPCIONES DE MENU*/
         aboutMeOption = findViewById(R.id.aboutMeOption);
@@ -70,6 +79,16 @@ public class HomeActivity extends AppCompatActivity {
         chatsOption = findViewById(R.id.chatsOption);
         signoutBtn = findViewById(R.id.signoutBtn);
 
+        //Cambar fuente
+        changeFont();
+
+        //Fecha actual
+        Date dates = new Date();
+        SimpleDateFormat dateC = new SimpleDateFormat("MMMM d, yyyy", Locale.ENGLISH);
+        String sDate = dateC.format(dates);
+        date.setText(sDate);
+
+        //Opcion de mis datos
         aboutMeOption.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -80,6 +99,7 @@ public class HomeActivity extends AppCompatActivity {
             }
         });
 
+        //Opcion para cerrar sesion
         signoutBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -87,6 +107,29 @@ public class HomeActivity extends AppCompatActivity {
                 signOut();
             }
         });
+    }
+
+    //Metodo para cambiar la  fuente
+    private void changeFont(){
+        //Fuente de letra
+        String locate = "fuente/sans_ligera.ttf";
+        Typeface tf = Typeface.createFromAsset(HomeActivity.this.getAssets(), locate);
+
+        date.setTypeface(tf);
+        usernameProfile.setTypeface(tf);
+        emailProfile.setTypeface(tf);
+        nameProfile.setTypeface(tf);
+        usernameTxt.setTypeface(tf);
+        emailTxt.setTypeface(tf);
+        nameTxt.setTypeface(tf);
+
+        //Cambiar fuente a los botones
+        signoutBtn.setTypeface(tf);
+        aboutMeOption.setTypeface(tf);
+        newPostOption.setTypeface(tf);
+        postOption.setTypeface(tf);
+        userOption.setTypeface(tf);
+        chatsOption.setTypeface(tf);
     }
 
     //LLamamos a onStart
@@ -119,13 +162,17 @@ public class HomeActivity extends AppCompatActivity {
                     //Obtenemos los valores
                     String username = "" + ds.child("username").getValue();
                     String email = "" + ds.child("email").getValue();
-                    String firstname = "" + ds.child("firstname").getValue();
+                    String firstname = "" + ds.child("firstName").getValue();
                     String profilePicture = "" + ds.child("profile_picture").getValue();
 
                     //Seteamos los datos
+                    if (nameProfile == null){
+                        nameProfile.setText("");
+                    } else{
+                        nameProfile.setText(firstname);
+                    }
                     usernameProfile.setText(username);
                     emailProfile.setText(email);
-                    nameProfile.setText(firstname);
 
                     //Gestionar la foto de perfil del usuario
                     try{

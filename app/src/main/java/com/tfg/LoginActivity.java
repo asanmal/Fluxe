@@ -3,6 +3,7 @@ package com.tfg;
 import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.util.Patterns;
 import android.view.View;
@@ -75,6 +76,9 @@ public class LoginActivity extends AppCompatActivity {
         //Creamos la solicitud de inicio para google
         createRequest();
 
+        //Metodo para cambiar la fuente
+        changeFont();
+
         //Asignamos evento al boton de ingresar
         registerLogin.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -101,6 +105,18 @@ public class LoginActivity extends AppCompatActivity {
                 signIn();
             }
         });
+    }
+
+    //Metodo para cambiar la fuente de las letras
+    private void changeFont(){
+        //Fuente de letra
+        String locate = "fuente/sans_ligera.ttf";
+        Typeface tf = Typeface.createFromAsset(LoginActivity.this.getAssets(), locate);
+
+        emailLogin.setTypeface(tf);
+        pwdLogin.setTypeface(tf);
+        registerLogin.setTypeface(tf);
+        googleLogin.setTypeface(tf);
     }
 
     //Metodo para crear una solicitud de inicio con google
@@ -163,11 +179,11 @@ public class LoginActivity extends AppCompatActivity {
 
                                 UserData.put("id", uid);
                                 UserData.put("username", username);
-                                //UserData.put("firstName", first_Name);
-                                //UserData.put("lastName", last_Name);
-                                //UserData.put("secondName", second_Name);
+                                UserData.put("firstName", "");
+                                UserData.put("lastName", "");
+                                UserData.put("secondName", "");
                                 UserData.put("email", email);
-                                //UserData.put("password", password);
+                                UserData.put("password", "");
                                 UserData.put("profile_picture", "");
 
                                 //HomeActivity una instancia de la bbdd
