@@ -51,7 +51,9 @@
                 android:layout_width="400dp"
                 android:layout_height="60dp"
                 android:layout_marginTop="10dp"
-                android:textColorHint="#000"/>
+                android:textColorHint="#000"
+                android:importantForAutofill="no"
+                android:background="#FFF"/>
 
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -68,7 +70,8 @@
                 android:inputType="textCapWords|textAutoCorrect"
                 android:layout_width="400dp"
                 android:layout_height="60dp"
-                android:textColorHint="#000"/>
+                android:textColorHint="#000"
+                android:background="#FFF"/>
 
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -85,7 +88,8 @@
                 android:inputType="textCapWords|textAutoCorrect"
                 android:layout_width="400dp"
                 android:layout_height="60dp"
-                android:textColorHint="#000"/>
+                android:textColorHint="#000"
+                android:background="#FFF"/>
 
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -102,7 +106,8 @@
                 android:inputType="textCapWords|textAutoCorrect"
                 android:layout_width="400dp"
                 android:layout_height="60dp"
-                android:textColorHint="#000"/>
+                android:textColorHint="#000"
+                android:background="#FFF"/>
 
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -119,14 +124,17 @@
                 android:autofillHints="emailAddress"
                 android:layout_width="400dp"
                 android:layout_height="60dp"
-                android:textColorHint="#000"/>
+                android:textColorHint="#000"
+                android:background="#FFF"/>
 
         </com.google.android.material.textfield.TextInputLayout>
 
         <!--Contrasena-->
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="400dp"
-            android:layout_height="60dp">
+            android:layout_height="60dp"
+            app:passwordToggleEnabled="true"
+            app:passwordToggleTint="@color/appGeneral">
 
             <EditText
                 android:id="@+id/pwd"
@@ -136,7 +144,8 @@
                 android:layout_width="400dp"
                 android:layout_height="60dp"
                 android:textColorHint="#000"
-                app:passwordToggleEnabled="true"/>
+                app:passwordToggleEnabled="true"
+                android:background="#FFF"/>
 
         </com.google.android.material.textfield.TextInputLayout>
 

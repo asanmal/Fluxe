@@ -44,7 +44,7 @@
     <string name="userOption">Users</string>
     <string name="chatsOption">Chats</string>
     <string name="signoutBtn">Log out</string>
-    
+
     <!-- Ajustes de perfil -->
     <string name="dataTxt">MY PERSONAL DATA</string>
     <string name="dataImg"></string>
@@ -64,5 +64,16 @@
     <string name="dataSecondNameTxt">SECOND LAST NAME: </string>
     <string name="dataEmailTxt">EMAIL: </string>
     <string name="dataPwdTxt">PASSWORD: </string>
+
+    <!-- CAMBIAR PASSWORD -->
+    <string name="myCredentials">My credentials</string>
+    <string name="currentEmail"> -- </string>
+    <string name="currentPwd"> -- </string>
+    <string name="currentEmailTxt">Current email: </string>
+    <string name="currentPwdTxt">Current Password: </string>
+    <string name="updatePwd">CHANGE PASSWORD</string>
+    <string name="currentPwdChg">Current password</string>
+    <string name="newPwd">New password</string>
+    <string name="noteTxt">Note: If you change the password, the current session will be closed.</string>
 
 </resources>

@@ -1,7 +1,9 @@
 package com.tfg.option;
 
+import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -20,6 +22,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Picasso;
 import com.tfg.R;
+import com.tfg.password.ChangePasswordActivity;
 
 public class MyDataActivity extends AppCompatActivity {
 
@@ -117,6 +120,13 @@ public class MyDataActivity extends AppCompatActivity {
             }
         });
 
+        updatePwdBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //Mandarnos a la pantalla de cambio de contraseña
+                startActivity(new Intent(MyDataActivity.this, ChangePasswordActivity.class));
+            }
+        });
     }
 
     //Metodo para cambiar la fuente a las letras
