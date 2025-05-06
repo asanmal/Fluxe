@@ -9,7 +9,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
@@ -98,6 +97,15 @@ public class HomeActivity extends AppCompatActivity {
                 Toast.makeText(HomeActivity.this, "My Data", Toast.LENGTH_SHORT).show();
             }
         });
+
+        //Opcion de mis users
+        userOption.setOnClickListener(v -> {
+            //Metodo para ver todos los usuarios
+            Intent intent = new Intent(HomeActivity.this, UsersActivity.class);
+            startActivity(intent);
+            Toast.makeText(HomeActivity.this, "Users", Toast.LENGTH_SHORT).show();
+        });
+
 
         //Opcion para cerrar sesion
         signoutBtn.setOnClickListener(new View.OnClickListener() {

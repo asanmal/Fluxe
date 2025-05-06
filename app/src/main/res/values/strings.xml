@@ -76,4 +76,7 @@
     <string name="newPwd">New password</string>
     <string name="noteTxt">Note: If you change the password, the current session will be closed.</string>
 
+    <!-- CHATS -->
+    <string name="recyclerView">Users List</string>
+
 </resources>
