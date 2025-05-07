@@ -115,6 +115,15 @@ public class HomeActivity extends AppCompatActivity {
                 signOut();
             }
         });
+
+        // opcion para abrir el chats:
+//        chatsOption.setOnClickListener(v -> {
+//            // Crea el Intent hacia MessageActivity
+//            Intent intent = new Intent(HomeActivity.this, MessageActivity.class);
+//            String currentUserId = firebaseUser.getUid();
+//            intent.putExtra("id", currentUserId);
+//            startActivity(intent);
+//        });
     }
 
     //Metodo para cambiar la  fuente

@@ -1,25 +1,41 @@
 package com.tfg.models;
 
-import com.google.firebase.Timestamp;
-import java.util.List;
-
 public class Chat {
-    private String id;
-    private List<String> userIds;
-    private String lastMessage;
-    private Timestamp timestamp;
 
-    public Chat() { /* Firestore necesita constructor vacío */ }
+    private String sender;
+    private String receiver;
+    private String message;
 
-    public Chat(String id, List<String> userIds, String lastMessage, Timestamp timestamp) {
-        this.id = id;
-        this.userIds = userIds;
-        this.lastMessage = lastMessage;
-        this.timestamp = timestamp;
+    public Chat() {
     }
 
-    public String getId() { return id; }
-    public List<String> getUserIds() { return userIds; }
-    public String getLastMessage() { return lastMessage; }
-    public Timestamp getTimestamp() { return timestamp; }
+    public Chat(String sender, String receiver, String message) {
+        this.sender = sender;
+        this.receiver = receiver;
+        this.message = message;
+    }
+
+    public String getSender() {
+        return sender;
+    }
+
+    public void setSender(String sender) {
+        this.sender = sender;
+    }
+
+    public String getReceiver() {
+        return receiver;
+    }
+
+    public void setReceiver(String receiver) {
+        this.receiver = receiver;
+    }
+
+    public String getMessage() {
+        return message;
+    }
+
+    public void setMessage(String message) {
+        this.message = message;
+    }
 }
