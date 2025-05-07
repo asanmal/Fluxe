@@ -22,6 +22,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Picasso;
+import com.tfg.option.ChatOption;
 import com.tfg.option.MyDataActivity;
 
 import java.text.SimpleDateFormat;
@@ -117,13 +118,13 @@ public class HomeActivity extends AppCompatActivity {
         });
 
         // opcion para abrir el chats:
-//        chatsOption.setOnClickListener(v -> {
-//            // Crea el Intent hacia MessageActivity
-//            Intent intent = new Intent(HomeActivity.this, MessageActivity.class);
-//            String currentUserId = firebaseUser.getUid();
-//            intent.putExtra("id", currentUserId);
-//            startActivity(intent);
-//        });
+        chatsOption.setOnClickListener(v -> {
+            // Crea el Intent hacia MessageActivity
+            Intent intent = new Intent(HomeActivity.this, ChatOption.class);
+            String currentUserId = firebaseUser.getUid();
+            intent.putExtra("id", currentUserId);
+            startActivity(intent);
+        });
     }
 
     //Metodo para cambiar la  fuente
