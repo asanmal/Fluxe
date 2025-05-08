@@ -4,11 +4,13 @@ public class User {
     private String id;
     private String username;
     private String profile_picture;
+    private String status;
 
-    public User(String id, String username, String profile_picture) {
+    public User(String id, String username, String profile_picture, String status) {
         this.id = id;
         this.username = username;
         this.profile_picture = profile_picture;
+        this.status = status;
     }
 
     public User(){
@@ -37,5 +39,13 @@ public class User {
 
     public void setProfile_picture(String profile_picture) {
         this.profile_picture = profile_picture;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 }

@@ -6,6 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:paddingTop="?attr/actionBarSize"
+    android:layout_marginTop="50dp"
     tools:context=".UsersActivity">
 
     <!-- SearchView encima -->
@@ -14,7 +15,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:iconifiedByDefault="false"
-        android:queryHint="Search user"/>
+        android:queryHint="Search user"
+        />
 
     <!-- RecyclerView que sabe desplazarse bajo la AppBar -->
     <androidx.recyclerview.widget.RecyclerView

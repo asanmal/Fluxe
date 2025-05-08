@@ -51,7 +51,7 @@ public class UsersActivity extends AppCompatActivity {
 
         // RecyclerView y Adapter
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        UserAdapter adapter = new UserAdapter(filtered);
+        UserAdapter adapter = new UserAdapter(filtered, false);
         recyclerView.setAdapter(adapter);
 
         // Listener del evento de SearchView

@@ -52,6 +52,8 @@ public class MessageActivity extends AppCompatActivity {
 
     Intent intent;
 
+    ValueEventListener seenListener;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -64,7 +66,7 @@ public class MessageActivity extends AppCompatActivity {
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                finish();
+                startActivity(new Intent(MessageActivity.this, HomeActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
             }
         });
 
@@ -142,6 +144,31 @@ public class MessageActivity extends AppCompatActivity {
             }
         });
 
+        seenMessage(userId);
+
+    }
+
+    //Metodo para ver si ha leido el mensaje
+    private void seenMessage(final String userId){
+        DATABASE = FirebaseDatabase.getInstance().getReference("chats");
+        seenListener = DATABASE.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                for (DataSnapshot snapchot : dataSnapshot.getChildren()){
+                    Chat chat = snapchot.getValue(Chat.class);
+                    if (chat.getReceiver().equals(firebaseUser.getUid()) && chat.getSender().equals(userId)){
+                        HashMap<String, Object> hashMap = new HashMap<>();
+                        hashMap.put("isseen", true);
+                        snapchot.getRef().updateChildren(hashMap);
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
     }
 
     private void sendMessage(String sender, String receiver, String message){
@@ -151,6 +178,7 @@ public class MessageActivity extends AppCompatActivity {
         hashMap.put("sender", sender);
         hashMap.put("receiver", receiver);
         hashMap.put("message", message);
+        hashMap.put("isseen", false);
 
         DATABASE.child("chats").push().setValue(hashMap);
     }
@@ -190,5 +218,28 @@ public class MessageActivity extends AppCompatActivity {
     public boolean onSupportNavigateUp(){
         finish();
         return super.onSupportNavigateUp();
+    }
+
+    //Metodo para estado online o offline
+    private void status(String status){
+        DATABASE = FirebaseDatabase.getInstance().getReference("users").child(firebaseUser.getUid());
+
+        HashMap<String, Object> hashMap = new HashMap<>();
+        hashMap.put("status", status);
+
+        DATABASE.updateChildren(hashMap);
+    }
+
+    @Override
+    protected void onResume(){
+        super.onResume();
+        status("online");
+    }
+
+    @Override
+    protected void onPause(){
+        super.onPause();
+        DATABASE.removeEventListener(seenListener);
+        status("offline");
     }
 }

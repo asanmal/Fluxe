@@ -27,6 +27,7 @@ import com.tfg.option.MyDataActivity;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.Locale;
 
 
@@ -223,6 +224,28 @@ public class HomeActivity extends AppCompatActivity {
         firebaseAuth.signOut();
         Toast.makeText(this, "Signed out successfully", Toast.LENGTH_SHORT).show();
 
-        startActivity(new Intent(HomeActivity.this, MainActivity.class));
+        startActivity(new Intent(HomeActivity.this, MainActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
+    }
+
+    //Metodo para estado online o offline
+    private void status(String status){
+        DATABASE = FirebaseDatabase.getInstance().getReference("users").child(firebaseUser.getUid());
+
+        HashMap<String, Object> hashMap = new HashMap<>();
+        hashMap.put("status", status);
+
+        DATABASE.updateChildren(hashMap);
+    }
+
+    @Override
+    protected void onResume(){
+        super.onResume();
+        status("online");
+    }
+
+    @Override
+    protected void onPause(){
+        super.onPause();
+        status("offline");
     }
 }

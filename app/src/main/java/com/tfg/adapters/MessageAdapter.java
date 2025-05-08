@@ -79,6 +79,16 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.VH> {
                     .addOnFailureListener(e -> h.avatar.setImageResource(R.drawable.login));
         }
 
+        if (pos == mChat.size()-1){
+            if (chat.isIsseen()){
+                h.txt_seen.setText("Seen");
+            } else {
+                h.txt_seen.setText("Delivered");
+            }
+        } else {
+            h.txt_seen.setVisibility(View.GONE);
+        }
+
     }
 
     @Override public int getItemCount() { return mChat.size(); }
@@ -86,11 +96,14 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.VH> {
     public class VH extends RecyclerView.ViewHolder {
         public ImageView avatar;
         public TextView show_message;
+        public TextView txt_seen;
+
         VH(View v) {
             super(v);
 
             avatar   = v.findViewById(R.id.profile_picture);
             show_message = v.findViewById(R.id.show_message);
+            txt_seen = v.findViewById(R.id.txt_seen);
         }
     }
 

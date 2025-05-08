@@ -21,8 +21,11 @@ import com.tfg.models.User;
 import java.util.List;
 
 public class UserAdapter extends RecyclerView.Adapter<UserAdapter.VH> {
+
     private final List<User> list;
-    public UserAdapter(List<User> list) { this.list = list; }
+    private boolean isChat;
+
+    public UserAdapter(List<User> list, boolean isChat) { this.list = list; this.isChat = isChat;}
 
     @NonNull
     @Override
@@ -31,6 +34,7 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.VH> {
                 .inflate(R.layout.item_user, p, false);
         return new VH(v);
     }
+
     @Override public void onBindViewHolder(@NonNull VH h, int pos) {
         User u = list.get(pos);
         h.username.setText(u.getUsername());
@@ -55,6 +59,19 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.VH> {
                     .addOnFailureListener(e -> h.avatar.setImageResource(R.drawable.login));
         }
 
+        if (isChat){
+            if (u.getStatus().equals("online")){
+                h.img_on.setVisibility(View.VISIBLE);
+                h.img_off.setVisibility(View.GONE);
+            } else {
+                h.img_on.setVisibility(View.GONE);
+                h.img_off.setVisibility(View.VISIBLE);
+            }
+        } else {
+            h.img_on.setVisibility(View.GONE);
+            h.img_off.setVisibility(View.GONE);
+        }
+
         h.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -67,12 +84,18 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.VH> {
     @Override public int getItemCount() { return list.size(); }
 
     public class VH extends RecyclerView.ViewHolder {
-        final ImageView avatar;
-        final TextView username;
+        public ImageView avatar;
+        public TextView username;
+        private ImageView img_on;
+        private ImageView img_off;
+
         VH(View v) {
             super(v);
             avatar   = v.findViewById(R.id.profile_picture);
             username = v.findViewById(R.id.username);
+            img_on = v.findViewById(R.id.img_on);
+            img_off = v.findViewById(R.id.img_off);
+
         }
     }
 }
