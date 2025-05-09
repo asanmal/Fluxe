@@ -21,7 +21,7 @@ import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.squareup.picasso.Picasso;
-import com.tfg.MessageActivity;
+import com.tfg.option.MessageActivity;
 import com.tfg.R;
 import com.tfg.models.Chat;
 import com.tfg.models.User;

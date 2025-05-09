@@ -1,4 +1,4 @@
-package com.tfg;
+package com.tfg.option;
 
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.*;
+import com.tfg.R;
 import com.tfg.adapters.UserAdapter;
 import com.tfg.models.User;
 
@@ -31,7 +32,7 @@ public class UsersActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_users);
+        setContentView(com.tfg.R.layout.activity_users);
 
         // Configuracion ActionBar con flecha Up
         ActionBar ab = getSupportActionBar();
@@ -42,7 +43,7 @@ public class UsersActivity extends AppCompatActivity {
         }
 
         // Referencias a vistas
-        searchView   = findViewById(R.id.search_view);
+        searchView   = findViewById(com.tfg.R.id.search_view);
         recyclerView = findViewById(R.id.recyclerView);
 
         // FORZAR SearchView siempre expandido y con botón submit

@@ -198,10 +198,10 @@ public class ChangePasswordActivity extends AppCompatActivity {
         updatePwd.setTypeface(tf);
     }
 
-    //Para retroceder a la pantalla anterior
+    //Accion de retroceso
     @Override
-    public boolean onNavigateUp() {
-        onBackPressed();
-        return super.onNavigateUp();
+    public boolean onSupportNavigateUp(){
+        finish();
+        return super.onSupportNavigateUp();
     }
 }

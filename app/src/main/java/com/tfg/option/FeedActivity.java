@@ -1,4 +1,4 @@
-package com.tfg;
+package com.tfg.option;
 
 import android.os.Bundle;
 import androidx.annotation.NonNull;
@@ -11,16 +11,17 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.tfg.R;
 import com.tfg.adapters.PublicationAdapter;
 import com.tfg.models.Publication;
 import java.util.ArrayList;
 import java.util.List;
 
 public class FeedActivity extends AppCompatActivity {
-    private RecyclerView rv;
-    private PublicationAdapter adapter;
-    private List<Publication> pubs = new ArrayList<>();
-    private DatabaseReference pubsRef;
+    private RecyclerView        rv;
+    private PublicationAdapter  adapter;
+    private List<Publication>   pubs   = new ArrayList<>();
+    private DatabaseReference   pubsRef;
 
     @Override
     protected void onCreate(Bundle b) {
@@ -47,11 +48,15 @@ public class FeedActivity extends AppCompatActivity {
         pubsRef.orderByChild("timestamp")
                 .addValueEventListener(new ValueEventListener() {
                     @Override
-                    public void onDataChange(@NonNull DataSnapshot s) {
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
                         pubs.clear();
-                        for (DataSnapshot snap : s.getChildren()) {
-                            Publication p = snap.getValue(Publication.class);
-                            if (p != null) pubs.add(0, p);
+                        for (DataSnapshot child : snapshot.getChildren()) {
+                            Publication p = child.getValue(Publication.class);
+                            if (p != null) {
+                                // asignar el key de Firebase como id
+                                p.setId(child.getKey());
+                                pubs.add(0, p);
+                            }
                         }
                         adapter.notifyDataSetChanged();
                     }

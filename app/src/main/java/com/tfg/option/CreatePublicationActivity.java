@@ -1,4 +1,4 @@
-package com.tfg;
+package com.tfg.option;
 
 import android.Manifest;
 import android.app.ProgressDialog;
@@ -28,6 +28,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
+import com.tfg.R;
 import com.tfg.models.Publication;
 import java.io.File;
 import java.io.IOException;

@@ -1,14 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
-
     <!-- red, notificaciones y cámara -->
-    <uses-permission android:name="android.permission.INTERNET"/>
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
-    <uses-permission android:name="android.permission.POST_NOTIFICATIONS"/>
-    <uses-permission android:name="android.permission.CAMERA"/>
-    <uses-feature android:name="android.hardware.camera" android:required="false"/>
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
+    <uses-permission android:name="android.permission.CAMERA" />
 
+    <uses-feature
+        android:name="android.hardware.camera"
+        android:required="false" />
 
     <application
         android:allowBackup="true"
@@ -20,6 +21,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Fluxe"
         tools:targetApi="31">
+        <activity
+            android:name=".CommentsActivity"
+            android:exported="false" />
 
         <provider
             android:name="androidx.core.content.FileProvider"
@@ -28,27 +32,27 @@
             android:grantUriPermissions="true">
             <meta-data
                 android:name="android.support.FILE_PROVIDER_PATHS"
-                android:resource="@xml/file_paths"/>
+                android:resource="@xml/file_paths" />
         </provider>
 
         <activity
             android:name=".change.EditDataActivity"
             android:exported="false" />
         <activity
-            android:name=".FeedActivity"
+            android:name=".option.FeedActivity"
             android:exported="false" />
         <activity
-            android:name=".CreatePublicationActivity"
+            android:name=".option.CreatePublicationActivity"
             android:exported="false" />
         <activity
             android:name=".option.ChatOption"
             android:exported="false" />
         <activity
-            android:name=".MessageActivity"
+            android:name=".option.MessageActivity"
             android:exported="false"
             android:theme="@style/Theme.Fluxe.Message" />
         <activity
-            android:name=".UsersActivity"
+            android:name=".option.UsersActivity"
             android:exported="false" />
         <activity
             android:name=".change.ChangePasswordActivity"

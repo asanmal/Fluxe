@@ -10,11 +10,11 @@ public class Publication {
     public Publication() {}
 
     public Publication(String id, String authorUid, String content, String imageUrl, long timestamp) {
-        this.id = id;
-        this.authorUid = authorUid;
-        this.content = content;
-        this.imageUrl = imageUrl;
-        this.timestamp = timestamp;
+        this.id         = id;
+        this.authorUid  = authorUid;
+        this.content    = content;
+        this.imageUrl   = imageUrl;
+        this.timestamp  = timestamp;
     }
 
     public String getId() {

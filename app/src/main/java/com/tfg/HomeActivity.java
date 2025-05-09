@@ -23,7 +23,10 @@ import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Picasso;
 import com.tfg.option.ChatOption;
+import com.tfg.option.CreatePublicationActivity;
+import com.tfg.option.FeedActivity;
 import com.tfg.option.MyDataActivity;
+import com.tfg.option.UsersActivity;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;

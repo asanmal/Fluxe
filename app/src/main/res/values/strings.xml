@@ -103,6 +103,17 @@
     <string name="txtTime">5 min ago</string>
     <string name="txtContent">Post content</string>
     <string name="post_image">Post image</string>
+    <string name="ivLike">ivLike</string>
+    <string name="tvLikeCount">tvLikeCount</string>
+    <string name="like_button">Like button</string>
+
+    <!-- Dentro del feed para comentarios -->
+    <string name="ivComment">ivComment</string>
+    <string name="comment_button">Comment</string>
+    <string name="hint_write_comment">Write a comment...</string>
+    <string name="btn_post_comment">Post</string>
+    <string name="comments_header">Comments</string>
+    <string name="comment_count">%d Comments</string>
 
 
 </resources>

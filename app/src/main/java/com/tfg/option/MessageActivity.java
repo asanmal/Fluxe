@@ -1,4 +1,4 @@
-package com.tfg;
+package com.tfg.option;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -24,6 +24,8 @@ import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.squareup.picasso.Picasso;
+import com.tfg.HomeActivity;
+import com.tfg.R;
 import com.tfg.adapters.MessageAdapter;
 import com.tfg.models.Chat;
 import com.tfg.models.User;
