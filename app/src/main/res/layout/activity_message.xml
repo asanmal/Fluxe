@@ -19,7 +19,7 @@
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
+            android:layout_height="match_parent"
             app:popupTheme="@style/ThemeOverlay.MaterialComponents.Light">
 
         <de.hdodenhof.circleimageview.CircleImageView
@@ -60,6 +60,7 @@
         android:id="@+id/bottom"
         android:layout_alignParentBottom="true">
 
+
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -67,7 +68,12 @@
             android:background="@android:color/transparent"
             android:hint="Type a message..."
             android:layout_toLeftOf="@id/btn_send"
-            android:layout_centerVertical="true"/>
+            android:layout_centerVertical="true"
+            android:inputType="textMultiLine"
+            android:gravity="top|start"
+            android:maxLines="2"
+            android:scrollbars="vertical"
+            android:overScrollMode="always"/>
 
         <ImageButton
             android:layout_width="40dp"

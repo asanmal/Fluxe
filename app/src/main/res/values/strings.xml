@@ -57,6 +57,16 @@
     <string name="updateBtn">UPDATE DATA</string>
     <string name="updatePwdBtn">UPDATE PASSWORD</string>
 
+    <!-- Hints para los campos -->
+    <string name="hint_username">Username</string>
+    <string name="hint_name">Name</string>
+    <string name="hint_last_name">Last Name</string>
+    <string name="hint_second_last_name">Second Last Name</string>
+    <string name="hint_email">Email</string>
+
+    <!-- Texto botón -->
+    <string name="save_changes">Save changes</string>
+
     <!--TexView para editar la informacion-->
     <string name="dataUsernameTxt">USERNAME: </string>
     <string name="dataFirstNameTxt">FIRST NAME: </string>
@@ -78,5 +88,21 @@
 
     <!-- CHATS -->
     <string name="recyclerView">Users List</string>
+
+    <!-- PUBLICACIONES -->
+    <string name="new_post_title">New Post</string>
+
+    <!-- Hints y botones -->
+    <string name="hint_what_to_share">What do you want to share?</string>
+    <string name="btn_choose_photo">Choose Photo</string>
+    <string name="btn_take_photo">Take Photo</string>
+    <string name="btn_publish">Publish</string>
+
+    <!-- para el feed -->
+    <string name="txtAuthor">Author</string>
+    <string name="txtTime">5 min ago</string>
+    <string name="txtContent">Post content</string>
+    <string name="post_image">Post image</string>
+
 
 </resources>

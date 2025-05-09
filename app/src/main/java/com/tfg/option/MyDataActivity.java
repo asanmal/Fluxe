@@ -13,7 +13,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
@@ -35,7 +34,8 @@ import com.google.firebase.storage.StorageTask;
 import com.google.firebase.storage.UploadTask;
 import com.squareup.picasso.Picasso;
 import com.tfg.R;
-import com.tfg.password.ChangePasswordActivity;
+import com.tfg.change.ChangePasswordActivity;
+import com.tfg.change.EditDataActivity;
 
 import java.util.HashMap;
 
@@ -150,6 +150,13 @@ public class MyDataActivity extends AppCompatActivity {
                 startActivity(new Intent(MyDataActivity.this, ChangePasswordActivity.class));
             }
         });
+
+        updateBtn.setOnClickListener(v -> {
+            // Lanza la pantalla de edición de datos
+            Intent intent = new Intent(MyDataActivity.this, EditDataActivity.class);
+            startActivity(intent);
+        });
+
 
         //Metodo para el evento de la imagen
         dataImg.setOnClickListener(new View.OnClickListener() {

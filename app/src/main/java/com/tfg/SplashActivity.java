@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 
-import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
 
 public class SplashActivity extends AppCompatActivity {
@@ -16,7 +15,7 @@ public class SplashActivity extends AppCompatActivity {
         setContentView(R.layout.activity_splash);
 
         //Esto demora la pantalla de carga
-        final int duracion = 2500;
+        final int duracion = 1500;
 
         new Handler().postDelayed(() -> {
             //Se ejecuta pasado el tiempo de duracion que le hemos puesto

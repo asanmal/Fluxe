@@ -126,6 +126,19 @@ public class HomeActivity extends AppCompatActivity {
             intent.putExtra("id", currentUserId);
             startActivity(intent);
         });
+
+        // Opción “New Post” → abre CreatePublicationActivity
+        newPostOption.setOnClickListener(v -> {
+            startActivity(new Intent(HomeActivity.this, CreatePublicationActivity.class));
+            Toast.makeText(HomeActivity.this, "Create Post", Toast.LENGTH_SHORT).show();
+        });
+
+        // Opción “Posts” → abre FeedActivity
+        postOption.setOnClickListener(v -> {
+            startActivity(new Intent(HomeActivity.this, FeedActivity.class));
+            Toast.makeText(HomeActivity.this, "Feed", Toast.LENGTH_SHORT).show();
+        });
+
     }
 
     //Metodo para cambiar la  fuente

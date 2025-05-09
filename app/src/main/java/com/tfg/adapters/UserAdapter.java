@@ -11,11 +11,19 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.squareup.picasso.Picasso;
 import com.tfg.MessageActivity;
 import com.tfg.R;
+import com.tfg.models.Chat;
 import com.tfg.models.User;
 
 import java.util.List;
@@ -24,6 +32,8 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.VH> {
 
     private final List<User> list;
     private boolean isChat;
+
+    String theLastMessage;
 
     public UserAdapter(List<User> list, boolean isChat) { this.list = list; this.isChat = isChat;}
 
@@ -60,6 +70,12 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.VH> {
         }
 
         if (isChat){
+            lastMessage(u.getId(), h.last_msg);
+        } else {
+            h.last_msg.setVisibility(View.GONE);
+        }
+
+        if (isChat){
             if (u.getStatus().equals("online")){
                 h.img_on.setVisibility(View.VISIBLE);
                 h.img_off.setVisibility(View.GONE);
@@ -88,6 +104,7 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.VH> {
         public TextView username;
         private ImageView img_on;
         private ImageView img_off;
+        private TextView last_msg;
 
         VH(View v) {
             super(v);
@@ -95,7 +112,44 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.VH> {
             username = v.findViewById(R.id.username);
             img_on = v.findViewById(R.id.img_on);
             img_off = v.findViewById(R.id.img_off);
+            last_msg = v.findViewById(R.id.last_msg);
 
         }
+    }
+
+    //Comprobar el ultimo mensaje
+    private void lastMessage(String userId, TextView last_msg){
+        theLastMessage = "default";
+        FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("chats");
+
+        reference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                for (DataSnapshot snapshot : dataSnapshot.getChildren()){
+                    Chat chat = snapshot.getValue(Chat.class);
+                    if (chat.getReceiver().equals(firebaseUser.getUid()) && chat.getSender().equals(userId) ||
+                        chat.getReceiver().equals(userId) && chat.getSender().equals(firebaseUser.getUid())){
+                        theLastMessage = chat.getMessage();
+                    }
+                }
+
+                switch (theLastMessage){
+                    case "default":
+                        last_msg.setText("No Message");
+                        break;
+                    default:
+                        last_msg.setText(theLastMessage);
+                        break;
+                }
+
+                theLastMessage = "default";
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
     }
 }

@@ -1,4 +1,4 @@
-package com.tfg.password;
+package com.tfg.change;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
@@ -29,7 +29,6 @@ import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 import com.tfg.LoginActivity;
 import com.tfg.R;
-import com.tfg.SignUpActivity;
 
 import java.util.HashMap;
 

@@ -5,11 +5,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingTop="?attr/actionBarSize"
     tools:context=".HomeActivity">
 
-    <!-- ScrollView con TODO tu contenido de Home -->
+    <!-- ScrollView con todo el home -->
     <androidx.core.widget.NestedScrollView
+        android:fitsSystemWindows="true"
         android:id="@+id/home_scrollview"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -22,7 +22,7 @@
             <!-- Fondo top -->
             <androidx.appcompat.widget.AppCompatImageView
                 android:layout_width="match_parent"
-                android:layout_height="150dp"
+                android:layout_height="120dp"
                 android:src="@drawable/portada"
                 android:scaleType="center"/>
 
@@ -39,10 +39,9 @@
                     android:id="@+id/profile_picture"
                     android:layout_width="100dp"
                     android:layout_height="100dp"
-                    android:layout_marginStart="20dp"
-                    android:layout_marginTop="10dp"
                     android:background="#065064"
                     android:padding="4dp"
+                    android:layout_gravity="center"
                     android:scaleType="centerCrop" />
 
                 <!-- FECHA TODAY -->
@@ -50,7 +49,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
-                    android:layout_marginTop="5dp"
+                    android:layout_marginTop="15dp"
                     android:gravity="center">
 
                     <androidx.appcompat.widget.AppCompatImageView
@@ -72,7 +71,6 @@
                 <androidx.appcompat.widget.LinearLayoutCompat
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="12dp"
                     android:orientation="vertical">
 
                     <!-- nombre de usuario -->
@@ -104,6 +102,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="10dp"
+                        android:gravity="center"
                         android:orientation="horizontal">
 
                         <TextView
@@ -128,6 +127,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="horizontal"
+                        android:gravity="center"
                         android:layout_marginTop="10dp">
 
                         <TextView
@@ -155,7 +155,7 @@
                 <androidx.appcompat.widget.LinearLayoutCompat
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="15dp"
+                    android:layout_marginTop="2dp"
                     android:orientation="horizontal"
                     android:weightSum="2">
 
@@ -177,6 +177,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:backgroundTint="#065064"
+                            android:layout_marginRight="5dp"
                             android:text="@string/aboutMeOption"
                             app:cornerRadius="10dp" />
 
@@ -201,6 +202,8 @@
                             android:layout_height="wrap_content"
                             android:backgroundTint="#065064"
                             android:text="@string/newPostOption"
+                            android:layout_marginRight="5dp"
+android:layout_marginLeft="5dp"
                             app:cornerRadius="10dp" />
 
                     </androidx.appcompat.widget.LinearLayoutCompat>
@@ -212,7 +215,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
-                    android:layout_marginTop="12dp"
+                    android:layout_marginTop="2dp"
                     android:weightSum="2">
 
                     <!-- Opcion 3: POSTS -->
@@ -234,6 +237,8 @@
                             android:layout_height="wrap_content"
                             android:backgroundTint="#065064"
                             android:text="@string/postOption"
+                            android:layout_marginRight="5dp"
+android:layout_marginLeft="5dp"
                             app:cornerRadius="10dp" />
 
                     </androidx.appcompat.widget.LinearLayoutCompat>
@@ -257,6 +262,8 @@
                             android:layout_height="wrap_content"
                             android:backgroundTint="#065064"
                             android:text="@string/userOption"
+                            android:layout_marginRight="5dp"
+android:layout_marginLeft="5dp"
                             app:cornerRadius="10dp" />
 
                     </androidx.appcompat.widget.LinearLayoutCompat>
@@ -268,7 +275,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
-                    android:layout_marginTop="12dp"
+                    android:layout_marginTop="2dp"
                     android:weightSum="2">
 
                     <!-- Opcion 5: CHATS -->
@@ -290,6 +297,8 @@
                             android:layout_height="wrap_content"
                             android:backgroundTint="#065064"
                             android:text="@string/chatsOption"
+                            android:layout_marginRight="5dp"
+android:layout_marginLeft="5dp"
                             app:cornerRadius="10dp" />
 
                     </androidx.appcompat.widget.LinearLayoutCompat>
@@ -313,6 +322,8 @@
                             android:layout_height="wrap_content"
                             android:backgroundTint="#065064"
                             android:text="@string/signoutBtn"
+                            android:layout_marginRight="5dp"
+android:layout_marginLeft="5dp"
                             app:cornerRadius="10dp" />
 
                     </androidx.appcompat.widget.LinearLayoutCompat>
@@ -324,10 +335,5 @@
         </RelativeLayout>
     </androidx.core.widget.NestedScrollView>
 
-    <!-- Contenedor para cargar el UsersFragment -->
-    <FrameLayout
-        android:id="@+id/fragment_container"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

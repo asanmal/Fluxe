@@ -88,9 +88,9 @@ public class MessageActivity extends AppCompatActivity {
         btn_send.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String msg = text_send.getText().toString();
+                String msg = text_send.getText().toString().trim();
 
-                if (!msg.equals("")){
+                if (!msg.isEmpty()){
                     sendMessage(firebaseUser.getUid(), userId, msg);
                 } else {
                     Toast.makeText(MessageActivity.this, "You can't send empty message", Toast.LENGTH_SHORT).show();
