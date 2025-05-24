@@ -12,7 +12,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.tfg.CommentsActivity;
+import com.tfg.option.CommentsActivity;
 import com.tfg.R;
 import com.tfg.models.Publication;
 import com.google.firebase.auth.FirebaseAuth;

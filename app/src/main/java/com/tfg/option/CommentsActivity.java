@@ -1,4 +1,4 @@
-package com.tfg;
+package com.tfg.option;
 
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -12,6 +12,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.tfg.R;
 import com.tfg.adapters.CommentAdapter;
 import com.tfg.models.Comment;
 import com.google.firebase.auth.FirebaseAuth;
