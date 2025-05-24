@@ -179,34 +179,6 @@
 
             </androidx.appcompat.widget.LinearLayoutCompat>
 
-            <!-- PASSWORD-->
-            <androidx.appcompat.widget.LinearLayoutCompat
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-                <!-- PASSWORD TXT -->
-                <TextView
-                    android:id="@+id/dataPwdTxt"
-                    android:text="@string/dataPwdTxt"
-                    android:textSize="18sp"
-                    android:textColor="#000000"
-                    android:layout_marginTop="6dp"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"/>
-
-                <!-- PASSWORD-->
-                <TextView
-                    android:id="@+id/dataPwd"
-                    android:text="@string/dataPwd"
-                    android:textSize="18sp"
-                    android:layout_marginTop="6dp"
-                    android:layout_marginStart="5dp"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"/>
-
-            </androidx.appcompat.widget.LinearLayoutCompat>
-
         </LinearLayout>
 
     </ScrollView>

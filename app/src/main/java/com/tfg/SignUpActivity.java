@@ -73,7 +73,6 @@ public class SignUpActivity extends AppCompatActivity {
             public void onClick(View v) {
                 String password = pwd.getText().toString();
                 String e_mail = email.getText().toString();
-                String singup_user = singUpUser.getText().toString();
 
                 if(!Patterns.EMAIL_ADDRESS.matcher(e_mail).matches()){
                     email.setError("Invalid email address");
@@ -108,13 +107,16 @@ public class SignUpActivity extends AppCompatActivity {
         progressDialog.setMessage("Please wait...");
         progressDialog.setCancelable(false);
         progressDialog.show();
+
         firebaseAuth.createUserWithEmailAndPassword(e_mail, password)
                 .addOnCompleteListener(new OnCompleteListener<AuthResult>(){
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task){
+                        //Cerramos el dialogo
+                        progressDialog.dismiss();
+
                         //Condicional para un registro exitoso
                         if (task.isSuccessful()) {
-                            progressDialog.dismiss(); //Cerrar el programa
                             FirebaseUser user = firebaseAuth.getCurrentUser();
 
                             //Datos a registrar
@@ -124,7 +126,7 @@ public class SignUpActivity extends AppCompatActivity {
                             String first_Name = firstName.getText().toString();
                             String last_Name = lastName.getText().toString();
                             String second_Name = secondName.getText().toString();
-                            String password = pwd.getText().toString();
+                            //String password = pwd.getText().toString(); comentado para que no aparezca en la bbdd
                             String e_mail = email.getText().toString();
 
                             //Hashmap con los datos de usuario para pasarlo a la bbdd
@@ -135,7 +137,7 @@ public class SignUpActivity extends AppCompatActivity {
                             UserData.put("lastName", last_Name);
                             UserData.put("secondName", second_Name);
                             UserData.put("email", e_mail);
-                            UserData.put("password", password);
+                            //UserData.put("password", password);
                             UserData.put("profile_picture", "");
 
                             //HomeActivity una instancia de la bbdd
@@ -155,8 +157,8 @@ public class SignUpActivity extends AppCompatActivity {
 
                             //Una vez registrado, nos lleva a la pantalla de inicio
                             startActivity(new Intent(SignUpActivity.this, HomeActivity.class));
+                            finish();
                         } else{
-                            progressDialog.dismiss(); //Cerrar el programa
                             Toast.makeText(SignUpActivity.this, "Something went wrong", Toast.LENGTH_SHORT).show();
 
                         }

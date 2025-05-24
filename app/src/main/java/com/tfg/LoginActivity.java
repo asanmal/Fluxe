@@ -182,7 +182,7 @@ public class LoginActivity extends AppCompatActivity {
                                 UserData.put("lastName", "");
                                 UserData.put("secondName", "");
                                 UserData.put("email", email);
-                                UserData.put("password", "");
+                                //UserData.put("password", ""); comentado para no ver la contraseña en firebase
                                 UserData.put("profile_picture", "");
 
                                 //HomeActivity una instancia de la bbdd

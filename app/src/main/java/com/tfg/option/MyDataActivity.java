@@ -43,7 +43,7 @@ public class MyDataActivity extends AppCompatActivity {
 
     ImageView dataImg;
     TextView dataUsername, dataFirstName, dataLastName, dataSecondName, dataEmail, dataPwd;
-    TextView dataTxt, dataUsernameTxt, dataFirstNameTxt, dataLastNameTxt, dataSecondNameTxt, dataEmailTxt, dataPwdTxt;
+    TextView dataTxt, dataUsernameTxt, dataFirstNameTxt, dataLastNameTxt, dataSecondNameTxt, dataEmailTxt;
     Button updateBtn, updatePwdBtn;
 
     FirebaseAuth firebaseAuth;
@@ -76,7 +76,6 @@ public class MyDataActivity extends AppCompatActivity {
         dataLastName = findViewById(R.id.dataLastName);
         dataSecondName = findViewById(R.id.dataSecondName);
         dataEmail = findViewById(R.id.dataEmail);
-        dataPwd = findViewById(R.id.dataPwd);
         updateBtn = findViewById(R.id.updateBtn);
         updatePwdBtn = findViewById(R.id.updatePwdBtn);
 
@@ -86,7 +85,6 @@ public class MyDataActivity extends AppCompatActivity {
         dataLastNameTxt = findViewById(R.id.dataLastNameTxt);
         dataSecondNameTxt = findViewById(R.id.dataSecondNameTxt);
         dataEmailTxt = findViewById(R.id.dataEmailTxt);
-        dataPwdTxt = findViewById(R.id.dataPwdTxt);
 
         firebaseAuth = FirebaseAuth.getInstance();
         user = firebaseAuth.getCurrentUser();
@@ -111,7 +109,6 @@ public class MyDataActivity extends AppCompatActivity {
                     String lastName = "" + snapshot.child("lastName").getValue();
                     String secondName = "" + snapshot.child("secondName").getValue();
                     String email = "" + snapshot.child("email").getValue();
-                    String password = "" + snapshot.child("password").getValue();
                     String profilePicture = "" + snapshot.child("profile_picture").getValue();
 
                     //Seteamos los datos en los textview
@@ -120,7 +117,6 @@ public class MyDataActivity extends AppCompatActivity {
                     dataLastName.setText(lastName);
                     dataSecondName.setText(secondName);
                     dataEmail.setText(email);
-                    dataPwd.setText(password);
 
                     //Setear los datos de la imagen
                     try {
@@ -257,14 +253,12 @@ public class MyDataActivity extends AppCompatActivity {
         dataLastNameTxt.setTypeface(tf);
         dataSecondNameTxt.setTypeface(tf);
         dataEmailTxt.setTypeface(tf);
-        dataPwdTxt.setTypeface(tf);
 
         dataUsername.setTypeface(tf);
         dataFirstName.setTypeface(tf);
         dataLastName.setTypeface(tf);
         dataSecondName.setTypeface(tf);
         dataEmail.setTypeface(tf);
-        dataPwd.setTypeface(tf);
         updateBtn.setTypeface(tf);
         updatePwdBtn.setTypeface(tf);
 

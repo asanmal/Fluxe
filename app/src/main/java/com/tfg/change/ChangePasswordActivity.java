@@ -34,7 +34,7 @@ import java.util.HashMap;
 
 public class ChangePasswordActivity extends AppCompatActivity {
 
-    TextView myCredentials, currentEmail, currentPwd, currentEmailTxt, currentPwdTxt, noteTxt;
+    TextView myCredentials, currentEmail, currentEmailTxt;
     EditText currentPwdChg, newPwd;
     Button updatePwd;
 
@@ -63,9 +63,7 @@ public class ChangePasswordActivity extends AppCompatActivity {
 
         myCredentials = findViewById(R.id.myCredentials);
         currentEmail = findViewById(R.id.currentEmail);
-        currentPwd = findViewById(R.id.currentPwd);
         currentEmailTxt = findViewById(R.id.currentEmailTxt);
-        currentPwdTxt = findViewById(R.id.currentPwdTxt);
         currentPwdChg = findViewById(R.id.currentPwdChg);
         newPwd = findViewById(R.id.newPwd);
         updatePwd = findViewById(R.id.updatePwd);
@@ -87,11 +85,9 @@ public class ChangePasswordActivity extends AppCompatActivity {
                 for (DataSnapshot ds : snapshot.getChildren()){
                     //Traemos los valores
                     String email = "" + ds.child("email").getValue();
-                    String pwd = "" + ds.child("password").getValue();
 
                     //Seteamos los datos en los textView
                     currentEmail.setText(email);
-                    currentPwd.setText(pwd);
                 }
             }
 
@@ -190,9 +186,7 @@ public class ChangePasswordActivity extends AppCompatActivity {
 
         myCredentials.setTypeface(tf);
         currentEmail.setTypeface(tf);
-        currentPwd.setTypeface(tf);
         currentEmailTxt.setTypeface(tf);
-        currentPwdTxt.setTypeface(tf);
         currentPwdChg.setTypeface(tf);
         newPwd.setTypeface(tf);
         updatePwd.setTypeface(tf);
