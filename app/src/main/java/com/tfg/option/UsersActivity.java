@@ -98,11 +98,16 @@ public class UsersActivity extends AppCompatActivity {
                 allUsers.clear();
                 for (DataSnapshot ds : snap.getChildren()) {
                     User u = ds.getValue(User.class);
-                    if (u != null && current != null &&
-                            !u.getId().equals(current.getUid())) {
+                    if (u == null || current == null) continue;
+
+                    String uid = u.getId();
+                    String myUid = current.getUid();
+                    // 1) uid no sea null y 2) comparamos invirtiendo equals
+                    if (uid != null && !myUid.equals(uid)) {
                         allUsers.add(u);
                     }
                 }
+
                 onLoaded.run();
             }
             @Override public void onCancelled(@NonNull DatabaseError err) { }

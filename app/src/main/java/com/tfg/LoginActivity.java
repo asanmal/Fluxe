@@ -9,6 +9,7 @@ import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -29,8 +30,7 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.*;
 
 import java.util.HashMap;
 
@@ -38,6 +38,7 @@ public class LoginActivity extends AppCompatActivity {
 
     EditText emailLogin, pwdLogin;
     Button registerLogin, googleLogin;
+    TextView tvForgotPassword;
 
     private GoogleSignInClient mGoogleSignInClient;
     private final static int RC_SIGN_IN = 123;
@@ -58,204 +59,227 @@ public class LoginActivity extends AppCompatActivity {
             actionBar.setDisplayShowHomeEnabled(true);
             actionBar.setDisplayHomeAsUpEnabled(true);
         }
-
         if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         }
 
-        emailLogin = findViewById(R.id.emailLogin);
-        pwdLogin = findViewById(R.id.pwdLogin);
-        registerLogin = findViewById(R.id.registerLogin);
-        googleLogin = findViewById(R.id.googleLogin);
+        emailLogin      = findViewById(R.id.emailLogin);
+        pwdLogin        = findViewById(R.id.pwdLogin);
+        registerLogin   = findViewById(R.id.registerLogin);
+        googleLogin     = findViewById(R.id.googleLogin);
+        tvForgotPassword= findViewById(R.id.tvForgotPassword);
 
         firebaseAuth = FirebaseAuth.getInstance();
         progressDialog = new ProgressDialog(LoginActivity.this);
         dialog = new Dialog(LoginActivity.this);
 
-        //Creamos la solicitud de inicio para google
+        // Creamos la solicitud de inicio para Google
         createRequest();
 
-        //Metodo para cambiar la fuente
+        // Método para cambiar la fuente
         changeFont();
 
-        //Asignamos evento al boton de ingresar
-        registerLogin.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String email = emailLogin.getText().toString();
-                String pwd = pwdLogin.getText().toString();
+        // Forgot password: validamos email y enviamos reset
+        tvForgotPassword.setOnClickListener(v -> {
+            String email = emailLogin.getText().toString().trim();
+            if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
+                emailLogin.setError(getString(R.string.invalid_email));
+                emailLogin.requestFocus();
+                return;
+            }
+            firebaseAuth
+                    .sendPasswordResetEmail(email)
+                    .addOnSuccessListener(aVoid ->
+                            Toast.makeText(this,
+                                    getString(R.string.reset_email_sent),
+                                    Toast.LENGTH_LONG).show()
+                    )
+                    .addOnFailureListener(e ->
+                            Toast.makeText(this,
+                                    getString(R.string.reset_email_error, e.getMessage()),
+                                    Toast.LENGTH_LONG).show()
+                    );
+        });
 
-                if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()){
-                    emailLogin.setError("Invalid email address");
-                    emailLogin.setFocusable(true);
-                } else if (pwd.length()<8) {
-                    pwdLogin.setError("Password must be at least 8 characters");
-                    pwdLogin.setFocusable(true);
-                } else {
-                    userLogin(email, pwd);
-                }
+        // Asignamos evento al botón de ingresar
+        registerLogin.setOnClickListener(v -> {
+            String email = emailLogin.getText().toString();
+            String pwd   = pwdLogin.getText().toString();
+
+            if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()){
+                emailLogin.setError("Invalid email address");
+                emailLogin.setFocusable(true);
+            } else if (pwd.length()<8) {
+                pwdLogin.setError("Password must be at least 8 characters");
+                pwdLogin.setFocusable(true);
+            } else {
+                userLogin(email, pwd);
             }
         });
 
-        //Asignamos evento al boton de ingresar con google
-        googleLogin.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                signIn();
-            }
+        // Asignamos evento al botón de ingresar con Google
+        googleLogin.setOnClickListener(v -> {
+            // Primero deslogueamos para que siempre aparezca el selector
+            mGoogleSignInClient.signOut()
+                    .addOnCompleteListener(LoginActivity.this, task -> signIn());
         });
     }
 
-    //Metodo para cambiar la fuente de las letras
+    // Método para cambiar la fuente de las letras
     private void changeFont(){
-        //Fuente de letra
+        // Fuente de letra
         String locate = "fuente/sans_ligera.ttf";
-        Typeface tf = Typeface.createFromAsset(LoginActivity.this.getAssets(), locate);
+        Typeface tf = Typeface.createFromAsset(getAssets(), locate);
 
         emailLogin.setTypeface(tf);
         pwdLogin.setTypeface(tf);
         registerLogin.setTypeface(tf);
         googleLogin.setTypeface(tf);
+        tvForgotPassword.setTypeface(tf);
     }
 
-    //Metodo para crear una solicitud de inicio con google
+    // Método para crear una solicitud de inicio con Google
     private void createRequest() {
-        //Configuracion de inicio de Google token + email
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-                .requestIdToken(getString(R.string.default_web_client_id)) //Token para autenticacion con firebase
+                .requestIdToken(getString(R.string.default_web_client_id))
                 .requestEmail()
                 .build();
-
-        //Crea el cliente de inicio de sesion con Google usando las opciones configuradas
         mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
     }
 
-    //Metodo para crear la pantalla de google
+    // Método para lanzar la pantalla de Google Sign-In
     private void signIn(){
         Intent signIntent = mGoogleSignInClient.getSignInIntent();
         startActivityForResult(signIntent, RC_SIGN_IN);
     }
 
-    //Metodo que recibe el resultado de la actividad lanzada con startActivityForResult
+    // Resultado de Google Sign-In
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        //Resultado devuelto al iniciar con GoogleSignInAPi
         if (requestCode == RC_SIGN_IN){
             Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
-
-            try{
-                //Inicio de sesion valido usando firebase
+            try {
+                // Si Google sign-in ok, autenticamos en Firebase
                 GoogleSignInAccount account = task.getResult(ApiException.class);
-                //Ejecucion metodo de login con google
                 firebaseAuthentication(account);
             } catch (ApiException e){
-                Toast.makeText(this, "Error de inicio de sesión: " + e.getStatusCode(), Toast.LENGTH_SHORT).show();
-
+                Toast.makeText(this,
+                        "Error de inicio de sesión: " + e.getStatusCode(),
+                        Toast.LENGTH_SHORT).show();
             }
         }
     }
 
-    //Metodo para autenticarse en google con firebase
+    // Autenticación con Firebase tras Google Sign-In
     private void firebaseAuthentication(GoogleSignInAccount account){
         AuthCredential credential = GoogleAuthProvider.getCredential(account.getIdToken(), null);
         firebaseAuth.signInWithCredential(credential)
-                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        if (task.isSuccessful()){
-                            FirebaseUser user = firebaseAuth.getCurrentUser();
-
-                            if (task.getResult().getAdditionalUserInfo().isNewUser()){
-
-                                String uid = user.getUid();
-                                String username = user.getDisplayName();
-                                String email = user.getEmail();
-
-                                //Pasamos los parametros para registrar al nuevo usuario
-                                //Hashmap con los datos de usuario para pasarlo a la bbdd
-                                HashMap<Object, String> UserData = new HashMap<>();
-
-                                UserData.put("id", uid);
-                                UserData.put("username", username);
-                                UserData.put("firstName", "");
-                                UserData.put("lastName", "");
-                                UserData.put("secondName", "");
-                                UserData.put("email", email);
-                                //UserData.put("password", ""); comentado para no ver la contraseña en firebase
-                                UserData.put("profile_picture", "");
-
-                                //HomeActivity una instancia de la bbdd
-                                FirebaseDatabase database = FirebaseDatabase.getInstance("https://fluxe-a2d2d-default-rtdb.europe-west1.firebasedatabase.app");
-
-                                //Creo la bbdd
-                                DatabaseReference reference = database.getReference("users");
-                                reference.child(uid).setValue(UserData);
-                            }
-
-                            //Iniciamos el activity para que nos lleve al inicio
-                            startActivity(new Intent(LoginActivity.this, HomeActivity.class));
+                .addOnCompleteListener(this, task -> {
+                    if (task.isSuccessful()){
+                        FirebaseUser user = firebaseAuth.getCurrentUser();
+                        // Si es un usuario nuevo, le asignamos username por defecto único
+                        if (task.getResult().getAdditionalUserInfo().isNewUser() && user != null){
+                            assignDefaultUsername(user);
                         } else {
-                            dialogNoSeason();
+                            // Usuario ya existente, vamos a Home
+                            startActivity(new Intent(LoginActivity.this, HomeActivity.class));
                         }
+                    } else {
+                        dialogNoSeason();
                     }
                 });
     }
 
-    //Metodo para iniciar sesion el usuario
+    // Genera un username "defaultfluxeX" único
+    private void assignDefaultUsername(FirebaseUser user) {
+        DatabaseReference usersRef = FirebaseDatabase.getInstance(
+                "https://fluxe-a2d2d-default-rtdb.europe-west1.firebasedatabase.app"
+        ).getReference("users");
+
+        final int[] index = {1};
+        recursiveCheckUsername(usersRef, user, index[0]);
+    }
+
+    // Comprueba recursivamente si "defaultfluxeN" existe; si no, lo usa
+    private void recursiveCheckUsername(DatabaseReference usersRef,
+                                        FirebaseUser user,
+                                        int idx) {
+        String candidate = "defaultfluxe" + idx;
+        usersRef.orderByChild("username").equalTo(candidate)
+                .addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snap) {
+                        if (snap.exists()) {
+                            // Ya existe ese username, probamos con el siguiente
+                            recursiveCheckUsername(usersRef, user, idx+1);
+                        } else {
+                            // Username libre: guardamos al usuario
+                            HashMap<Object,String> UserData = new HashMap<>();
+                            UserData.put("id",              user.getUid());
+                            UserData.put("username",        candidate);
+                            UserData.put("firstName",       "");
+                            UserData.put("lastName",        "");
+                            UserData.put("secondName",      "");
+                            UserData.put("email",           user.getEmail());
+                            UserData.put("profile_picture", "");
+
+                            usersRef.child(user.getUid())
+                                    .setValue(UserData)
+                                    .addOnCompleteListener(t -> {
+                                        // Una vez guardado, vamos a Home
+                                        startActivity(new Intent(LoginActivity.this, HomeActivity.class));
+                                        finish();
+                                    })
+                                    .addOnFailureListener(e ->
+                                            Toast.makeText(LoginActivity.this,
+                                                    "Error al guardar usuario: " + e.getMessage(),
+                                                    Toast.LENGTH_LONG).show()
+                                    );
+                        }
+                    }
+                    @Override public void onCancelled(@NonNull DatabaseError e) { }
+                });
+    }
+
+    // Inicio de sesión con email/password
     private void userLogin(String email, String pwd) {
         progressDialog.setTitle("Signing in");
         progressDialog.setMessage("Please wait...");
         progressDialog.setCancelable(false);
         progressDialog.show();
         firebaseAuth.signInWithEmailAndPassword(email, pwd)
-                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        //Condicional por si se inicia sesion bien
-                        if (task.isSuccessful()) {
-                            progressDialog.dismiss(); //Cerrando progress
-                            FirebaseUser user = firebaseAuth.getCurrentUser();
-
-                            //Cuando iniciemos sesion nos lleve al inicio
-                            startActivity(new Intent( LoginActivity.this, HomeActivity.class));
-                            assert  user != null;
-                            Toast.makeText(LoginActivity.this, "Welcome to Fluxe " + user.getEmail(), Toast.LENGTH_SHORT).show();
-                            finish();
-                        } else {
-                            progressDialog.dismiss();
-                            dialogNoSeason();
-                        }
+                .addOnCompleteListener(this, task -> {
+                    progressDialog.dismiss();
+                    if (task.isSuccessful()) {
+                        startActivity(new Intent(LoginActivity.this, HomeActivity.class));
+                        FirebaseUser u = firebaseAuth.getCurrentUser();
+                        Toast.makeText(LoginActivity.this,
+                                "Welcome to Fluxe " + (u != null ? u.getEmail() : ""),
+                                Toast.LENGTH_SHORT).show();
+                        finish();
+                    } else {
+                        dialogNoSeason();
                     }
-                }).addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        progressDialog.dismiss();
-                        Toast.makeText(LoginActivity.this, e.getMessage(),Toast.LENGTH_SHORT).show();
-                    }
+                })
+                .addOnFailureListener(e -> {
+                    progressDialog.dismiss();
+                    Toast.makeText(LoginActivity.this,
+                            e.getMessage(), Toast.LENGTH_SHORT).show();
                 });
     }
 
-    //Creamos el metodo del dialogo personalizado cuando el usuario no pueda iniciar sesion
+    // Diálogo cuando falla el login
     private void dialogNoSeason(){
         Button ok_no_season;
-
         dialog.setContentView(R.layout.no_season);
         ok_no_season = dialog.findViewById(R.id.ok_no_season);
-
-        //Accion al presionar en ok para cerrar el cuadro de dialogo
-        ok_no_season.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                dialog.dismiss();
-            }
-        });
-
+        ok_no_season.setOnClickListener(v -> dialog.dismiss());
         dialog.setCancelable(false);
         dialog.show();
     }
 
-    //Accion de retroceso
+    // Acción de retroceso
     @Override
     public boolean onSupportNavigateUp(){
         finish();

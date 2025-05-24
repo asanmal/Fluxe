@@ -1,6 +1,7 @@
 package com.tfg.change;
 
 import android.os.Bundle;
+import android.util.Patterns;
 import android.widget.Button;
 import android.widget.Toast;
 
@@ -9,20 +10,13 @@ import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.material.textfield.TextInputEditText;
-
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.database.*;
 import com.tfg.R;
 
 import java.util.HashMap;
 import java.util.Map;
-
 
 public class EditDataActivity extends AppCompatActivity {
 
@@ -34,7 +28,7 @@ public class EditDataActivity extends AppCompatActivity {
     private Button btnSaveData;
 
     private FirebaseUser user;
-    private DatabaseReference db;
+    private DatabaseReference db, usersRef;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,12 +59,13 @@ public class EditDataActivity extends AppCompatActivity {
         db   = FirebaseDatabase.getInstance()
                 .getReference("users")
                 .child(user.getUid());
+        usersRef = FirebaseDatabase.getInstance()
+                .getReference("users");
 
         loadExistingData();
 
         btnSaveData.setOnClickListener(v -> saveChange());
     }
-
 
     private void loadExistingData() {
         db.addListenerForSingleValueEvent(new ValueEventListener() {
@@ -87,38 +82,94 @@ public class EditDataActivity extends AppCompatActivity {
     }
 
     private void saveChange() {
-        String u  = editUsername.getText().toString().trim();
+        // 1) Leer y trim
+        String u  = editUsername.getText().toString().trim().toLowerCase(); // minúsculas
         String fn = editFirstName.getText().toString().trim();
         String ln = editLastName.getText().toString().trim();
         String sn = editSecondName.getText().toString().trim();
         String em = editEmail.getText().toString().trim();
 
+        // 2) Validaciones básicas
         if (u.isEmpty() || fn.isEmpty() || em.isEmpty()) {
             Toast.makeText(this,
                     "Username, name and email are required",
                     Toast.LENGTH_SHORT).show();
             return;
         }
+        if (u.length() < 3 || u.length() > 16) {
+            editUsername.setError("Username must be 3–16 characters");
+            editUsername.requestFocus();
+            return;
+        }
+        if (!u.matches("[a-z0-9]+")) {
+            editUsername.setError("Use only letters and digits");
+            editUsername.requestFocus();
+            return;
+        }
+        if (!Patterns.EMAIL_ADDRESS.matcher(em).matches()) {
+            editEmail.setError("Invalid email address");
+            editEmail.requestFocus();
+            return;
+        }
 
-        Map<String,Object> cambios = new HashMap<>();
-        cambios.put("username",    u);
-        cambios.put("firstName",   fn);
-        cambios.put("lastName",    ln);
-        cambios.put("secondName",  sn);
-        cambios.put("email",       em);
+        // 3) Validar unicidad de username
+        usersRef.orderByChild("username")
+                .equalTo(u)
+                .addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override public void onDataChange(@NonNull DataSnapshot snapU) {
+                        boolean conflict = false;
+                        for (DataSnapshot ds : snapU.getChildren()) {
+                            if (!ds.getKey().equals(user.getUid())) {
+                                conflict = true; break;
+                            }
+                        }
+                        if (conflict) {
+                            editUsername.setError("Username already taken");
+                            editUsername.requestFocus();
+                            return;
+                        }
+                        // 4) Validar unicidad de email
+                        usersRef.orderByChild("email")
+                                .equalTo(em)
+                                .addListenerForSingleValueEvent(new ValueEventListener() {
+                                    @Override public void onDataChange(@NonNull DataSnapshot snapE) {
+                                        boolean conflictE = false;
+                                        for (DataSnapshot ds : snapE.getChildren()) {
+                                            if (!ds.getKey().equals(user.getUid())) {
+                                                conflictE = true; break;
+                                            }
+                                        }
+                                        if (conflictE) {
+                                            editEmail.setError("Email already in use");
+                                            editEmail.requestFocus();
+                                            return;
+                                        }
+                                        // 5) Todo OK: aplicar cambios
+                                        Map<String,Object> cambios = new HashMap<>();
+                                        cambios.put("username",    u);
+                                        cambios.put("firstName",   fn);
+                                        cambios.put("lastName",    ln);
+                                        cambios.put("secondName",  sn);
+                                        cambios.put("email",       em);
 
-        db.updateChildren(cambios)
-                .addOnCompleteListener(task -> {
-                    if (task.isSuccessful()) {
-                        Toast.makeText(this,
-                                "Data updated",
-                                Toast.LENGTH_SHORT).show();
-                        finish();
-                    } else {
-                        Toast.makeText(this,
-                                "Error: " + task.getException().getMessage(),
-                                Toast.LENGTH_LONG).show();
+                                        db.updateChildren(cambios)
+                                                .addOnCompleteListener(task -> {
+                                                    if (task.isSuccessful()) {
+                                                        Toast.makeText(EditDataActivity.this,
+                                                                "Data updated",
+                                                                Toast.LENGTH_SHORT).show();
+                                                        finish();
+                                                    } else {
+                                                        Toast.makeText(EditDataActivity.this,
+                                                                "Error: " + task.getException().getMessage(),
+                                                                Toast.LENGTH_LONG).show();
+                                                    }
+                                                });
+                                    }
+                                    @Override public void onCancelled(@NonNull DatabaseError e) { }
+                                });
                     }
+                    @Override public void onCancelled(@NonNull DatabaseError e) { }
                 });
     }
 

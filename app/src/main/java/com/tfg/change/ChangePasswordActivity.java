@@ -4,8 +4,7 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
-import android.text.TextUtils;
-import android.view.View;
+import android.util.Patterns;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -15,22 +14,14 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.EmailAuthProvider;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.Query;
-import com.google.firebase.database.ValueEventListener;
-import com.tfg.LoginActivity;
+import com.google.firebase.auth.UserInfo;
+import com.google.firebase.database.*;
+import com.tfg.MainActivity;
 import com.tfg.R;
-
-import java.util.HashMap;
 
 public class ChangePasswordActivity extends AppCompatActivity {
 
@@ -44,7 +35,6 @@ public class ChangePasswordActivity extends AppCompatActivity {
 
     ProgressDialog progressDialog;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -56,134 +46,129 @@ public class ChangePasswordActivity extends AppCompatActivity {
             actionBar.setDisplayShowHomeEnabled(true);
             actionBar.setDisplayHomeAsUpEnabled(true);
         }
-
         if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         }
 
-        myCredentials = findViewById(R.id.myCredentials);
-        currentEmail = findViewById(R.id.currentEmail);
+        myCredentials   = findViewById(R.id.myCredentials);
+        currentEmail    = findViewById(R.id.currentEmail);
         currentEmailTxt = findViewById(R.id.currentEmailTxt);
-        currentPwdChg = findViewById(R.id.currentPwdChg);
-        newPwd = findViewById(R.id.newPwd);
-        updatePwd = findViewById(R.id.updatePwd);
+        currentPwdChg   = findViewById(R.id.currentPwdChg);
+        newPwd          = findViewById(R.id.newPwd);
+        updatePwd       = findViewById(R.id.updatePwd);
 
         firebaseAuth = FirebaseAuth.getInstance();
-        user = firebaseAuth.getCurrentUser();
-        users = FirebaseDatabase.getInstance().getReference("users");
+        user         = firebaseAuth.getCurrentUser();
+        users        = FirebaseDatabase.getInstance().getReference("users");
+        progressDialog = new ProgressDialog(this);
 
-        progressDialog = new ProgressDialog(ChangePasswordActivity.this);
-
-        //Cambiar la fuent a las letras
+        // Cambiar la fuente a las letras
         changeFont();
 
-        //Consultar correo y contraseña del usuario actual
+        // Mostrar email actual
         Query query = users.orderByChild("email").equalTo(user.getEmail());
-        query.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
+        query.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override public void onDataChange(@NonNull DataSnapshot snapshot) {
                 for (DataSnapshot ds : snapshot.getChildren()){
-                    //Traemos los valores
-                    String email = "" + ds.child("email").getValue();
-
-                    //Seteamos los datos en los textView
+                    String email = ds.child("email").getValue(String.class);
                     currentEmail.setText(email);
                 }
             }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-            }
+            @Override public void onCancelled(@NonNull DatabaseError error) { }
         });
 
+        // Evento para cambiar la password
+        updatePwd.setOnClickListener(v -> {
+            FirebaseUser u = FirebaseAuth.getInstance().getCurrentUser();
+            if (u == null) return;
 
-        //Evento para cambiar la password
-        updatePwd.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String beforePwd = currentPwdChg.getText().toString().trim();
-                String afterPwd = newPwd.getText().toString().trim();
-
-                //Condicionales para la nueva contraseña
-                if (TextUtils.isEmpty(beforePwd)){
-                    Toast.makeText(ChangePasswordActivity.this, "The current password field is empty", Toast.LENGTH_SHORT).show();
-                }
-                if (TextUtils.isEmpty(afterPwd)){
-                    Toast.makeText(ChangePasswordActivity.this, "The new password field is empty", Toast.LENGTH_SHORT).show();
-                }
-                if (!afterPwd.equals("") && afterPwd.length() >= 8){
-                    //LLamamos al metodo para cambiar la contraseña actual por la nueva
-                    changePassword(beforePwd, afterPwd);
-                } else {
-                    newPwd.setError("The password must be longer than 8 characters");
-                    newPwd.setFocusable(true);
+            // Comprueba si viene de Google
+            boolean isGoogle = false;
+            for (UserInfo info : u.getProviderData()) {
+                if ("google.com".equals(info.getProviderId())) {
+                    isGoogle = true;
+                    break;
                 }
             }
-        });
-    }
+            if (isGoogle) {
+                // Si es Google, enviamos email de restablecimiento y volvemos al Main
+                firebaseAuth.sendPasswordResetEmail(u.getEmail())
+                        .addOnSuccessListener(aVoid -> {
+                            Toast.makeText(this,
+                                    "We’ve sent you an email to reset your password.",
+                                    Toast.LENGTH_LONG).show();
+                            startActivity(new Intent(this, MainActivity.class));
+                            finish();
+                        })
+                        .addOnFailureListener(e ->
+                                Toast.makeText(this,
+                                        "Error sending email: " + e.getMessage(),
+                                        Toast.LENGTH_LONG).show()
+                        );
+                return;
+            }
 
-    //Metodo para cambiar la contraseña
-    private void changePassword(String beforePwd, String afterPwd) {
-        progressDialog.show();
-        progressDialog.setTitle("Updating");
-        progressDialog.setMessage("Please wait!!");
-        user = FirebaseAuth.getInstance().getCurrentUser();
-        assert user != null;
-        AuthCredential authCredential = EmailAuthProvider.getCredential(user.getEmail(), beforePwd);
-        user.reauthenticate(authCredential)
-                .addOnSuccessListener(new OnSuccessListener<Void>() {
-                    @Override
-                    public void onSuccess(Void unused) {
-                        user.updatePassword(afterPwd)
-                                .addOnSuccessListener(new OnSuccessListener<Void>() {
-                                    @Override
-                                    public void onSuccess(Void unused) {
-                                        progressDialog.dismiss();
-                                        String value = newPwd.getText().toString().trim();
-                                        HashMap<String, Object> result = new HashMap<>();
-                                        result.put("password", value);
+            // Leer campos
+            String before = currentPwdChg.getText().toString().trim();
+            String after  = newPwd.getText().toString().trim();
 
-                                        //Actualizamos la nueva contraseña en firebase
-                                        users.child(user.getUid()).updateChildren(result)
-                                                .addOnSuccessListener(new OnSuccessListener<Void>() {
-                                                    @Override
-                                                    public void onSuccess(Void unused) {
-                                                        Toast.makeText(ChangePasswordActivity.this, "Password changed", Toast.LENGTH_SHORT).show();
-                                                    }
-                                                }).addOnFailureListener(new OnFailureListener() {
-                                            @Override
-                                            public void onFailure(@NonNull Exception e) {
-                                                progressDialog.dismiss();
-                                            }
-                                        });
-                                        //Luego se crierr la sesion
-                                        firebaseAuth.signOut();
-                                        startActivity(new Intent(ChangePasswordActivity.this, LoginActivity.class));
-                                        finish();
-                                    }
-                                }).addOnFailureListener(new OnFailureListener() {
-                                    @Override
-                                    public void onFailure(@NonNull Exception e) {
+            // Validaciones
+            if (before.isEmpty()) {
+                Toast.makeText(this, "Current password is empty", Toast.LENGTH_SHORT).show();
+                return;
+            }
+            if (after.isEmpty()) {
+                newPwd.setError("New password is required");
+                newPwd.requestFocus();
+                return;
+            }
+            if (after.length() < 8 || after.length() > 16) {
+                newPwd.setError("Password must be 8–16 characters");
+                newPwd.requestFocus();
+                return;
+            }
+            if (!after.matches("[A-Za-z0-9]+")) {
+                newPwd.setError("Use only letters and digits");
+                newPwd.requestFocus();
+                return;
+            }
 
-                                        progressDialog.dismiss();
-                                    }
+            // Reautenticamos y actualizamos
+            AuthCredential cred = EmailAuthProvider.getCredential(u.getEmail(), before);
+            progressDialog.setTitle("Updating");
+            progressDialog.setMessage("Please wait...");
+            progressDialog.setCancelable(false);
+            progressDialog.show();
+            u.reauthenticate(cred)
+                    .addOnSuccessListener(aVoid -> {
+                        u.updatePassword(after)
+                                .addOnSuccessListener(aVoid2 -> {
+                                    progressDialog.dismiss();
+                                    Toast.makeText(this,
+                                            "Password changed successfully",
+                                            Toast.LENGTH_SHORT).show();
+                                    startActivity(new Intent(this, MainActivity.class));
+                                    finish();
+                                })
+                                .addOnFailureListener(e -> {
+                                    progressDialog.dismiss();
+                                    Toast.makeText(this,
+                                            "Update failed: " + e.getMessage(),
+                                            Toast.LENGTH_SHORT).show();
                                 });
-                    }
-                }).addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
+                    })
+                    .addOnFailureListener(e -> {
                         progressDialog.dismiss();
-                        Toast.makeText(ChangePasswordActivity.this, "The current password is incorrect", Toast.LENGTH_SHORT).show();
-                    }
-                });
+                        Toast.makeText(this,
+                                "Current password incorrect",
+                                Toast.LENGTH_SHORT).show();
+                    });
+        });
     }
 
-    //Metodo para cambiar la  fuente
+    // Metodo para cambiar la fuente
     private void changeFont(){
-        //Fuente de letra
-        String locate = "fuente/sans_ligera.ttf";
-        Typeface tf = Typeface.createFromAsset(ChangePasswordActivity.this.getAssets(), locate);
-
+        Typeface tf = Typeface.createFromAsset(getAssets(), "fuente/sans_ligera.ttf");
         myCredentials.setTypeface(tf);
         currentEmail.setTypeface(tf);
         currentEmailTxt.setTypeface(tf);
@@ -192,7 +177,7 @@ public class ChangePasswordActivity extends AppCompatActivity {
         updatePwd.setTypeface(tf);
     }
 
-    //Accion de retroceso
+    // Acción de retroceso
     @Override
     public boolean onSupportNavigateUp(){
         finish();

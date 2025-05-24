@@ -19,6 +19,12 @@
     <string name="emailLogin">Email</string>
     <string name="pwdLogin">Password</string>
     <string name="registerLogin">LOGIN</string>
+    <string name="forgot_password">Forgot your password?</string>
+    <string name="invalid_email">Invalid email address</string>
+    <string name="reset_email_sent">We’ve sent you an email to reset your password.</string>
+    <string name="reset_email_error">Error sending reset email: %1$s</string>
+
+
 
     <!-- Datos de inicio de sesion con google -->
     <string name="default_web_client_id">755456289980-88kpu8u9s116v2hjv7v47jr6d6419r93.apps.googleusercontent.com</string>
