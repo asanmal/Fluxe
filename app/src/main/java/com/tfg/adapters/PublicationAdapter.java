@@ -27,24 +27,22 @@ import java.util.List;
 import java.util.Locale;
 
 public class PublicationAdapter extends RecyclerView.Adapter<PublicationAdapter.ViewHolder> {
-    private final Context           ctx;
+    private final Context ctx;
     private final List<Publication> pubs;
-    private final String            currentUid;
+    private final String currentUid;
     private final DatabaseReference baseRef;
 
     public PublicationAdapter(Context ctx, List<Publication> pubs) {
-        this.ctx        = ctx;
-        this.pubs       = pubs;
-        FirebaseUser u  = FirebaseAuth.getInstance().getCurrentUser();
+        this.ctx = ctx;
+        this.pubs = pubs;
+        FirebaseUser u = FirebaseAuth.getInstance().getCurrentUser();
         this.currentUid = u != null ? u.getUid() : "";
-        this.baseRef    = FirebaseDatabase.getInstance()
-                .getReference("publications");
+        this.baseRef = FirebaseDatabase.getInstance().getReference("publications");
     }
 
     @NonNull @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View v = LayoutInflater.from(ctx)
-                .inflate(R.layout.item_publication, parent, false);
+        View v = LayoutInflater.from(ctx).inflate(R.layout.item_publication, parent, false);
         return new ViewHolder(v);
     }
 
@@ -101,7 +99,10 @@ public class PublicationAdapter extends RecyclerView.Adapter<PublicationAdapter.
                 );
             }
             @Override public void onCancelled(@NonNull DatabaseError e) {
-                Toast.makeText(ctx, "Couldn't load likes", Toast.LENGTH_SHORT).show();
+                // Toast de error extraído a string resource
+                Toast.makeText(ctx,
+                        ctx.getString(R.string.error_load_likes),
+                        Toast.LENGTH_SHORT).show();
             }
         });
         h.ivLike.setOnClickListener(v ->
@@ -109,13 +110,17 @@ public class PublicationAdapter extends RecyclerView.Adapter<PublicationAdapter.
                     @NonNull @Override
                     public Transaction.Result doTransaction(@NonNull MutableData md) {
                         if (md.hasChild(currentUid)) md.child(currentUid).setValue(null);
-                        else                           md.child(currentUid).setValue(true);
+                        else md.child(currentUid).setValue(true);
                         return Transaction.success(md);
                     }
                     @Override
                     public void onComplete(DatabaseError err, boolean committed, DataSnapshot d) {
-                        if (err != null)
-                            Toast.makeText(ctx, "Like failed", Toast.LENGTH_SHORT).show();
+                        if (err != null) {
+                            // Toast de fallo de like extraído a string resource
+                            Toast.makeText(ctx,
+                                    ctx.getString(R.string.error_like_failed),
+                                    Toast.LENGTH_SHORT).show();
+                        }
                     }
                 })
         );
@@ -147,13 +152,13 @@ public class PublicationAdapter extends RecyclerView.Adapter<PublicationAdapter.
 
         ViewHolder(@NonNull View v) {
             super(v);
-            txtAuthor      = v.findViewById(R.id.txtAuthor);
-            txtTime        = v.findViewById(R.id.txtTime);
-            imgPost        = v.findViewById(R.id.imgPost);
-            txtContent     = v.findViewById(R.id.txtContent);
-            ivLike         = v.findViewById(R.id.ivLike);
-            tvLikeCount    = v.findViewById(R.id.tvLikeCount);
-            ivComment      = v.findViewById(R.id.ivComment);
+            txtAuthor = v.findViewById(R.id.txtAuthor);
+            txtTime = v.findViewById(R.id.txtTime);
+            imgPost = v.findViewById(R.id.imgPost);
+            txtContent = v.findViewById(R.id.txtContent);
+            ivLike = v.findViewById(R.id.ivLike);
+            tvLikeCount = v.findViewById(R.id.tvLikeCount);
+            ivComment = v.findViewById(R.id.ivComment);
             tvCommentCount = v.findViewById(R.id.tvCommentCount);
         }
     }

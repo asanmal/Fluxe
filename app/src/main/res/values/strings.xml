@@ -21,10 +21,6 @@
     <string name="registerLogin">LOGIN</string>
     <string name="forgot_password">Forgot your password?</string>
     <string name="invalid_email">Invalid email address</string>
-    <string name="reset_email_sent">We’ve sent you an email to reset your password.</string>
-    <string name="reset_email_error">Error sending reset email: %1$s</string>
-
-
 
     <!-- Datos de inicio de sesion con google -->
     <string name="default_web_client_id">755456289980-88kpu8u9s116v2hjv7v47jr6d6419r93.apps.googleusercontent.com</string>
@@ -122,4 +118,78 @@
     <string name="comment_count">%d Comments</string>
 
 
+    <!-- TOAST MENSAJES -->
+    <!-- Like -->
+    <string name="error_load_likes">Couldnt load likes</string>
+    <string name="error_like_failed">Like failed</string>
+
+    <!-- ChangePasswordActivity -->
+    <string name="title_change_password">Change Password</string>
+    <string name="reset_email_sent">We have sent you an email to reset your password.</string>
+    <string name="reset_email_error">Error sending email: %s</string>
+    <string name="current_pwd_empty">Current password is empty</string>
+    <string name="new_pwd_required">New password is required</string>
+    <string name="pwd_length_error">Password must be 8–16 characters</string>
+    <string name="pwd_chars_error">Use only letters and digits</string>
+    <string name="updating_title">Updating</string>
+    <string name="updating_message">Please wait…</string>
+    <string name="pwd_changed_success">Password changed successfully</string>
+    <string name="pwd_update_failed">Update failed: %s</string>
+    <string name="current_pwd_incorrect">Current password incorrect</string>
+
+    <!-- EditDataActivity -->
+    <string name="title_change_data">Change Data</string>
+    <string name="error_required_fields">Username, name and email are required</string>
+    <string name="error_username_length">Username must be 3–16 characters</string>
+    <string name="error_username_chars">Use only letters and digits</string>
+    <string name="error_invalid_email">Invalid email address</string>
+    <string name="error_username_taken">Username already taken</string>
+    <string name="error_email_taken">Email already in use</string>
+    <string name="msg_data_updated">Data updated</string>
+    <string name="error_update">Error: %s</string>
+
+    <!-- CreatePublicationActivity -->
+    <string name="title_post">Post</string>
+    <string name="toast_camera_denied">Camera permission denied</string>
+    <string name="toast_write_or_photo">Write something or choose or take a photo</string>
+    <string name="msg_publishing">Publishing...</string>
+    <string name="toast_image_failed">Image upload failed</string>
+    <string name="toast_published">Published!</string>
+    <string name="toast_publish_failed">Publish failed</string>
+
+    <!-- MessageActivity -->
+    <string name="toast_empty_message">You cant send empty message</string>
+
+    <!-- MyDataActivity -->
+    <string name="pub_uploading">Publishing...</string>
+    <string name="toast_failed">Failed!</string>
+    <string name="toast_error_fmt">Error: %1$s</string>
+    <string name="toast_no_image_selected">No image selected</string>
+    <string name="toast_upload_in_progress">Upload in progress</string>
+
+    <!-- HomeActivity -->
+    <string name="title_home">Home</string>
+    <string name="toast_my_data">My Data</string>
+    <string name="toast_users">Users</string>
+    <string name="toast_create_post">Create Post</string>
+    <string name="toast_feed">Feed</string>
+    <string name="toast_logged_in">Logged in successfully</string>
+    <string name="toast_signed_out">Signed out successfully</string>
+
+    <!-- LoginActivity -->
+    <string name="title_login">Login</string>
+    <string name="error_saving_user">Error saving user: %1$s</string>
+    <string name="error_pwd_length">Password must be at least 8 characters</string>
+    <string name="error_google_signin">Google sign-in failed: %1$d</string>
+    <string name="title_signing_in">Signing in</string>
+    <string name="msg_please_wait">Please wait...</string>
+    <string name="toast_welcome">Welcome to Fluxe %1$s</string>
+    <string name="error_generic">Error: %1$s</string>
+
+    <!-- SignUpActivity -->
+    <string name="data_saved">Data saved to Firebase</string>
+    <string name="error_saving_data">Error saving data: %1$s</string>
+    <string name="signup_completed">Sign up completed successfully</string>
+    <string name="something_went_wrong">Something went wrong: %1$s</string>
+    <string name="signup_failed">Sign up failed: %1$s</string>
 </resources>

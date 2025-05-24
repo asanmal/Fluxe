@@ -23,11 +23,7 @@ import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.database.*;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.StorageTask;
@@ -42,7 +38,7 @@ import java.util.HashMap;
 public class MyDataActivity extends AppCompatActivity {
 
     ImageView dataImg;
-    TextView dataUsername, dataFirstName, dataLastName, dataSecondName, dataEmail, dataPwd;
+    TextView dataUsername, dataFirstName, dataLastName, dataSecondName, dataEmail;
     TextView dataTxt, dataUsernameTxt, dataFirstNameTxt, dataLastNameTxt, dataSecondNameTxt, dataEmailTxt;
     Button updateBtn, updatePwdBtn;
 
@@ -129,14 +125,11 @@ public class MyDataActivity extends AppCompatActivity {
                         //Si no existe se pone por defecto
                         Picasso.get().load(R.drawable.login).into(dataImg);
                     }
-
                 }
             }
 
             @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
+            public void onCancelled(@NonNull DatabaseError error) { }
         });
 
         updatePwdBtn.setOnClickListener(new View.OnClickListener() {
@@ -152,7 +145,6 @@ public class MyDataActivity extends AppCompatActivity {
             Intent intent = new Intent(MyDataActivity.this, EditDataActivity.class);
             startActivity(intent);
         });
-
 
         //Metodo para el evento de la imagen
         dataImg.setOnClickListener(new View.OnClickListener() {
@@ -178,7 +170,7 @@ public class MyDataActivity extends AppCompatActivity {
 
     private void uploadImage(){
         final ProgressDialog pd = new ProgressDialog(MyDataActivity.this);
-        pd.setMessage("Uploading");
+        pd.setMessage(getString(R.string.pub_uploading));
         pd.show();
 
         if (imageUri != null){
@@ -193,12 +185,12 @@ public class MyDataActivity extends AppCompatActivity {
                     if (!task.isSuccessful()){
                         throw task.getException();
                     }
-
                     return fileReference.getDownloadUrl();
                 }
             }).addOnCompleteListener(new OnCompleteListener<Uri>() {
                 @Override
                 public void onComplete(@NonNull Task<Uri> task) {
+                    pd.dismiss();
                     if (task.isSuccessful()){
                         Uri downloadUri = task.getResult();
                         String mUri = downloadUri.toString();
@@ -207,22 +199,24 @@ public class MyDataActivity extends AppCompatActivity {
                         HashMap<String, Object> map = new HashMap<>();
                         map.put("profile_picture", mUri);
                         DATABASE.updateChildren(map);
-
-                        pd.dismiss();
                     } else {
-                        Toast.makeText(getApplicationContext(), "Failed!", Toast.LENGTH_SHORT).show();
-                        pd.dismiss();
+                        Toast.makeText(getApplicationContext(),
+                                getString(R.string.toast_failed), Toast.LENGTH_SHORT).show();
                     }
                 }
             }).addOnFailureListener(new OnFailureListener() {
                 @Override
                 public void onFailure(@NonNull Exception e) {
-                    Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
                     pd.dismiss();
+                    Toast.makeText(getApplicationContext(),
+                            getString(R.string.toast_error_fmt, e.getMessage()),
+                            Toast.LENGTH_SHORT).show();
                 }
             });
         } else {
-            Toast.makeText(getApplicationContext(), "No image selected", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(),
+                    getString(R.string.toast_no_image_selected),
+                    Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -234,7 +228,9 @@ public class MyDataActivity extends AppCompatActivity {
             imageUri = data.getData();
 
             if (uploadTask != null && uploadTask.isInProgress()){
-                Toast.makeText(getApplicationContext(), "Upload in progress", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(),
+                        getString(R.string.toast_upload_in_progress),
+                        Toast.LENGTH_SHORT).show();
             } else {
                 uploadImage();
             }
@@ -261,7 +257,6 @@ public class MyDataActivity extends AppCompatActivity {
         dataEmail.setTypeface(tf);
         updateBtn.setTypeface(tf);
         updatePwdBtn.setTypeface(tf);
-
     }
 
     //Accion de retroceso

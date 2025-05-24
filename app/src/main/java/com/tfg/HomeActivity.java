@@ -15,12 +15,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.Query;
-import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.database.*;
 import com.squareup.picasso.Picasso;
 import com.tfg.option.ChatOption;
 import com.tfg.option.CreatePublicationActivity;
@@ -32,7 +27,6 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Locale;
-
 
 public class HomeActivity extends AppCompatActivity {
 
@@ -51,17 +45,15 @@ public class HomeActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //EdgeToEdge.enable(this);
         setContentView(R.layout.activity_home);
 
         ActionBar actionBar = getSupportActionBar();
         if (actionBar != null){
-            actionBar.setTitle("Home");
+            actionBar.setTitle(getString(R.string.title_home));
         }
 
         firebaseAuth = FirebaseAuth.getInstance();
-        firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
-
+        firebaseUser = firebaseAuth.getCurrentUser();
         firebaseDatabase = FirebaseDatabase.getInstance();
         DATABASE = firebaseDatabase.getReference("users");
 
@@ -75,7 +67,7 @@ public class HomeActivity extends AppCompatActivity {
         emailTxt = findViewById(R.id.emailTxt);
         nameTxt = findViewById(R.id.nameTxt);
 
-        /*OPCIONES DE MENU*/
+        /* OPCIONES DE MENU */
         aboutMeOption = findViewById(R.id.aboutMeOption);
         newPostOption = findViewById(R.id.newPostOption);
         postOption = findViewById(R.id.postOption);
@@ -83,73 +75,61 @@ public class HomeActivity extends AppCompatActivity {
         chatsOption = findViewById(R.id.chatsOption);
         signoutBtn = findViewById(R.id.signoutBtn);
 
-        //Cambar fuente
+        // Cambiar fuente
         changeFont();
 
-        //Fecha actual
+        // Fecha actual
         Date dates = new Date();
         SimpleDateFormat dateC = new SimpleDateFormat("MMMM d, yyyy", Locale.ENGLISH);
         String sDate = dateC.format(dates);
         date.setText(sDate);
 
-        //Opcion de mis datos
-        aboutMeOption.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //Metodo para abrir mis datos de usuario
-                Intent intent = new Intent(HomeActivity.this, MyDataActivity.class);
-                startActivity(intent);
-                Toast.makeText(HomeActivity.this, "My Data", Toast.LENGTH_SHORT).show();
-            }
+        // Opción de mis datos
+        aboutMeOption.setOnClickListener(v -> {
+            startActivity(new Intent(HomeActivity.this, MyDataActivity.class));
+            Toast.makeText(HomeActivity.this,
+                    getString(R.string.toast_my_data),
+                    Toast.LENGTH_SHORT).show();
         });
 
-        //Opcion de mis users
+        // Opción de todos los usuarios
         userOption.setOnClickListener(v -> {
-            //Metodo para ver todos los usuarios
-            Intent intent = new Intent(HomeActivity.this, UsersActivity.class);
-            startActivity(intent);
-            Toast.makeText(HomeActivity.this, "Users", Toast.LENGTH_SHORT).show();
+            startActivity(new Intent(HomeActivity.this, UsersActivity.class));
+            Toast.makeText(HomeActivity.this,
+                    getString(R.string.toast_users),
+                    Toast.LENGTH_SHORT).show();
         });
 
+        // Opción para cerrar sesión
+        signoutBtn.setOnClickListener(v -> signOut());
 
-        //Opcion para cerrar sesion
-        signoutBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //Metodo para cerrar sesison
-                signOut();
-            }
-        });
-
-        // opcion para abrir el chats:
+        // Opción de chats
         chatsOption.setOnClickListener(v -> {
-            // Crea el Intent hacia MessageActivity
             Intent intent = new Intent(HomeActivity.this, ChatOption.class);
-            String currentUserId = firebaseUser.getUid();
-            intent.putExtra("id", currentUserId);
+            intent.putExtra("id", firebaseUser.getUid());
             startActivity(intent);
         });
 
-        // Opción “New Post” → abre CreatePublicationActivity
+        // Opción “New Post”
         newPostOption.setOnClickListener(v -> {
             startActivity(new Intent(HomeActivity.this, CreatePublicationActivity.class));
-            Toast.makeText(HomeActivity.this, "Create Post", Toast.LENGTH_SHORT).show();
+            Toast.makeText(HomeActivity.this,
+                    getString(R.string.toast_create_post),
+                    Toast.LENGTH_SHORT).show();
         });
 
-        // Opción “Posts” → abre FeedActivity
+        // Opción “Feed”
         postOption.setOnClickListener(v -> {
             startActivity(new Intent(HomeActivity.this, FeedActivity.class));
-            Toast.makeText(HomeActivity.this, "Feed", Toast.LENGTH_SHORT).show();
+            Toast.makeText(HomeActivity.this,
+                    getString(R.string.toast_feed),
+                    Toast.LENGTH_SHORT).show();
         });
-
     }
 
-    //Metodo para cambiar la  fuente
+    // Método para cambiar la fuente
     private void changeFont(){
-        //Fuente de letra
-        String locate = "fuente/sans_ligera.ttf";
-        Typeface tf = Typeface.createFromAsset(HomeActivity.this.getAssets(), locate);
-
+        Typeface tf = Typeface.createFromAsset(getAssets(), "fuente/sans_ligera.ttf");
         date.setTypeface(tf);
         usernameProfile.setTypeface(tf);
         emailProfile.setTypeface(tf);
@@ -157,8 +137,6 @@ public class HomeActivity extends AppCompatActivity {
         usernameTxt.setTypeface(tf);
         emailTxt.setTypeface(tf);
         nameTxt.setTypeface(tf);
-
-        //Cambiar fuente a los botones
         signoutBtn.setTypeface(tf);
         aboutMeOption.setTypeface(tf);
         newPostOption.setTypeface(tf);
@@ -167,51 +145,41 @@ public class HomeActivity extends AppCompatActivity {
         chatsOption.setTypeface(tf);
     }
 
-    //LLamamos a onStart
     @Override
     protected void onStart(){
-        verifyLogin();
         super.onStart();
+        verifyLogin();
     }
 
-    //Metodo que permita verificar si el usuario ya nicio sesion antes
+    // Verifica si hay un usuario logueado
     private void verifyLogin(){
         if (firebaseUser != null){
             loadData();
-            Toast.makeText(this, "Logged in successfully", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this,
+                    getString(R.string.toast_logged_in),
+                    Toast.LENGTH_SHORT).show();
         } else {
             startActivity(new Intent(HomeActivity.this, MainActivity.class));
             finish();
         }
     }
 
-    //Metodo para recuperar los datos que vamos a mostrar en el perfil del usuario
+    // Carga datos de perfil
     private void loadData(){
         Query query = DATABASE.orderByChild("email").equalTo(firebaseUser.getEmail());
         query.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                //Recorro los usuarios registardos en firebase, hasta encontrar el usuario actual
+            @Override public void onDataChange(@NonNull DataSnapshot snapshot) {
                 for (DataSnapshot ds : snapshot.getChildren()){
+                    String username = ds.child("username").getValue(String.class);
+                    String email = ds.child("email").getValue(String.class);
+                    String firstname = ds.child("firstName").getValue(String.class);
+                    String profilePicture = ds.child("profile_picture").getValue(String.class);
 
-                    //Obtenemos los valores
-                    String username = "" + ds.child("username").getValue();
-                    String email = "" + ds.child("email").getValue();
-                    String firstname = "" + ds.child("firstName").getValue();
-                    String profilePicture = "" + ds.child("profile_picture").getValue();
-
-                    //Seteamos los datos
-                    if (nameProfile == null){
-                        nameProfile.setText("");
-                    } else{
-                        nameProfile.setText(firstname);
-                    }
+                    nameProfile.setText(firstname != null ? firstname : "");
                     usernameProfile.setText(username);
                     emailProfile.setText(email);
 
-                    //Gestionar la foto de perfil del usuario
-                    try{
-                        //Si existe imagen la cargamos
+                    try {
                         if (profilePicture != null && !profilePicture.trim().isEmpty()) {
                             Picasso.get()
                                     .load(profilePicture)
@@ -222,35 +190,30 @@ public class HomeActivity extends AppCompatActivity {
                             profile_picture.setImageResource(R.drawable.login);
                         }
                     } catch (Exception e) {
-                        //Si el usuario no tiene imagen en la base de datos
-                        Picasso.get().load(profilePicture).into(profile_picture);
+                        Picasso.get().load(R.drawable.login).into(profile_picture);
                     }
                 }
             }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
+            @Override public void onCancelled(@NonNull DatabaseError error) {}
         });
     }
 
-    //Metodo para cerrar sesion
+    // Cierra sesión
     private void signOut(){
         firebaseAuth.signOut();
-        Toast.makeText(this, "Signed out successfully", Toast.LENGTH_SHORT).show();
-
-        startActivity(new Intent(HomeActivity.this, MainActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
+        Toast.makeText(this,
+                getString(R.string.toast_signed_out),
+                Toast.LENGTH_SHORT).show();
+        startActivity(new Intent(HomeActivity.this, MainActivity.class)
+                .setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
     }
 
-    //Metodo para estado online o offline
+    // Estado online/offline
     private void status(String status){
-        DATABASE = FirebaseDatabase.getInstance().getReference("users").child(firebaseUser.getUid());
-
-        HashMap<String, Object> hashMap = new HashMap<>();
-        hashMap.put("status", status);
-
-        DATABASE.updateChildren(hashMap);
+        DatabaseReference ref = FirebaseDatabase.getInstance()
+                .getReference("users")
+                .child(firebaseUser.getUid());
+        ref.updateChildren(new HashMap<String,Object>() {{ put("status", status); }});
     }
 
     @Override

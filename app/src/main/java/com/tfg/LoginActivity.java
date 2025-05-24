@@ -6,7 +6,6 @@ import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.util.Patterns;
-import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -22,16 +21,12 @@ import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.common.api.ApiException;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthCredential;
-import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
 import com.google.firebase.database.*;
-
 import java.util.HashMap;
 
 public class LoginActivity extends AppCompatActivity {
@@ -63,10 +58,10 @@ public class LoginActivity extends AppCompatActivity {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         }
 
-        emailLogin      = findViewById(R.id.emailLogin);
-        pwdLogin        = findViewById(R.id.pwdLogin);
-        registerLogin   = findViewById(R.id.registerLogin);
-        googleLogin     = findViewById(R.id.googleLogin);
+        emailLogin = findViewById(R.id.emailLogin);
+        pwdLogin = findViewById(R.id.pwdLogin);
+        registerLogin = findViewById(R.id.registerLogin);
+        googleLogin = findViewById(R.id.googleLogin);
         tvForgotPassword= findViewById(R.id.tvForgotPassword);
 
         firebaseAuth = FirebaseAuth.getInstance();
@@ -104,7 +99,7 @@ public class LoginActivity extends AppCompatActivity {
         // Asignamos evento al botón de ingresar
         registerLogin.setOnClickListener(v -> {
             String email = emailLogin.getText().toString();
-            String pwd   = pwdLogin.getText().toString();
+            String pwd = pwdLogin.getText().toString();
 
             if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()){
                 emailLogin.setError("Invalid email address");
@@ -165,7 +160,7 @@ public class LoginActivity extends AppCompatActivity {
                 firebaseAuthentication(account);
             } catch (ApiException e){
                 Toast.makeText(this,
-                        "Error de inicio de sesión: " + e.getStatusCode(),
+                        getString(R.string.error_google_signin, e.getStatusCode()),
                         Toast.LENGTH_SHORT).show();
             }
         }
@@ -232,9 +227,11 @@ public class LoginActivity extends AppCompatActivity {
                                         finish();
                                     })
                                     .addOnFailureListener(e ->
-                                            Toast.makeText(LoginActivity.this,
-                                                    "Error al guardar usuario: " + e.getMessage(),
-                                                    Toast.LENGTH_LONG).show()
+                                            Toast.makeText(
+                                                    LoginActivity.this,
+                                                    getString(R.string.error_saving_user, e.getMessage()),
+                                                    Toast.LENGTH_LONG
+                                            ).show()
                                     );
                         }
                     }
@@ -254,9 +251,11 @@ public class LoginActivity extends AppCompatActivity {
                     if (task.isSuccessful()) {
                         startActivity(new Intent(LoginActivity.this, HomeActivity.class));
                         FirebaseUser u = firebaseAuth.getCurrentUser();
-                        Toast.makeText(LoginActivity.this,
-                                "Welcome to Fluxe " + (u != null ? u.getEmail() : ""),
-                                Toast.LENGTH_SHORT).show();
+                        Toast.makeText(
+                                LoginActivity.this,
+                                getString(R.string.toast_welcome, email),
+                                Toast.LENGTH_SHORT
+                        ).show();
                         finish();
                     } else {
                         dialogNoSeason();

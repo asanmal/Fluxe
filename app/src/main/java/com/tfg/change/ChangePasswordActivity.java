@@ -4,7 +4,6 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
-import android.util.Patterns;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -42,7 +41,7 @@ public class ChangePasswordActivity extends AppCompatActivity {
 
         ActionBar actionBar = getSupportActionBar();
         if (actionBar != null){
-            actionBar.setTitle("Change Password");
+            actionBar.setTitle(getString(R.string.title_change_password));
             actionBar.setDisplayShowHomeEnabled(true);
             actionBar.setDisplayHomeAsUpEnabled(true);
         }
@@ -50,16 +49,16 @@ public class ChangePasswordActivity extends AppCompatActivity {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         }
 
-        myCredentials   = findViewById(R.id.myCredentials);
-        currentEmail    = findViewById(R.id.currentEmail);
+        myCredentials = findViewById(R.id.myCredentials);
+        currentEmail = findViewById(R.id.currentEmail);
         currentEmailTxt = findViewById(R.id.currentEmailTxt);
-        currentPwdChg   = findViewById(R.id.currentPwdChg);
-        newPwd          = findViewById(R.id.newPwd);
-        updatePwd       = findViewById(R.id.updatePwd);
+        currentPwdChg = findViewById(R.id.currentPwdChg);
+        newPwd = findViewById(R.id.newPwd);
+        updatePwd = findViewById(R.id.updatePwd);
 
         firebaseAuth = FirebaseAuth.getInstance();
-        user         = firebaseAuth.getCurrentUser();
-        users        = FirebaseDatabase.getInstance().getReference("users");
+        user = firebaseAuth.getCurrentUser();
+        users = FirebaseDatabase.getInstance().getReference("users");
         progressDialog = new ProgressDialog(this);
 
         // Cambiar la fuente a las letras
@@ -95,14 +94,14 @@ public class ChangePasswordActivity extends AppCompatActivity {
                 firebaseAuth.sendPasswordResetEmail(u.getEmail())
                         .addOnSuccessListener(aVoid -> {
                             Toast.makeText(this,
-                                    "We’ve sent you an email to reset your password.",
+                                    getString(R.string.reset_email_sent),
                                     Toast.LENGTH_LONG).show();
                             startActivity(new Intent(this, MainActivity.class));
                             finish();
                         })
                         .addOnFailureListener(e ->
                                 Toast.makeText(this,
-                                        "Error sending email: " + e.getMessage(),
+                                        getString(R.string.reset_email_error, e.getMessage()),
                                         Toast.LENGTH_LONG).show()
                         );
                 return;
@@ -110,33 +109,36 @@ public class ChangePasswordActivity extends AppCompatActivity {
 
             // Leer campos
             String before = currentPwdChg.getText().toString().trim();
-            String after  = newPwd.getText().toString().trim();
+            String after = newPwd.getText().toString().trim();
 
             // Validaciones
             if (before.isEmpty()) {
-                Toast.makeText(this, "Current password is empty", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this,
+                        getString(R.string.current_pwd_empty),
+                        Toast.LENGTH_SHORT).show();
                 return;
             }
             if (after.isEmpty()) {
-                newPwd.setError("New password is required");
+                newPwd.setError(getString(R.string.new_pwd_required));
                 newPwd.requestFocus();
                 return;
             }
             if (after.length() < 8 || after.length() > 16) {
-                newPwd.setError("Password must be 8–16 characters");
+                newPwd.setError(getString(R.string.pwd_length_error));
                 newPwd.requestFocus();
                 return;
             }
             if (!after.matches("[A-Za-z0-9]+")) {
-                newPwd.setError("Use only letters and digits");
+                newPwd.setError(getString(R.string.pwd_chars_error));
                 newPwd.requestFocus();
                 return;
             }
 
             // Reautenticamos y actualizamos
-            AuthCredential cred = EmailAuthProvider.getCredential(u.getEmail(), before);
-            progressDialog.setTitle("Updating");
-            progressDialog.setMessage("Please wait...");
+            AuthCredential cred = EmailAuthProvider
+                    .getCredential(u.getEmail(), before);
+            progressDialog.setTitle(getString(R.string.updating_title));
+            progressDialog.setMessage(getString(R.string.updating_message));
             progressDialog.setCancelable(false);
             progressDialog.show();
             u.reauthenticate(cred)
@@ -145,7 +147,7 @@ public class ChangePasswordActivity extends AppCompatActivity {
                                 .addOnSuccessListener(aVoid2 -> {
                                     progressDialog.dismiss();
                                     Toast.makeText(this,
-                                            "Password changed successfully",
+                                            getString(R.string.pwd_changed_success),
                                             Toast.LENGTH_SHORT).show();
                                     startActivity(new Intent(this, MainActivity.class));
                                     finish();
@@ -153,14 +155,14 @@ public class ChangePasswordActivity extends AppCompatActivity {
                                 .addOnFailureListener(e -> {
                                     progressDialog.dismiss();
                                     Toast.makeText(this,
-                                            "Update failed: " + e.getMessage(),
+                                            getString(R.string.pwd_update_failed, e.getMessage()),
                                             Toast.LENGTH_SHORT).show();
                                 });
                     })
                     .addOnFailureListener(e -> {
                         progressDialog.dismiss();
                         Toast.makeText(this,
-                                "Current password incorrect",
+                                getString(R.string.current_pwd_incorrect),
                                 Toast.LENGTH_SHORT).show();
                     });
         });

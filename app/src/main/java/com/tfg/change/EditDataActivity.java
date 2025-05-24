@@ -20,11 +20,7 @@ import java.util.Map;
 
 public class EditDataActivity extends AppCompatActivity {
 
-    private TextInputEditText editUsername,
-            editFirstName,
-            editLastName,
-            editSecondName,
-            editEmail;
+    private TextInputEditText editUsername, editFirstName, editLastName, editSecondName, editEmail;
     private Button btnSaveData;
 
     private FirebaseUser user;
@@ -38,7 +34,7 @@ public class EditDataActivity extends AppCompatActivity {
         // ----- ActionBar -----
         ActionBar actionBar = getSupportActionBar();
         if (actionBar != null){
-            actionBar.setTitle("Change Data");
+            actionBar.setTitle(getString(R.string.title_change_data));
             actionBar.setDisplayShowHomeEnabled(true);
             actionBar.setDisplayHomeAsUpEnabled(true);
         }
@@ -47,16 +43,16 @@ public class EditDataActivity extends AppCompatActivity {
         }
 
         // referencias vistas
-        editUsername   = findViewById(R.id.editUsername);
-        editFirstName  = findViewById(R.id.editFirstName);
-        editLastName   = findViewById(R.id.editLastName);
+        editUsername = findViewById(R.id.editUsername);
+        editFirstName = findViewById(R.id.editFirstName);
+        editLastName = findViewById(R.id.editLastName);
         editSecondName = findViewById(R.id.editSecondName);
-        editEmail      = findViewById(R.id.editEmail);
-        btnSaveData    = findViewById(R.id.btnSaveData);
+        editEmail = findViewById(R.id.editEmail);
+        btnSaveData = findViewById(R.id.btnSaveData);
 
         // Firebase
         user = FirebaseAuth.getInstance().getCurrentUser();
-        db   = FirebaseDatabase.getInstance()
+        db = FirebaseDatabase.getInstance()
                 .getReference("users")
                 .child(user.getUid());
         usersRef = FirebaseDatabase.getInstance()
@@ -92,22 +88,22 @@ public class EditDataActivity extends AppCompatActivity {
         // 2) Validaciones básicas
         if (u.isEmpty() || fn.isEmpty() || em.isEmpty()) {
             Toast.makeText(this,
-                    "Username, name and email are required",
+                    getString(R.string.error_required_fields),
                     Toast.LENGTH_SHORT).show();
             return;
         }
         if (u.length() < 3 || u.length() > 16) {
-            editUsername.setError("Username must be 3–16 characters");
+            editUsername.setError(getString(R.string.error_username_length));
             editUsername.requestFocus();
             return;
         }
         if (!u.matches("[a-z0-9]+")) {
-            editUsername.setError("Use only letters and digits");
+            editUsername.setError(getString(R.string.error_username_chars));
             editUsername.requestFocus();
             return;
         }
         if (!Patterns.EMAIL_ADDRESS.matcher(em).matches()) {
-            editEmail.setError("Invalid email address");
+            editEmail.setError(getString(R.string.error_invalid_email));
             editEmail.requestFocus();
             return;
         }
@@ -124,7 +120,7 @@ public class EditDataActivity extends AppCompatActivity {
                             }
                         }
                         if (conflict) {
-                            editUsername.setError("Username already taken");
+                            editUsername.setError(getString(R.string.error_username_taken));
                             editUsername.requestFocus();
                             return;
                         }
@@ -140,28 +136,28 @@ public class EditDataActivity extends AppCompatActivity {
                                             }
                                         }
                                         if (conflictE) {
-                                            editEmail.setError("Email already in use");
+                                            editEmail.setError(getString(R.string.error_email_taken));
                                             editEmail.requestFocus();
                                             return;
                                         }
-                                        // 5) Todo OK: aplicar cambios
+                                        // 5) aplicar cambios
                                         Map<String,Object> cambios = new HashMap<>();
-                                        cambios.put("username",    u);
-                                        cambios.put("firstName",   fn);
-                                        cambios.put("lastName",    ln);
-                                        cambios.put("secondName",  sn);
-                                        cambios.put("email",       em);
+                                        cambios.put("username", u);
+                                        cambios.put("firstName", fn);
+                                        cambios.put("lastName", ln);
+                                        cambios.put("secondName", sn);
+                                        cambios.put("email", em);
 
                                         db.updateChildren(cambios)
                                                 .addOnCompleteListener(task -> {
                                                     if (task.isSuccessful()) {
                                                         Toast.makeText(EditDataActivity.this,
-                                                                "Data updated",
+                                                                getString(R.string.msg_data_updated),
                                                                 Toast.LENGTH_SHORT).show();
                                                         finish();
                                                     } else {
                                                         Toast.makeText(EditDataActivity.this,
-                                                                "Error: " + task.getException().getMessage(),
+                                                                getString(R.string.error_update, task.getException().getMessage()),
                                                                 Toast.LENGTH_LONG).show();
                                                     }
                                                 });

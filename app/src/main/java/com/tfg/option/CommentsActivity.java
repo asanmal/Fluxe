@@ -23,15 +23,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CommentsActivity extends AppCompatActivity {
-    private TextView            tvCommentsHeader;
-    private RecyclerView        rv;
-    private EditText            editComment;
-    private Button              btnPost;
-    private CommentAdapter      adapter;
-    private List<Comment>       comments = new ArrayList<>();
-    private DatabaseReference   commentsRef;
-    private FirebaseUser        user;
-    private String              postId;
+    private TextView tvCommentsHeader;
+    private RecyclerView rv;
+    private EditText editComment;
+    private Button btnPost;
+    private CommentAdapter adapter;
+    private List<Comment> comments = new ArrayList<>();
+    private DatabaseReference commentsRef;
+    private FirebaseUser user;
+    private String postId;
 
     @Override
     protected void onCreate(Bundle s) {
@@ -47,12 +47,12 @@ public class CommentsActivity extends AppCompatActivity {
         }
 
         tvCommentsHeader = findViewById(R.id.tvCommentsHeader);
-        rv          = findViewById(R.id.rvComments);
+        rv = findViewById(R.id.rvComments);
         editComment = findViewById(R.id.editComment);
-        btnPost     = findViewById(R.id.btnPostComment);
+        btnPost = findViewById(R.id.btnPostComment);
 
-        user    = FirebaseAuth.getInstance().getCurrentUser();
-        postId  = getIntent().getStringExtra("postId");
+        user = FirebaseAuth.getInstance().getCurrentUser();
+        postId = getIntent().getStringExtra("postId");
         commentsRef = FirebaseDatabase.getInstance()
                 .getReference("comments")
                 .child(postId);
@@ -86,7 +86,7 @@ public class CommentsActivity extends AppCompatActivity {
             String text = editComment.getText().toString().trim();
             if (TextUtils.isEmpty(text)) return;
             String id = commentsRef.push().getKey();
-            long ts    = System.currentTimeMillis();
+            long ts = System.currentTimeMillis();
             Comment cm = new Comment(id, user.getUid(), text, ts);
             commentsRef.child(id).setValue(cm);
             editComment.setText("");

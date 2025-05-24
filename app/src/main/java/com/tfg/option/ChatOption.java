@@ -1,5 +1,6 @@
 package com.tfg.option;
 
+import android.content.Intent;
 import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
@@ -14,6 +15,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.tfg.HomeActivity;
 import com.tfg.R;
 import com.tfg.adapters.UserAdapter;
 import com.tfg.models.Chat;
@@ -136,6 +138,9 @@ public class ChatOption extends AppCompatActivity {
     @Override
     public boolean onSupportNavigateUp(){
         finish();
-        return super.onSupportNavigateUp();
+        Intent intent = new Intent(this, HomeActivity.class)
+                .setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
+        startActivity(intent);
+        return true;
     }
 }

@@ -50,19 +50,19 @@ public class CreatePublicationActivity extends AppCompatActivity {
         setContentView(R.layout.activity_create_publication);
         ActionBar ab = getSupportActionBar();
         if (ab != null) {
-            ab.setTitle("Post");
+            ab.setTitle(getString(R.string.title_post));
             ab.setDisplayShowHomeEnabled(true);
             ab.setDisplayHomeAsUpEnabled(true);
         }
 
-        user    = FirebaseAuth.getInstance().getCurrentUser();
+        user = FirebaseAuth.getInstance().getCurrentUser();
         pubsRef = FirebaseDatabase.getInstance().getReference("publications");
-        imgRef  = FirebaseStorage.getInstance().getReference("postImages");
+        imgRef = FirebaseStorage.getInstance().getReference("postImages");
 
         content = findViewById(R.id.editContent);
-        btnGal  = findViewById(R.id.btnChooseImage);
-        btnCam  = findViewById(R.id.btnTakePhoto);
-        btnPub  = findViewById(R.id.btnPublish);
+        btnGal = findViewById(R.id.btnChooseImage);
+        btnCam = findViewById(R.id.btnTakePhoto);
+        btnPub = findViewById(R.id.btnPublish);
         imgPrev = findViewById(R.id.imgPreview);
 
         btnGal.setOnClickListener(v -> openGallery());
@@ -87,14 +87,18 @@ public class CreatePublicationActivity extends AppCompatActivity {
         }
     }
 
-
     private void openCamera() {
         try {
             File f = File.createTempFile("IMG_" + System.currentTimeMillis(), ".jpg", getExternalCacheDir());
             camPath = f.getAbsolutePath();
             Uri uri = FileProvider.getUriForFile(this, getPackageName() + ".fileprovider", f);
-            startActivityForResult(new Intent(MediaStore.ACTION_IMAGE_CAPTURE).putExtra(MediaStore.EXTRA_OUTPUT, uri), REQ_CAM);
-        } catch (IOException e) { e.printStackTrace(); }
+            startActivityForResult(
+                    new Intent(MediaStore.ACTION_IMAGE_CAPTURE).putExtra(MediaStore.EXTRA_OUTPUT, uri),
+                    REQ_CAM
+            );
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
@@ -108,12 +112,11 @@ public class CreatePublicationActivity extends AppCompatActivity {
                 openCamera();
             } else {
                 Toast.makeText(this,
-                        "Camera permission denied",
+                        getString(R.string.toast_camera_denied),
                         Toast.LENGTH_SHORT).show();
             }
         }
     }
-
 
     @Override
     protected void onActivityResult(int req, int res, Intent data) {
@@ -125,7 +128,6 @@ public class CreatePublicationActivity extends AppCompatActivity {
         }
     }
 
-
     private String getExt(Uri uri) {
         ContentResolver cr = getContentResolver();
         return MimeTypeMap.getSingleton().getExtensionFromMimeType(cr.getType(uri));
@@ -134,11 +136,13 @@ public class CreatePublicationActivity extends AppCompatActivity {
     private void publish() {
         String t = content.getText().toString().trim();
         if (t.isEmpty() && imageUri == null) {
-            Toast.makeText(this, "Write something or choose or take a photo", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this,
+                    getString(R.string.toast_write_or_photo),
+                    Toast.LENGTH_SHORT).show();
             return;
         }
         ProgressDialog pd = new ProgressDialog(this);
-        pd.setMessage("Publishing...");
+        pd.setMessage(getString(R.string.msg_publishing));
         pd.show();
         long ts = System.currentTimeMillis();
         String id = pubsRef.push().getKey();
@@ -151,9 +155,13 @@ public class CreatePublicationActivity extends AppCompatActivity {
                     })
                     .addOnCompleteListener(task -> {
                         pd.dismiss();
-                        if (task.isSuccessful() && task.getResult() != null)
+                        if (task.isSuccessful() && task.getResult() != null) {
                             savePublication(id, t, task.getResult().toString(), ts, pd);
-                        else Toast.makeText(this, "Image upload failed", Toast.LENGTH_SHORT).show();
+                        } else {
+                            Toast.makeText(this,
+                                    getString(R.string.toast_image_failed),
+                                    Toast.LENGTH_SHORT).show();
+                        }
                     });
         } else {
             savePublication(id, t, null, ts, pd);
@@ -164,7 +172,11 @@ public class CreatePublicationActivity extends AppCompatActivity {
         pubsRef.child(id).setValue(new Publication(id, user.getUid(), t, img, ts))
                 .addOnCompleteListener(task -> {
                     pd.dismiss();
-                    Toast.makeText(this, task.isSuccessful() ? "Published!" : "Publish failed", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(this,
+                            task.isSuccessful()
+                                    ? getString(R.string.toast_published)
+                                    : getString(R.string.toast_publish_failed),
+                            Toast.LENGTH_SHORT).show();
                     if (task.isSuccessful()) finish();
                 });
     }

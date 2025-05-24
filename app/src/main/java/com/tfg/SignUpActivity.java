@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.util.Patterns;
-import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -14,9 +13,6 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.*;
@@ -46,16 +42,16 @@ public class SignUpActivity extends AppCompatActivity {
         }
 
         // Referencias a vistas
-        username     = findViewById(R.id.username);
-        firstName    = findViewById(R.id.firstName);
-        lastName     = findViewById(R.id.lastName);
-        secondName   = findViewById(R.id.secondName);
-        email        = findViewById(R.id.email);
-        pwd          = findViewById(R.id.pwd);
-        singUpUser   = findViewById(R.id.singUpUser);
+        username = findViewById(R.id.username);
+        firstName = findViewById(R.id.firstName);
+        lastName = findViewById(R.id.lastName);
+        secondName = findViewById(R.id.secondName);
+        email = findViewById(R.id.email);
+        pwd = findViewById(R.id.pwd);
+        singUpUser = findViewById(R.id.singUpUser);
 
-        firebaseAuth   = FirebaseAuth.getInstance();
-        usersRef       = FirebaseDatabase
+        firebaseAuth = FirebaseAuth.getInstance();
+        usersRef = FirebaseDatabase
                 .getInstance("https://fluxe-a2d2d-default-rtdb.europe-west1.firebasedatabase.app")
                 .getReference("users");
         progressDialog = new ProgressDialog(SignUpActivity.this);
@@ -110,7 +106,7 @@ public class SignUpActivity extends AppCompatActivity {
                                                 email.requestFocus();
                                                 return;
                                             }
-                                            // 7) Todo ok: procedemos al registro en Firebase Auth + RTDB
+                                            // 7) Procedemos al registro en Firebase Auth + RTDB
                                             SignUp(userName, e_mail, password);
                                         }
                                         @Override public void onCancelled(@NonNull DatabaseError e) {}
@@ -151,8 +147,8 @@ public class SignUpActivity extends AppCompatActivity {
                         String uid = fbUser.getUid();
 
                         // 2) Preparamos datos para RTDB
-                        String first_Name  = firstName.getText().toString().trim();
-                        String last_Name   = lastName.getText().toString().trim();
+                        String first_Name = firstName.getText().toString().trim();
+                        String last_Name = lastName.getText().toString().trim();
                         String second_Name = secondName.getText().toString().trim();
 
                         HashMap<Object,String> UserData = new HashMap<>();
@@ -169,17 +165,17 @@ public class SignUpActivity extends AppCompatActivity {
                                 .setValue(UserData)
                                 .addOnSuccessListener(unused ->
                                         Toast.makeText(SignUpActivity.this,
-                                                "Data saved to Firebase",
+                                                getString(R.string.data_saved),
                                                 Toast.LENGTH_SHORT).show()
                                 )
                                 .addOnFailureListener(e ->
                                         Toast.makeText(SignUpActivity.this,
-                                                "Error saving data: "+e.getMessage(),
+                                                getString(R.string.error_saving_data, e.getMessage()),
                                                 Toast.LENGTH_SHORT).show()
                                 );
 
                         Toast.makeText(SignUpActivity.this,
-                                "Sign up completed successfully",
+                                getString(R.string.signup_completed),
                                 Toast.LENGTH_SHORT).show();
                         // 4) Vamos al Home
                         startActivity(new Intent(SignUpActivity.this, HomeActivity.class));
@@ -187,14 +183,14 @@ public class SignUpActivity extends AppCompatActivity {
 
                     } else {
                         Toast.makeText(SignUpActivity.this,
-                                "Something went wrong: "+task.getException().getMessage(),
+                                getString(R.string.something_went_wrong, task.getException().getMessage()),
                                 Toast.LENGTH_SHORT).show();
                     }
                 })
                 .addOnFailureListener(e -> {
                     progressDialog.dismiss();
                     Toast.makeText(SignUpActivity.this,
-                            "SignUp failed: "+e.getMessage(),
+                            getString(R.string.signup_failed, e.getMessage()),
                             Toast.LENGTH_SHORT).show();
                 });
     }

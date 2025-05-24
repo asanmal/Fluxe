@@ -2,7 +2,6 @@ package com.tfg.adapters;
 
 import android.content.Context;
 import android.widget.TextView;
-import android.widget.Toast;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,11 +19,11 @@ import java.util.List;
 import java.util.Locale;
 
 public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.VH> {
-    private final Context       ctx;
+    private final Context ctx;
     private final List<Comment> comments;
 
     public CommentAdapter(Context ctx, List<Comment> comments) {
-        this.ctx      = ctx;
+        this.ctx = ctx;
         this.comments = comments;
     }
 
