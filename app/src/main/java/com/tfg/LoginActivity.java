@@ -50,7 +50,7 @@ public class LoginActivity extends AppCompatActivity {
 
         ActionBar actionBar = getSupportActionBar();
         if (actionBar != null){
-            actionBar.setTitle("Login");
+            actionBar.setTitle(R.string.login);
             actionBar.setDisplayShowHomeEnabled(true);
             actionBar.setDisplayHomeAsUpEnabled(true);
         }
@@ -71,7 +71,7 @@ public class LoginActivity extends AppCompatActivity {
         // Creamos la solicitud de inicio para Google
         createRequest();
 
-        // Método para cambiar la fuente
+        // Metodo para cambiar la fuente
         changeFont();
 
         // Forgot password: validamos email y enviamos reset

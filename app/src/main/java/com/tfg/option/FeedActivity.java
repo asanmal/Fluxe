@@ -31,7 +31,7 @@ public class FeedActivity extends AppCompatActivity {
         // ActionBar setup
         ActionBar ab = getSupportActionBar();
         if (ab != null) {
-            ab.setTitle("Post");
+            ab.setTitle(getString(R.string.post));
             ab.setDisplayShowHomeEnabled(true);
             ab.setDisplayHomeAsUpEnabled(true);
         }

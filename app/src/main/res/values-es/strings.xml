@@ -1,0 +1,206 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Fluxe</string>
+
+    <!-- Botones principales de inicio de sesion -->
+    <string name="loginBtn">Iniciar sesión</string>
+    <string name="registroBtn">Registrarse</string>
+
+    <!--Datos de registro-->
+    <string name="singup">Registro</string>
+    <string name="registerTxt">Regístrate para compartir fotos y ver las fotos de tus amigos.</string>
+    <string name="username">Nombre de usuario</string>
+    <string name="firstName">Nombre</string>
+    <string name="lastName">Apellido</string>
+    <string name="secondName">Segundo apellido</string>
+    <string name="email">Correo electrónico</string>
+    <string name="pwd">Contraseña</string>
+    <string name="singUpUser">Registrarse</string>
+
+    <!--Datos de inicio de sesion-->
+    <string name="login">Inicio</string>
+    <string name="emailLogin">Correo electrónico</string>
+    <string name="pwdLogin">Contraseña</string>
+    <string name="registerLogin">INICIAR SESIÓN</string>
+    <string name="forgot_password">¿Olvidaste tu contraseña?</string>
+    <string name="invalid_email">Dirección de correo no válida</string>
+
+    <!-- Datos de inicio de sesion con google -->
+    <string name="default_web_client_id">755456289980-88kpu8u9s116v2hjv7v47jr6d6419r93.apps.googleusercontent.com</string>
+    <string name="googleLogin">Iniciar con Google</string>
+
+    <!--Dialogo personalizado de no inicio de sesion-->
+    <string name="noSeason">No se pudo iniciar sesión, inténtalo de nuevo.</string>
+    <string name="ok_no_season">Aceptar</string>
+
+    <!-- Perfil -->
+    <string name="date"> -- </string>
+    <string name="usernameTxt">Bienvenido: </string>
+    <string name="usernameProfile"> -- </string>
+    <string name="emailTxt">Correo: </string>
+    <string name="emailProfile"> -- </string>
+    <string name="nameTxt">Nombre: </string>
+    <string name="nameProfile"> -- </string>
+
+    <!-- Menu -->
+    <string name="aboutMeOption">Sobre mí</string>
+    <string name="newPostOption">Nuevo post</string>
+    <string name="postOption">Publicaciones</string>
+    <string name="userOption">Usuarios</string>
+    <string name="chatsOption">Chats</string>
+    <string name="signoutBtn">Cerrar sesión</string>
+
+    <!-- Ajustes de perfil -->
+    <string name="my_data">Mis datos</string>
+    <string name="dataTxt">MIS DATOS PERSONALES</string>
+    <string name="dataImg"></string>
+    <string name="dataUsername"> -- </string>
+    <string name="dataFirstName"> -- </string>
+    <string name="dataLastName"> -- </string>
+    <string name="dataSecondName"> -- </string>
+    <string name="dataEmail"> -- </string>
+    <string name="dataPwd"> -- </string>
+    <string name="updateBtn">ACTUALIZAR DATOS</string>
+    <string name="updatePwdBtn">CAMBIAR CONTRASEÑA</string>
+
+    <!-- Hints para los campos -->
+    <string name="hint_username">Nombre de usuario</string>
+    <string name="hint_name">Nombre</string>
+    <string name="hint_last_name">Apellido</string>
+    <string name="hint_second_last_name">Segundo apellido</string>
+    <string name="hint_email">Correo electrónico</string>
+
+    <!-- Texto botón -->
+    <string name="save_changes">Guardar cambios</string>
+
+    <!--TexView para editar la informacion-->
+    <string name="dataUsernameTxt">USUARIO: </string>
+    <string name="dataFirstNameTxt">NOMBRE: </string>
+    <string name="dataLastNameTxt">APELLIDO: </string>
+    <string name="dataSecondNameTxt">SEGUNDO APELLIDO: </string>
+    <string name="dataEmailTxt">CORREO: </string>
+    <string name="dataPwdTxt">CONTRASEÑA: </string>
+
+    <!-- CAMBIAR PASSWORD -->
+    <string name="myCredentials">Mis credenciales</string>
+    <string name="currentEmail"> -- </string>
+    <string name="currentPwd"> -- </string>
+    <string name="currentEmailTxt">Correo actual: </string>
+    <string name="currentPwdTxt">Contraseña actual: </string>
+    <string name="updatePwd">CAMBIAR CONTRASEÑA</string>
+    <string name="currentPwdChg">Contraseña actual</string>
+    <string name="newPwd">Nueva contraseña</string>
+    <string name="noteTxt">Nota: Al cambiar la contraseña se cerrará la sesión actual.</string>
+
+    <!-- CHATS Y LISTA DE USUARIOS-->
+    <string name="chat">Conversaciones</string>
+    <string name="recyclerView">Lista de usuarios</string>
+    <string name="type_message">Escribir un mensaje...</string>
+    <string name="seen_message">Visto</string>
+    <string name="delivered_message">Enviado</string>
+    <string name="search">Buscar</string>
+    <string name="users">Usuarios</string>
+
+    <!-- PUBLICACIONES -->
+    <string name="new_post_title">Nueva publicación</string>
+    <string name="comments">Comentarios</string>
+    <string name="post">Publicaciones</string>
+
+    <!-- Hints y botones -->
+    <string name="hint_what_to_share">¿Qué quieres compartir?</string>
+    <string name="btn_choose_photo">Elegir foto</string>
+    <string name="btn_take_photo">Tomar foto</string>
+    <string name="btn_publish">Publicar</string>
+
+    <!-- para el feed -->
+    <string name="txtAuthor">Autor</string>
+    <string name="txtTime">Hace 5 min</string>
+    <string name="txtContent">Contenido de la publicación</string>
+    <string name="post_image">Imagen de la publicación</string>
+    <string name="ivLike">Me gusta</string>
+    <string name="tvLikeCount">Número de Me gusta</string>
+    <string name="like_button">Botón Me gusta</string>
+
+    <!-- Dentro del feed para comentarios -->
+    <string name="ivComment">Comentario</string>
+    <string name="comment_button">Comentar</string>
+    <string name="hint_write_comment">Escribe un comentario…</string>
+    <string name="btn_post_comment">Publicar</string>
+    <string name="comments_header">Comentarios</string>
+    <string name="comment_count">%d comentarios</string>
+
+    <!-- TOAST MENSAJES -->
+    <!-- Like -->
+    <string name="error_load_likes">No se pudieron cargar los Me gusta</string>
+    <string name="error_like_failed">Error al dar Me gusta</string>
+
+    <!-- ChangePasswordActivity -->
+    <string name="title_change_password">Cambiar contraseña</string>
+    <string name="reset_email_sent">Hemos enviado un correo para restablecer la contraseña.</string>
+    <string name="reset_email_error">Error al enviar correo: %s</string>
+    <string name="current_pwd_empty">La contraseña actual está vacía</string>
+    <string name="new_pwd_required">Se requiere nueva contraseña</string>
+    <string name="pwd_length_error">La contraseña debe tener 8–16 caracteres</string>
+    <string name="pwd_chars_error">Usa solo letras y dígitos</string>
+    <string name="updating_title">Actualizando</string>
+    <string name="updating_message">Por favor espera…</string>
+    <string name="pwd_changed_success">Contraseña cambiada con éxito</string>
+    <string name="pwd_update_failed">Error al actualizar: %s</string>
+    <string name="current_pwd_incorrect">La contraseña actual es incorrecta</string>
+
+    <!-- EditDataActivity -->
+    <string name="title_change_data">Cambiar datos</string>
+    <string name="error_required_fields">Usuario, nombre y correo requeridos</string>
+    <string name="error_username_length">El usuario debe tener 3–16 caracteres</string>
+    <string name="error_username_chars">Usa solo letras y dígitos</string>
+    <string name="error_invalid_email">Dirección de correo no válida</string>
+    <string name="error_username_taken">Usuario ya en uso</string>
+    <string name="error_email_taken">Correo ya en uso</string>
+    <string name="msg_data_updated">Datos actualizados</string>
+    <string name="error_update">Error: %s</string>
+
+    <!-- CreatePublicationActivity -->
+    <string name="title_post">Publicar</string>
+    <string name="toast_camera_denied">Permiso de cámara denegado</string>
+    <string name="toast_write_or_photo">Escribe algo o selecciona/toma una foto</string>
+    <string name="msg_publishing">Publicando…</string>
+    <string name="toast_image_failed">Error al subir imagen</string>
+    <string name="toast_published">Publicado</string>
+    <string name="toast_publish_failed">Error al publicar</string>
+
+    <!-- MessageActivity -->
+    <string name="toast_empty_message">No puedes enviar mensajes vacíos</string>
+
+    <!-- MyDataActivity -->
+    <string name="pub_uploading">Publicando…</string>
+    <string name="toast_failed">¡Falló!</string>
+    <string name="toast_error_fmt">Error: %1$s</string>
+    <string name="toast_no_image_selected">No se seleccionó imagen</string>
+    <string name="toast_upload_in_progress">Subida en progreso</string>
+
+    <!-- HomeActivity -->
+    <string name="title_home">Inicio</string>
+    <string name="toast_my_data">Mis datos</string>
+    <string name="toast_users">Usuarios</string>
+    <string name="toast_create_post">Crear publicación</string>
+    <string name="toast_feed">Feed</string>
+    <string name="toast_logged_in">Sesión iniciada</string>
+    <string name="toast_signed_out">Sesión cerrada</string>
+
+    <!-- LoginActivity -->
+    <string name="title_login">Iniciar sesión</string>
+    <string name="error_saving_user">Error al guardar usuario: %1$s</string>
+    <string name="error_pwd_length">La contraseña debe tener al menos 8 caracteres</string>
+    <string name="error_google_signin">Error en inicio con Google: %1$d</string>
+    <string name="title_signing_in">Iniciando sesión</string>
+    <string name="msg_please_wait">Por favor espera…</string>
+    <string name="toast_welcome">Bienvenido a Fluxe %1$s</string>
+    <string name="error_generic">Error: %1$s</string>
+
+    <!-- SignUpActivity -->
+    <string name="data_saved">Datos guardados en Firebase</string>
+    <string name="error_saving_data">Error al guardar datos: %1$s</string>
+    <string name="signup_completed">Registro completado</string>
+    <string name="something_went_wrong">Algo salió mal: %1$s</string>
+    <string name="signup_failed">Error en registro: %1$s</string>
+</resources>

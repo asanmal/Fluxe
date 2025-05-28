@@ -60,7 +60,7 @@ public class MyDataActivity extends AppCompatActivity {
 
         ActionBar actionBar = getSupportActionBar();
         assert  actionBar!=null;
-        actionBar.setTitle("My Data");
+        actionBar.setTitle(R.string.my_data);
         actionBar.setDisplayShowHomeEnabled(true);
         actionBar.setDisplayHomeAsUpEnabled(true);
 

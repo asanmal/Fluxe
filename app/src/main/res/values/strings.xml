@@ -6,6 +6,7 @@
     <string name="registroBtn">Sign up</string>
 
     <!--Datos de registro-->
+    <string name="singup">Sign Up</string>
     <string name="registerTxt">Sign up to share photos and see your friends photos.</string>
     <string name="username">Username</string>
     <string name="firstName">First Name</string>
@@ -16,6 +17,7 @@
     <string name="singUpUser">Sign up</string>
 
     <!--Datos de inicio de sesion-->
+    <string name="login">Login</string>
     <string name="emailLogin">Email</string>
     <string name="pwdLogin">Password</string>
     <string name="registerLogin">LOGIN</string>
@@ -48,6 +50,7 @@
     <string name="signoutBtn">Log out</string>
 
     <!-- Ajustes de perfil -->
+    <string name="my_data">My data</string>
     <string name="dataTxt">MY PERSONAL DATA</string>
     <string name="dataImg"></string>
     <string name="dataUsername"> -- </string>
@@ -88,11 +91,19 @@
     <string name="newPwd">New password</string>
     <string name="noteTxt">Note: If you change the password, the current session will be closed.</string>
 
-    <!-- CHATS -->
+    <!-- CHATS Y LISTA DE USUARIO-->
+    <string name="chat">Chats</string>
     <string name="recyclerView">Users List</string>
+    <string name="type_message">Type a message...</string>
+    <string name="seen_message">Seen</string>
+    <string name="delivered_message">Delivered</string>
+    <string name="search">Search</string>
+    <string name="users">Users</string>
 
     <!-- PUBLICACIONES -->
     <string name="new_post_title">New Post</string>
+    <string name="comments">Comments</string>
+    <string name="post">Posts</string>
 
     <!-- Hints y botones -->
     <string name="hint_what_to_share">What do you want to share?</string>

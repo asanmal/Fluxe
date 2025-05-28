@@ -37,7 +37,7 @@ public class UsersActivity extends AppCompatActivity {
         // Configuracion ActionBar con flecha Up
         ActionBar ab = getSupportActionBar();
         if (ab != null) {
-            ab.setTitle("Users");
+            ab.setTitle(getString(R.string.users));
             ab.setDisplayShowHomeEnabled(true);
             ab.setDisplayHomeAsUpEnabled(true);
         }

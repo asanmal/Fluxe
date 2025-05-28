@@ -41,7 +41,7 @@ public class CommentsActivity extends AppCompatActivity {
         // ActionBar
         ActionBar ab = getSupportActionBar();
         if (ab != null) {
-            ab.setTitle("Comments");
+            ab.setTitle(R.string.comments);
             ab.setDisplayShowHomeEnabled(true);
             ab.setDisplayHomeAsUpEnabled(true);
         }

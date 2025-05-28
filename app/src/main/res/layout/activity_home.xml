@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     tools:context=".HomeActivity">
 
-    <!-- ScrollView con todo el home -->
+    <!-- ScrollView con el home -->
     <androidx.core.widget.NestedScrollView
         android:fitsSystemWindows="true"
         android:id="@+id/home_scrollview"
