@@ -37,8 +37,9 @@ public class HomeActivity extends AppCompatActivity {
     DatabaseReference DATABASE;
 
     ImageView profile_picture;
-    TextView usernameTxt, emailTxt, nameTxt;
-    TextView date, usernameProfile, emailProfile, nameProfile;
+    TextView usernameTxt, emailTxt;
+    TextView date, usernameProfile, emailProfile;
+    //TextView  nameProfile;
 
     Button signoutBtn, aboutMeOption, newPostOption, postOption, userOption, chatsOption;
 
@@ -65,11 +66,11 @@ public class HomeActivity extends AppCompatActivity {
         date = findViewById(R.id.date);
         usernameProfile = findViewById(R.id.usernameProfile);
         emailProfile = findViewById(R.id.emailProfile);
-        nameProfile = findViewById(R.id.nameProfile);
+        //nameProfile = findViewById(R.id.nameProfile);
 
         usernameTxt = findViewById(R.id.usernameTxt);
         emailTxt = findViewById(R.id.emailTxt);
-        nameTxt = findViewById(R.id.nameTxt);
+        //nameTxt = findViewById(R.id.nameTxt);
 
         /* OPCIONES DE MENU */
         aboutMeOption = findViewById(R.id.aboutMeOption);
@@ -146,6 +147,10 @@ public class HomeActivity extends AppCompatActivity {
             i.putExtra("show", "following");
             startActivity(i);
         });
+
+        findViewById(R.id.btnTestPing).setOnClickListener(v -> {
+            startActivity(new Intent(HomeActivity.this, com.tfg.view.PingActivity.class));
+        });
     }
 
     // Método para cambiar la fuente
@@ -154,10 +159,10 @@ public class HomeActivity extends AppCompatActivity {
         date.setTypeface(tf);
         usernameProfile.setTypeface(tf);
         emailProfile.setTypeface(tf);
-        nameProfile.setTypeface(tf);
+        //nameProfile.setTypeface(tf);
         usernameTxt.setTypeface(tf);
         emailTxt.setTypeface(tf);
-        nameTxt.setTypeface(tf);
+        //nameTxt.setTypeface(tf);
         signoutBtn.setTypeface(tf);
         aboutMeOption.setTypeface(tf);
         newPostOption.setTypeface(tf);
@@ -198,7 +203,7 @@ public class HomeActivity extends AppCompatActivity {
                     String firstname = ds.child("firstName").getValue(String.class);
                     String profilePicture = ds.child("profile_picture").getValue(String.class);
 
-                    nameProfile.setText(firstname != null ? firstname : "");
+                   //nameProfile.setText(firstname != null ? firstname : "");
                     usernameProfile.setText(username);
                     emailProfile.setText(email);
 

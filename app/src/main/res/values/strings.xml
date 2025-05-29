@@ -210,4 +210,14 @@
     <string name="signup_completed">Sign up completed successfully</string>
     <string name="something_went_wrong">Something went wrong: %1$s</string>
     <string name="signup_failed">Sign up failed: %1$s</string>
+
+    <!-- SOCKET, RUNABLE, PROCESS -->
+    <string name="ping_btn_run">Test Connection</string>
+    <string name="ping_init_text">Press the button to start…</string>
+    <string name="ping_running">Starting ping…</string>
+    <string name="ping_error">Error: %1$s</string>
+    <string name="test">Test</string>
+
+
+
 </resources>

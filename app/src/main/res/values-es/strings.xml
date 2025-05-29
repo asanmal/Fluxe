@@ -211,4 +211,11 @@
     <string name="signup_completed">Registro completado</string>
     <string name="something_went_wrong">Algo salió mal: %1$s</string>
     <string name="signup_failed">Error en registro: %1$s</string>
+
+    <!-- SOCKET, RUNABLE, PROCESS -->
+    <string name="ping_btn_run">Probar conexión</string>
+    <string name="ping_init_text">Pulsa el botón para empezar…</string>
+    <string name="ping_running">Iniciando ping…</string>
+    <string name="ping_error">Error: %1$s</string>
+    <string name="test">Test</string>
 </resources>
