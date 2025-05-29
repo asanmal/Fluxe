@@ -42,6 +42,10 @@ public class HomeActivity extends AppCompatActivity {
 
     Button signoutBtn, aboutMeOption, newPostOption, postOption, userOption, chatsOption;
 
+    //Follow contador y ref
+    TextView tvFollowersCount, tvFollowingCount;
+    DatabaseReference followRef;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -74,6 +78,11 @@ public class HomeActivity extends AppCompatActivity {
         userOption = findViewById(R.id.userOption);
         chatsOption = findViewById(R.id.chatsOption);
         signoutBtn = findViewById(R.id.signoutBtn);
+
+        // Follow bindear contadores
+        tvFollowersCount = findViewById(R.id.tvFollowersCount);
+        tvFollowingCount = findViewById(R.id.tvFollowingCount);
+        followRef = FirebaseDatabase.getInstance().getReference("followers");
 
         // Cambiar fuente
         changeFont();
@@ -125,6 +134,18 @@ public class HomeActivity extends AppCompatActivity {
                     getString(R.string.toast_feed),
                     Toast.LENGTH_SHORT).show();
         });
+
+        // FOLLOW: click en contadores para ver lista
+        tvFollowersCount.setOnClickListener(v -> {
+            Intent i = new Intent(HomeActivity.this, UsersActivity.class);
+            i.putExtra("show", "followers");
+            startActivity(i);
+        });
+        tvFollowingCount.setOnClickListener(v -> {
+            Intent i = new Intent(HomeActivity.this, UsersActivity.class);
+            i.putExtra("show", "following");
+            startActivity(i);
+        });
     }
 
     // Método para cambiar la fuente
@@ -143,6 +164,8 @@ public class HomeActivity extends AppCompatActivity {
         postOption.setTypeface(tf);
         userOption.setTypeface(tf);
         chatsOption.setTypeface(tf);
+        tvFollowersCount.setTypeface(tf);
+        tvFollowingCount.setTypeface(tf);
     }
 
     @Override
@@ -196,6 +219,29 @@ public class HomeActivity extends AppCompatActivity {
             }
             @Override public void onCancelled(@NonNull DatabaseError error) {}
         });
+
+        // FOLLOW: contar followers
+        followRef.child(firebaseUser.getUid()).child("followers")
+                .addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override public void onDataChange(@NonNull DataSnapshot ds) {
+                        int cnt = (int) ds.getChildrenCount();
+                        tvFollowersCount.setText(
+                                getString(R.string.followers_count, cnt)
+                        );
+                    }
+                    @Override public void onCancelled(@NonNull DatabaseError e) {}
+                });
+        // FOLLOW: contar following
+        followRef.child(firebaseUser.getUid()).child("following")
+                .addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override public void onDataChange(@NonNull DataSnapshot ds) {
+                        int cnt = (int) ds.getChildrenCount();
+                        tvFollowingCount.setText(
+                                getString(R.string.following_count, cnt)
+                        );
+                    }
+                    @Override public void onCancelled(@NonNull DatabaseError e) {}
+                });
     }
 
     // Cierra sesión

@@ -102,10 +102,10 @@ public class LoginActivity extends AppCompatActivity {
             String pwd = pwdLogin.getText().toString();
 
             if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()){
-                emailLogin.setError("Invalid email address");
+                emailLogin.setError(getString(R.string.invalid_email));
                 emailLogin.setFocusable(true);
             } else if (pwd.length()<8) {
-                pwdLogin.setError("Password must be at least 8 characters");
+                pwdLogin.setError(getString(R.string.pwd_length_error));
                 pwdLogin.setFocusable(true);
             } else {
                 userLogin(email, pwd);
@@ -133,7 +133,7 @@ public class LoginActivity extends AppCompatActivity {
         tvForgotPassword.setTypeface(tf);
     }
 
-    // Método para crear una solicitud de inicio con Google
+    // Metodo para crear una solicitud de inicio con Google
     private void createRequest() {
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestIdToken(getString(R.string.default_web_client_id))
@@ -142,7 +142,7 @@ public class LoginActivity extends AppCompatActivity {
         mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
     }
 
-    // Método para lanzar la pantalla de Google Sign-In
+    // Metodo para lanzar la pantalla de Google Sign-In
     private void signIn(){
         Intent signIntent = mGoogleSignInClient.getSignInIntent();
         startActivityForResult(signIntent, RC_SIGN_IN);
@@ -241,8 +241,8 @@ public class LoginActivity extends AppCompatActivity {
 
     // Inicio de sesión con email/password
     private void userLogin(String email, String pwd) {
-        progressDialog.setTitle("Signing in");
-        progressDialog.setMessage("Please wait...");
+        progressDialog.setTitle(R.string.title_signing_in);
+        progressDialog.setMessage(getString(R.string.msg_please_wait));
         progressDialog.setCancelable(false);
         progressDialog.show();
         firebaseAuth.signInWithEmailAndPassword(email, pwd)

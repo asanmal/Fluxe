@@ -5,6 +5,7 @@ import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -32,8 +33,13 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.VH> {
 
     private final List<User> list;
     private boolean isChat;
-
     String theLastMessage;
+
+    //Tabla de seguidores
+    private FirebaseUser me = FirebaseAuth.getInstance().getCurrentUser();
+    private DatabaseReference followRef =
+            FirebaseDatabase.getInstance()
+                    .getReference("followers");
 
     public UserAdapter(List<User> list, boolean isChat) { this.list = list; this.isChat = isChat;}
 
@@ -88,6 +94,49 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.VH> {
             h.img_off.setVisibility(View.GONE);
         }
 
+        // comprobar si ya sigo a u.getId()
+        followRef.child(me.getUid()).child("following")
+                .addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override public void onDataChange(@NonNull DataSnapshot ds) {
+                        boolean following = ds.hasChild(u.getId());
+                        h.btnFollow.setText(
+                                following
+                                        ? h.itemView.getContext().getString(R.string.unfollow)
+                                        : h.itemView.getContext().getString(R.string.follow)
+                        );
+                    }
+                    @Override public void onCancelled(@NonNull DatabaseError e) {}
+                });
+
+        // manejar click follow/unfollow
+        h.btnFollow.setOnClickListener(v -> {
+            DatabaseReference myFollowing =
+                    followRef.child(me.getUid()).child("following");
+            DatabaseReference theirFollowers =
+                    followRef.child(u.getId()).child("followers");
+            myFollowing.child(u.getId()).addListenerForSingleValueEvent(
+                    new ValueEventListener() {
+                        @Override public void onDataChange(@NonNull DataSnapshot ds) {
+                            if (ds.exists()) {
+                                // ya sigo → dejo de seguir
+                                myFollowing.child(u.getId()).removeValue();
+                                theirFollowers.child(me.getUid()).removeValue();
+                                h.btnFollow.setText(
+                                        v.getContext().getString(R.string.follow)
+                                );
+                            } else {
+                                // no sigo → comienzo a seguir
+                                myFollowing.child(u.getId()).setValue(true);
+                                theirFollowers.child(me.getUid()).setValue(true);
+                                h.btnFollow.setText(
+                                        v.getContext().getString(R.string.unfollow)
+                                );
+                            }
+                        }
+                        @Override public void onCancelled(@NonNull DatabaseError e) {}
+                    });
+        });
+
         h.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -105,6 +154,7 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.VH> {
         private ImageView img_on;
         private ImageView img_off;
         private TextView last_msg;
+        public Button btnFollow;
 
         VH(View v) {
             super(v);
@@ -113,6 +163,7 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.VH> {
             img_on = v.findViewById(R.id.img_on);
             img_off = v.findViewById(R.id.img_off);
             last_msg = v.findViewById(R.id.last_msg);
+            btnFollow = v.findViewById(R.id.btnFollow);
 
         }
     }

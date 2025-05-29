@@ -101,6 +101,14 @@
     <string name="search">Buscar</string>
     <string name="users">Usuarios</string>
 
+    <!-- FOLLOWERS -->
+    <string name="follow">Seguir</string>
+    <string name="unfollow">Dejar de seguir</string>
+    <string name="following">Siguiendo</string>
+    <string name="following_count">%d Siguiendo</string>
+    <string name="followers_count">%d Seguidores</string>
+
+
     <!-- PUBLICACIONES -->
     <string name="new_post_title">Nueva publicación</string>
     <string name="comments">Comentarios</string>

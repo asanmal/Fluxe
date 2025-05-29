@@ -100,6 +100,13 @@
     <string name="search">Search</string>
     <string name="users">Users</string>
 
+    <!-- FOLLOWERS -->
+    <string name="follow">Follow</string>
+    <string name="unfollow">Unfollow</string>
+    <string name="following">Following</string>
+    <string name="following_count">%d Following</string>
+    <string name="followers_count">%d Followers</string>
+
     <!-- PUBLICACIONES -->
     <string name="new_post_title">New Post</string>
     <string name="comments">Comments</string>
