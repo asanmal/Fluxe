@@ -1,28 +1,79 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
+    <!-- red, notificaciones y cámara -->
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
+    <uses-permission android:name="android.permission.CAMERA" />
+
+    <uses-feature
+        android:name="android.hardware.camera"
+        android:required="false" />
 
     <application
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@mipmap/ic_launcherf"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:roundIcon="@mipmap/ic_launcherf_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Fluxe"
         tools:targetApi="31">
         <activity
-            android:name=".Inicio"
+            android:name=".view.PingActivity"
             android:exported="false" />
         <activity
-            android:name=".Registro"
+            android:name=".option.CommentsActivity"
+            android:exported="false" />
+
+        <provider
+            android:name="androidx.core.content.FileProvider"
+            android:authorities="${applicationId}.fileprovider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_paths" />
+        </provider>
+
+        <activity
+            android:name=".change.EditDataActivity"
+            android:exported="false" />
+        <activity
+            android:name=".option.FeedActivity"
+            android:exported="false" />
+        <activity
+            android:name=".option.CreatePublicationActivity"
+            android:exported="false" />
+        <activity
+            android:name=".option.ChatOption"
+            android:exported="false" />
+        <activity
+            android:name=".option.MessageActivity"
+            android:exported="false"
+            android:theme="@style/Theme.Fluxe.Message" />
+        <activity
+            android:name=".option.UsersActivity"
+            android:exported="false" />
+        <activity
+            android:name=".change.ChangePasswordActivity"
+            android:exported="false" />
+        <activity
+            android:name=".option.MyDataActivity"
+            android:exported="false" />
+        <activity
+            android:name=".HomeActivity"
+            android:exported="false" />
+        <activity
+            android:name=".SignUpActivity"
             android:exported="true" />
         <activity
-            android:name=".Login"
+            android:name=".LoginActivity"
             android:exported="false" />
         <activity
-            android:name=".PantallaDeCarga"
+            android:name=".SplashActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

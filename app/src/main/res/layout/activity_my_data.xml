@@ -1,0 +1,224 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".option.MyDataActivity">
+
+    <!-- Contenido scrollable ocupa -->
+    <ScrollView
+        android:fitsSystemWindows="true"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:padding="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/dataTxt"
+                android:text="@string/dataTxt"
+                android:layout_gravity="center"
+                android:textSize="22sp"
+                android:textColor="#000000"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+            <!-- Imagen de perfil -->
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/dataImg"
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="5dp"
+                android:src="@drawable/login"/>
+
+            <!--USERNAME-->
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <!--USERNAME TXT-->
+                <TextView
+                    android:id="@+id/dataUsernameTxt"
+                    android:text="@string/dataUsernameTxt"
+                    android:textSize="18sp"
+                    android:textColor="#000000"
+                    android:layout_marginTop="15dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+
+                <!--USERNAME-->
+                <TextView
+                    android:id="@+id/dataUsername"
+                    android:text="@string/dataUsername"
+                    android:textSize="18sp"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginStart="5dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+
+            </androidx.appcompat.widget.LinearLayoutCompat>
+
+            <!--FIRST NAME-->
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <!--FIRST NAME TXT-->
+                <TextView
+                    android:id="@+id/dataFirstNameTxt"
+                    android:text="@string/dataFirstNameTxt"
+                    android:textSize="18sp"
+                    android:textColor="#000000"
+                    android:layout_marginTop="6dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+
+                <!--FIRST NAME-->
+                <TextView
+                    android:id="@+id/dataFirstName"
+                    android:text="@string/dataFirstName"
+                    android:textSize="18sp"
+                    android:layout_marginTop="6dp"
+                    android:layout_marginStart="5dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+
+            </androidx.appcompat.widget.LinearLayoutCompat>
+
+            <!-- LAST NAME -->
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <!-- LAST NAME TXT -->
+                <TextView
+                    android:id="@+id/dataLastNameTxt"
+                    android:text="@string/dataLastNameTxt"
+                    android:textSize="18sp"
+                    android:textColor="#000000"
+                    android:layout_marginTop="6dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+
+                <!-- LAST NAME -->
+                <TextView
+                    android:id="@+id/dataLastName"
+                    android:text="@string/dataLastName"
+                    android:textSize="18sp"
+                    android:layout_marginTop="6dp"
+                    android:layout_marginStart="5dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+
+            </androidx.appcompat.widget.LinearLayoutCompat>
+
+            <!-- SECOND LAST NAME -->
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <!-- SECOND LAST NAME TXT -->
+                <TextView
+                    android:id="@+id/dataSecondNameTxt"
+                    android:text="@string/dataSecondNameTxt"
+                    android:textSize="18sp"
+                    android:textColor="#000000"
+                    android:layout_marginTop="6dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+
+                <!-- SECOND LAST NAME -->
+                <TextView
+                    android:id="@+id/dataSecondName"
+                    android:text="@string/dataSecondName"
+                    android:textSize="18sp"
+                    android:layout_marginTop="6dp"
+                    android:layout_marginStart="5dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+
+            </androidx.appcompat.widget.LinearLayoutCompat>
+
+            <!-- EMAIL -->
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <!-- EMAIL TXT -->
+                <TextView
+                    android:id="@+id/dataEmailTxt"
+                    android:text="@string/dataEmailTxt"
+                    android:textSize="18sp"
+                    android:textColor="#000000"
+                    android:layout_marginTop="6dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+
+                <!-- EMAIL -->
+                <TextView
+                    android:id="@+id/dataEmail"
+                    android:text="@string/dataEmail"
+                    android:textSize="18sp"
+                    android:layout_marginTop="6dp"
+                    android:layout_marginStart="5dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+
+            </androidx.appcompat.widget.LinearLayoutCompat>
+
+        </LinearLayout>
+
+    </ScrollView>
+
+    <!-- Botones abajo, siempre visibles -->
+    <LinearLayout
+        android:orientation="vertical"
+        android:padding="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#FFFFFF">
+
+        <!-- BOTON ACTUALIZAR -->
+        <Button
+            android:id="@+id/updateBtn"
+            android:text="@string/updateBtn"
+            android:backgroundTint="#065064"
+            app:cornerRadius="10dp"
+            android:layout_gravity="center"
+            android:drawableLeft="@drawable/update_icon"
+            android:drawablePadding="15dp"
+            android:padding="10dp"
+            android:textColor="#FFFFFF"
+            android:layout_width="290dp"
+            android:layout_height="wrap_content"/>
+
+        <!-- BOTON CONTRASEÑA -->
+        <Button
+            android:id="@+id/updatePwdBtn"
+            android:text="@string/updatePwdBtn"
+            android:backgroundTint="#065064"
+            app:cornerRadius="10dp"
+            android:layout_gravity="center"
+            android:drawableLeft="@drawable/update_icon"
+            android:drawablePadding="10dp"
+            android:padding="10dp"
+            android:textColor="#FFFFFF"
+            android:layout_width="290dp"
+            android:layout_height="wrap_content"/>
+
+    </LinearLayout>
+
+</LinearLayout>

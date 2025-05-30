@@ -1,23 +1,235 @@
 <resources>
     <string name="app_name">Fluxe</string>
 
+    <!-- Botones principales de inicio de sesion -->
     <string name="loginBtn">Login</string>
     <string name="registroBtn">Sign up</string>
 
     <!--Datos de registro-->
-    <string name="registroTxt">Sign up to share photos and see your friends photos.</string>
+    <string name="singup">Sign Up</string>
+    <string name="registerTxt">Sign up to share photos and see your friends photos.</string>
     <string name="username">Username</string>
     <string name="firstName">First Name</string>
     <string name="lastName">Last Name</string>
     <string name="secondName">Second Last Name</string>
-    <string name="birthdate">Birthdate</string>
     <string name="email">Email</string>
     <string name="pwd">Password</string>
-    <string name="registrarUsuario">Sign up</string>
+    <string name="singUpUser">Sign up</string>
 
     <!--Datos de inicio de sesion-->
+    <string name="login">Login</string>
     <string name="emailLogin">Email</string>
     <string name="pwdLogin">Password</string>
-    <string name="registroLogin">Login</string>
+    <string name="registerLogin">LOGIN</string>
+    <string name="forgot_password">Forgot your password?</string>
+    <string name="invalid_email">Invalid email address</string>
+
+    <!-- Datos de inicio de sesion con google -->
+    <string name="default_web_client_id">755456289980-88kpu8u9s116v2hjv7v47jr6d6419r93.apps.googleusercontent.com</string>
+    <string name="googleLogin">Log in with Google</string>
+
+    <!--Dialogo personalizado de no inicio de sesion-->
+    <string name="noSeason">Could not log in, please try again.</string>
+    <string name="ok_no_season">Ok</string>
+
+    <!-- Perfil -->
+    <string name="date"> -- </string>
+    <string name="usernameTxt">Welcome: </string>
+    <string name="usernameProfile"> -- </string>
+    <string name="emailTxt">Email: </string>
+    <string name="emailProfile"> -- </string>
+    <string name="nameTxt">Name: </string>
+    <string name="nameProfile"> -- </string>
+
+    <!-- Menu -->
+    <string name="aboutMeOption">About Me</string>
+    <string name="newPostOption">New Post</string>
+    <string name="postOption">Posts</string>
+    <string name="userOption">Users</string>
+    <string name="chatsOption">Chats</string>
+    <string name="signoutBtn">Log out</string>
+
+    <!-- Ajustes de perfil -->
+    <string name="my_data">My data</string>
+    <string name="dataTxt">MY PERSONAL DATA</string>
+    <string name="dataImg"></string>
+    <string name="dataUsername"> -- </string>
+    <string name="dataFirstName"> -- </string>
+    <string name="dataLastName"> -- </string>
+    <string name="dataSecondName"> -- </string>
+    <string name="dataEmail"> -- </string>
+    <string name="dataPwd"> -- </string>
+    <string name="updateBtn">UPDATE DATA</string>
+    <string name="updatePwdBtn">UPDATE PASSWORD</string>
+
+    <!-- Hints para los campos -->
+    <string name="hint_username">Username</string>
+    <string name="hint_name">Name</string>
+    <string name="hint_last_name">Last Name</string>
+    <string name="hint_second_last_name">Second Last Name</string>
+    <string name="hint_email">Email</string>
+
+    <!-- Texto botón -->
+    <string name="save_changes">Save changes</string>
+
+    <!--TexView para editar la informacion-->
+    <string name="dataUsernameTxt">USERNAME: </string>
+    <string name="dataFirstNameTxt">FIRST NAME: </string>
+    <string name="dataLastNameTxt">LAST NAME: </string>
+    <string name="dataSecondNameTxt">SECOND LAST NAME: </string>
+    <string name="dataEmailTxt">EMAIL: </string>
+    <string name="dataPwdTxt">PASSWORD: </string>
+
+    <!-- CAMBIAR PASSWORD -->
+    <string name="myCredentials">My credentials</string>
+    <string name="currentEmail"> -- </string>
+    <string name="currentPwd"> -- </string>
+    <string name="currentEmailTxt">Current email: </string>
+    <string name="currentPwdTxt">Current Password: </string>
+    <string name="updatePwd">CHANGE PASSWORD</string>
+    <string name="currentPwdChg">Current password</string>
+    <string name="newPwd">New password</string>
+    <string name="noteTxt">Note: If you change the password, the current session will be closed.</string>
+
+    <!-- CHATS Y LISTA DE USUARIO-->
+    <string name="chat">Chats</string>
+    <string name="recyclerView">Users List</string>
+    <string name="type_message">Type a message...</string>
+    <string name="seen_message">Seen</string>
+    <string name="delivered_message">Delivered</string>
+    <string name="search">Search</string>
+    <string name="users">Users</string>
+
+    <!-- FOLLOWERS -->
+    <string name="follow">Follow</string>
+    <string name="unfollow">Unfollow</string>
+    <string name="following">Following</string>
+    <string name="following_count">%d Following</string>
+    <string name="followers_count">%d Followers</string>
+
+    <!-- PUBLICACIONES -->
+    <string name="new_post_title">New Post</string>
+    <string name="comments">Comments</string>
+    <string name="post">Posts</string>
+
+    <!-- Hints y botones -->
+    <string name="hint_what_to_share">What do you want to share?</string>
+    <string name="btn_choose_photo">Choose Photo</string>
+    <string name="btn_take_photo">Take Photo</string>
+    <string name="btn_publish">Publish</string>
+
+    <!-- para el feed -->
+    <string name="txtAuthor">Author</string>
+    <string name="txtTime">5 min ago</string>
+    <string name="txtContent">Post content</string>
+    <string name="post_image">Post image</string>
+    <string name="ivLike">ivLike</string>
+    <string name="tvLikeCount">tvLikeCount</string>
+    <string name="like_button">Like button</string>
+
+    <!-- Dentro del feed para comentarios -->
+    <string name="ivComment">ivComment</string>
+    <string name="comment_button">Comment</string>
+    <string name="hint_write_comment">Write a comment...</string>
+    <string name="btn_post_comment">Post</string>
+    <string name="comments_header">Comments</string>
+    <string name="comment_count">%d Comments</string>
+
+
+    <!-- TOAST MENSAJES -->
+    <!-- Like -->
+    <string name="error_load_likes">Couldnt load likes</string>
+    <string name="error_like_failed">Like failed</string>
+
+    <!-- ChangePasswordActivity -->
+    <string name="title_change_password">Change Password</string>
+    <string name="reset_email_sent">We have sent you an email to reset your password.</string>
+    <string name="reset_email_error">Error sending email: %s</string>
+    <string name="current_pwd_empty">Current password is empty</string>
+    <string name="new_pwd_required">New password is required</string>
+    <string name="pwd_length_error">Password must be 8–16 characters</string>
+    <string name="pwd_chars_error">Use only letters and digits</string>
+    <string name="updating_title">Updating</string>
+    <string name="updating_message">Please wait…</string>
+    <string name="pwd_changed_success">Password changed successfully</string>
+    <string name="pwd_update_failed">Update failed: %s</string>
+    <string name="current_pwd_incorrect">Current password incorrect</string>
+
+    <!-- EditDataActivity -->
+    <string name="title_change_data">Change Data</string>
+    <string name="error_required_fields">Username, name and email are required</string>
+    <string name="error_username_length">Username must be 3–16 characters</string>
+    <string name="error_username_chars">Use only letters and digits</string>
+    <string name="error_invalid_email">Invalid email address</string>
+    <string name="error_username_taken">Username already taken</string>
+    <string name="error_email_taken">Email already in use</string>
+    <string name="msg_data_updated">Data updated</string>
+    <string name="error_update">Error: %s</string>
+
+    <!-- CreatePublicationActivity -->
+    <string name="title_post">Post</string>
+    <string name="toast_camera_denied">Camera permission denied</string>
+    <string name="toast_write_or_photo">Write something or choose or take a photo</string>
+    <string name="msg_publishing">Publishing...</string>
+    <string name="toast_image_failed">Image upload failed</string>
+    <string name="toast_published">Published!</string>
+    <string name="toast_publish_failed">Publish failed</string>
+
+    <!-- MessageActivity -->
+    <string name="toast_empty_message">You cant send empty message</string>
+
+    <!-- MyDataActivity -->
+    <string name="pub_uploading">Publishing...</string>
+    <string name="toast_failed">Failed!</string>
+    <string name="toast_error_fmt">Error: %1$s</string>
+    <string name="toast_no_image_selected">No image selected</string>
+    <string name="toast_upload_in_progress">Upload in progress</string>
+    <string name="error_no_spaces">Cannot contain spaces</string>
+    <string name="error_max_length">Cannot exceed 40 characters</string>
+    <string name="error_max_lengths">More than 3 and less than 17 characters</string>
+    <string name="error_only_letters">Only letters are allowed</string>
+
+    <!-- HomeActivity -->
+    <string name="title_home">Home</string>
+    <string name="toast_my_data">My Data</string>
+    <string name="toast_users">Users</string>
+    <string name="toast_create_post">Create Post</string>
+    <string name="toast_feed">Feed</string>
+    <string name="toast_logged_in">Logged in successfully</string>
+    <string name="toast_signed_out">Signed out successfully</string>
+
+    <!-- LoginActivity -->
+    <string name="title_login">Login</string>
+    <string name="error_saving_user">Error saving user: %1$s</string>
+    <string name="error_pwd_length">Password must be at least 8 characters</string>
+    <string name="error_google_signin">Google sign-in failed: %1$d</string>
+    <string name="title_signing_in">Signing in</string>
+    <string name="msg_please_wait">Please wait...</string>
+    <string name="toast_welcome">Welcome to Fluxe %1$s</string>
+    <string name="error_generic">Error: %1$s</string>
+
+    <!-- SignUpActivity -->
+    <string name="data_saved">Data saved to Firebase</string>
+    <string name="error_saving_data">Error saving data: %1$s</string>
+    <string name="signup_completed">Sign up completed successfully</string>
+    <string name="something_went_wrong">Something went wrong: %1$s</string>
+    <string name="signup_failed">Sign up failed: %1$s</string>
+
+    <!-- SOCKET, RUNABLE, PROCESS -->
+    <string name="ping_btn_run">Test Connection</string>
+    <string name="ping_init_text">Press the button to start…</string>
+    <string name="ping_running">Starting ping…</string>
+    <string name="ping_error">Error: %1$s</string>
+    <string name="test">Test</string>
+
+    <!-- Claves del extra -->
+    <string name="show_followers">followers</string>
+    <string name="show_following">following</string>
+
+    <!-- Textos para el ActionBar -->
+    <string name="followers_title">Followers</string>
+    <string name="following_title">Following</string>
+
+
 
 </resources>
