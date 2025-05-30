@@ -218,4 +218,12 @@
     <string name="ping_running">Iniciando ping…</string>
     <string name="ping_error">Error: %1$s</string>
     <string name="test">Test</string>
+
+    <!-- Claves del extra -->
+    <string name="show_followers">followers</string>
+    <string name="show_following">following</string>
+
+    <!-- Textos para el ActionBar -->
+    <string name="followers_title">Seguidores</string>
+    <string name="following_title">Siguiendo</string>
 </resources>

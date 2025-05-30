@@ -359,13 +359,12 @@
                     android:layout_margin="3dp"
                     android:text="@string/ping_btn_run"
                     android:backgroundTint="#065064"
-                    app:cornerRadius="8dp"
+                    app:cornerRadius="10dp"
                     android:textSize="14sp"/>
             </androidx.appcompat.widget.LinearLayoutCompat>
 
         </RelativeLayout>
+
     </androidx.core.widget.NestedScrollView>
-
-
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

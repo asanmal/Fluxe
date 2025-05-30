@@ -118,14 +118,14 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.VH> {
                     new ValueEventListener() {
                         @Override public void onDataChange(@NonNull DataSnapshot ds) {
                             if (ds.exists()) {
-                                // ya sigo → dejo de seguir
+                                // ya sigo y dejo de seguir
                                 myFollowing.child(u.getId()).removeValue();
                                 theirFollowers.child(me.getUid()).removeValue();
                                 h.btnFollow.setText(
                                         v.getContext().getString(R.string.follow)
                                 );
                             } else {
-                                // no sigo → comienzo a seguir
+                                // no sigo y comienzo a seguir
                                 myFollowing.child(u.getId()).setValue(true);
                                 theirFollowers.child(me.getUid()).setValue(true);
                                 h.btnFollow.setText(

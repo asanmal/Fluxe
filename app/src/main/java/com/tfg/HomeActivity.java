@@ -41,7 +41,7 @@ public class HomeActivity extends AppCompatActivity {
     TextView date, usernameProfile, emailProfile;
     //TextView  nameProfile;
 
-    Button signoutBtn, aboutMeOption, newPostOption, postOption, userOption, chatsOption;
+    Button signoutBtn, aboutMeOption, newPostOption, postOption, userOption, chatsOption, btnTestPing;
 
     //Follow contador y ref
     TextView tvFollowersCount, tvFollowingCount;
@@ -79,6 +79,7 @@ public class HomeActivity extends AppCompatActivity {
         userOption = findViewById(R.id.userOption);
         chatsOption = findViewById(R.id.chatsOption);
         signoutBtn = findViewById(R.id.signoutBtn);
+        btnTestPing = findViewById(R.id.btnTestPing);
 
         // Follow bindear contadores
         tvFollowersCount = findViewById(R.id.tvFollowersCount);
@@ -102,7 +103,7 @@ public class HomeActivity extends AppCompatActivity {
                     Toast.LENGTH_SHORT).show();
         });
 
-        // Opción de todos los usuarios
+        // Opcion de todos los usuarios
         userOption.setOnClickListener(v -> {
             startActivity(new Intent(HomeActivity.this, UsersActivity.class));
             Toast.makeText(HomeActivity.this,
@@ -110,7 +111,7 @@ public class HomeActivity extends AppCompatActivity {
                     Toast.LENGTH_SHORT).show();
         });
 
-        // Opción para cerrar sesión
+        // Opción para cerrar sesion
         signoutBtn.setOnClickListener(v -> signOut());
 
         // Opción de chats
@@ -120,7 +121,7 @@ public class HomeActivity extends AppCompatActivity {
             startActivity(intent);
         });
 
-        // Opción “New Post”
+        // Opción New Post
         newPostOption.setOnClickListener(v -> {
             startActivity(new Intent(HomeActivity.this, CreatePublicationActivity.class));
             Toast.makeText(HomeActivity.this,
@@ -128,7 +129,7 @@ public class HomeActivity extends AppCompatActivity {
                     Toast.LENGTH_SHORT).show();
         });
 
-        // Opción “Feed”
+        // Opción Feed
         postOption.setOnClickListener(v -> {
             startActivity(new Intent(HomeActivity.this, FeedActivity.class));
             Toast.makeText(HomeActivity.this,
@@ -136,7 +137,7 @@ public class HomeActivity extends AppCompatActivity {
                     Toast.LENGTH_SHORT).show();
         });
 
-        // FOLLOW: click en contadores para ver lista
+        // Click en contadores para ver lista
         tvFollowersCount.setOnClickListener(v -> {
             Intent i = new Intent(HomeActivity.this, UsersActivity.class);
             i.putExtra("show", "followers");
@@ -153,7 +154,7 @@ public class HomeActivity extends AppCompatActivity {
         });
     }
 
-    // Método para cambiar la fuente
+    // Metodo para cambiar la fuente
     private void changeFont(){
         Typeface tf = Typeface.createFromAsset(getAssets(), "fuente/sans_ligera.ttf");
         date.setTypeface(tf);
@@ -171,6 +172,7 @@ public class HomeActivity extends AppCompatActivity {
         chatsOption.setTypeface(tf);
         tvFollowersCount.setTypeface(tf);
         tvFollowingCount.setTypeface(tf);
+        btnTestPing.setTypeface(tf);
     }
 
     @Override
@@ -225,7 +227,7 @@ public class HomeActivity extends AppCompatActivity {
             @Override public void onCancelled(@NonNull DatabaseError error) {}
         });
 
-        // FOLLOW: contar followers
+        // Contar followers
         followRef.child(firebaseUser.getUid()).child("followers")
                 .addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override public void onDataChange(@NonNull DataSnapshot ds) {
@@ -236,7 +238,7 @@ public class HomeActivity extends AppCompatActivity {
                     }
                     @Override public void onCancelled(@NonNull DatabaseError e) {}
                 });
-        // FOLLOW: contar following
+        // Contar following
         followRef.child(firebaseUser.getUid()).child("following")
                 .addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override public void onDataChange(@NonNull DataSnapshot ds) {
@@ -249,7 +251,7 @@ public class HomeActivity extends AppCompatActivity {
                 });
     }
 
-    // Cierra sesión
+    // Cierra sesion
     private void signOut(){
         firebaseAuth.signOut();
         Toast.makeText(this,

@@ -25,25 +25,34 @@ public class UsersActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
     private SearchView searchView;
 
-    // Lista completa y lista filtrada
+    // Referencia a followers para cargar seguidores/siguiendo
+    private DatabaseReference followRef;
+
+    // Usuario actual
+    private FirebaseUser current;
+
+    // Listas de datos
     private final List<User> allUsers = new ArrayList<>();
     private final List<User> filtered = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(com.tfg.R.layout.activity_users);
+        setContentView(R.layout.activity_users);
 
         // Configuracion ActionBar con flecha Up
         ActionBar ab = getSupportActionBar();
         if (ab != null) {
-            ab.setTitle(getString(R.string.users));
             ab.setDisplayShowHomeEnabled(true);
             ab.setDisplayHomeAsUpEnabled(true);
         }
 
+        // Inicializar referencias Firebase
+        current = FirebaseAuth.getInstance().getCurrentUser();
+        followRef = FirebaseDatabase.getInstance().getReference("followers");
+
         // Referencias a vistas
-        searchView   = findViewById(com.tfg.R.id.search_view);
+        searchView   = findViewById(R.id.search_view);
         recyclerView = findViewById(R.id.recyclerView);
 
         // FORZAR SearchView siempre expandido y con botón submit
@@ -75,12 +84,21 @@ public class UsersActivity extends AppCompatActivity {
             }
         });
 
-        // Carga usuarios y al terminar llena ambas listas y refresca
-        loadUsers(() -> {
-            filtered.clear();
-            filtered.addAll(allUsers);
-            adapter.notifyDataSetChanged();
-        });
+        // Condicional por si son seguidores, siguiendo o todos
+        String showMode = getIntent().getStringExtra("show");
+        if (showMode != null && showMode.equals(getString(R.string.show_followers))) {
+            // Sololo seguidores
+            if (ab != null) ab.setTitle(getString(R.string.followers_title));
+            loadFollowers(() -> updateList(adapter));
+        } else if (showMode != null && showMode.equals(getString(R.string.show_following))) {
+            // Solo usuarios seguidos
+            if (ab != null) ab.setTitle(getString(R.string.following_title));
+            loadFollowing(() -> updateList(adapter));
+        } else {
+            // Por defecto todos los usuarios
+            if (ab != null) ab.setTitle(getString(R.string.users));
+            loadUsers(() -> updateList(adapter));
+        }
     }
 
     @Override
@@ -89,11 +107,17 @@ public class UsersActivity extends AppCompatActivity {
         return super.onSupportNavigateUp();
     }
 
-    /** Carga todos los usuarios en allUsers, luego callback */
+    // Actualizar el adapter con el contenido de allUsers
+    private void updateList(UserAdapter adapter) {
+        filtered.clear();
+        filtered.addAll(allUsers);
+        adapter.notifyDataSetChanged();
+    }
+
+    //Carga todos los usuarios en allUsers, luego callback
     private void loadUsers(Runnable onLoaded) {
-        FirebaseUser current = FirebaseAuth.getInstance().getCurrentUser();
-        DatabaseReference ref = FirebaseDatabase.getInstance().getReference("users");
-        ref.addListenerForSingleValueEvent(new ValueEventListener() {
+        DatabaseReference usersRef = FirebaseDatabase.getInstance().getReference("users");
+        usersRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override public void onDataChange(@NonNull DataSnapshot snap) {
                 allUsers.clear();
                 for (DataSnapshot ds : snap.getChildren()) {
@@ -102,19 +126,68 @@ public class UsersActivity extends AppCompatActivity {
 
                     String uid = u.getId();
                     String myUid = current.getUid();
-                    // 1) uid no sea null y 2) comparamos invirtiendo equals
+                    // uid no sea null y comparamos invirtiendo equals
                     if (uid != null && !myUid.equals(uid)) {
                         allUsers.add(u);
                     }
                 }
-
                 onLoaded.run();
             }
             @Override public void onCancelled(@NonNull DatabaseError err) { }
         });
     }
 
-    //Filtra allUsers por username conteniendo query
+    // Carga solo los usuarios que siguen al usuario actual
+    private void loadFollowers(Runnable onLoaded) {
+        if (current == null) return;
+        followRef.child(current.getUid()).child("followers")
+                .addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override public void onDataChange(@NonNull DataSnapshot snap) {
+                        List<String> ids = new ArrayList<>();
+                        for (DataSnapshot ds : snap.getChildren()) {
+                            ids.add(ds.getKey());
+                        }
+                        fetchUsersByIds(ids, onLoaded);
+                    }
+                    @Override public void onCancelled(@NonNull DatabaseError e) { }
+                });
+    }
+
+    //Carga solo los usuarios a los que sigue el usuario actual
+    private void loadFollowing(Runnable onLoaded) {
+        if (current == null) return;
+        followRef.child(current.getUid()).child("following")
+                .addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override public void onDataChange(@NonNull DataSnapshot snap) {
+                        List<String> ids = new ArrayList<>();
+                        for (DataSnapshot ds : snap.getChildren()) {
+                            ids.add(ds.getKey());
+                        }
+                        fetchUsersByIds(ids, onLoaded);
+                    }
+                    @Override public void onCancelled(@NonNull DatabaseError e) { }
+                });
+    }
+
+    //Con un listado de IDs, filtra el nodo users por esos IDs
+    private void fetchUsersByIds(List<String> ids, Runnable onLoaded) {
+        DatabaseReference usersRef = FirebaseDatabase.getInstance().getReference("users");
+        usersRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override public void onDataChange(@NonNull DataSnapshot snap) {
+                allUsers.clear();
+                for (DataSnapshot ds : snap.getChildren()) {
+                    User u = ds.getValue(User.class);
+                    if (u != null && ids.contains(u.getId())) {
+                        allUsers.add(u);
+                    }
+                }
+                onLoaded.run();
+            }
+            @Override public void onCancelled(@NonNull DatabaseError e) { }
+        });
+    }
+
+    // Filtro allUsers por username conteniendo query
     private void filter(String query) {
         filtered.clear();
         if (TextUtils.isEmpty(query)) {
@@ -128,6 +201,4 @@ public class UsersActivity extends AppCompatActivity {
             }
         }
     }
-
-
 }
