@@ -100,7 +100,7 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.VH> {
         VH(View v) {
             super(v);
 
-            avatar   = v.findViewById(R.id.profile_picture);
+            avatar = v.findViewById(R.id.profile_picture);
             show_message = v.findViewById(R.id.show_message);
             txt_seen = v.findViewById(R.id.txt_seen);
         }

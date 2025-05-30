@@ -125,7 +125,7 @@ public class PublicationAdapter extends RecyclerView.Adapter<PublicationAdapter.
                 })
         );
 
-        // Comentarios & contador
+        // Comentarios y contador
         DatabaseReference commentsRef = FirebaseDatabase.getInstance()
                 .getReference("comments")
                 .child(p.getId());

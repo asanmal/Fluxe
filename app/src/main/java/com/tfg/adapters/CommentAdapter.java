@@ -72,8 +72,8 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.VH> {
         VH(@NonNull View v) {
             super(v);
             txtAuthor = v.findViewById(R.id.txtCommentAuthor);
-            txtText   = v.findViewById(R.id.txtCommentText);
-            txtTime   = v.findViewById(R.id.txtCommentTime);
+            txtText = v.findViewById(R.id.txtCommentText);
+            txtTime = v.findViewById(R.id.txtCommentTime);
         }
     }
 }

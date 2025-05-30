@@ -33,10 +33,12 @@
         <ImageView
             android:id="@+id/imgPost"
             android:layout_width="match_parent"
-            android:layout_height="400dp"
+            android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:visibility="gone"
+            android:adjustViewBounds="true"
+            android:maxHeight="500dp"
             android:scaleType="centerCrop"
+            android:visibility="gone"
             android:contentDescription="@string/post_image"/>
 
         <TextView

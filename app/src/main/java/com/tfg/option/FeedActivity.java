@@ -18,10 +18,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class FeedActivity extends AppCompatActivity {
-    private RecyclerView        rv;
-    private PublicationAdapter  adapter;
-    private List<Publication>   pubs   = new ArrayList<>();
-    private DatabaseReference   pubsRef;
+    private RecyclerView rv;
+    private PublicationAdapter adapter;
+    private List<Publication> pubs   = new ArrayList<>();
+    private DatabaseReference pubsRef;
 
     @Override
     protected void onCreate(Bundle b) {

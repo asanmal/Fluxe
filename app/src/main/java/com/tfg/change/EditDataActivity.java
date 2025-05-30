@@ -38,9 +38,6 @@ public class EditDataActivity extends AppCompatActivity {
             actionBar.setDisplayShowHomeEnabled(true);
             actionBar.setDisplayHomeAsUpEnabled(true);
         }
-        if (getSupportActionBar() != null) {
-            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        }
 
         // referencias vistas
         editUsername = findViewById(R.id.editUsername);
@@ -78,69 +75,122 @@ public class EditDataActivity extends AppCompatActivity {
     }
 
     private void saveChange() {
-        // 1) Leer y trim
+        // Leer y trim
         String u  = editUsername.getText().toString().trim().toLowerCase(); // minúsculas
         String fn = editFirstName.getText().toString().trim();
         String ln = editLastName.getText().toString().trim();
         String sn = editSecondName.getText().toString().trim();
         String em = editEmail.getText().toString().trim();
 
-        // 2) Validaciones básicas
-        if (u.isEmpty() || fn.isEmpty() || em.isEmpty()) {
+        // Validaciones de campos requeridos
+        if (u.isEmpty() || fn.isEmpty() || ln.isEmpty() || sn.isEmpty() || em.isEmpty()) {
             Toast.makeText(this,
                     getString(R.string.error_required_fields),
                     Toast.LENGTH_SHORT).show();
             return;
         }
+        // Validar espacios (no permitidos)
+        if (u.contains(" ")) {
+            editUsername.setError(getString(R.string.error_no_spaces));
+            editUsername.requestFocus();
+            return;
+        }
+        if (fn.contains(" ")) {
+            editFirstName.setError(getString(R.string.error_no_spaces));
+            editFirstName.requestFocus();
+            return;
+        }
+        if (ln.contains(" ")) {
+            editLastName.setError(getString(R.string.error_no_spaces));
+            editLastName.requestFocus();
+            return;
+        }
+        if (sn.contains(" ")) {
+            editSecondName.setError(getString(R.string.error_no_spaces));
+            editSecondName.requestFocus();
+            return;
+        }
+        if (em.contains(" ")) {
+            editEmail.setError(getString(R.string.error_no_spaces));
+            editEmail.requestFocus();
+            return;
+        }
+        // Validar solo letras en nombre y apellidos
+        if (!fn.matches("[a-zA-Z]+")) {
+            editFirstName.setError(getString(R.string.error_only_letters));
+            editFirstName.requestFocus();
+            return;
+        }
+        if (!ln.matches("[a-zA-Z]+")) {
+            editLastName.setError(getString(R.string.error_only_letters));
+            editLastName.requestFocus();
+            return;
+        }
+        if (!sn.matches("[a-zA-Z]+")) {
+            editSecondName.setError(getString(R.string.error_only_letters));
+            editSecondName.requestFocus();
+            return;
+        }
+        // Validar longitud de username (mín:3, máx:16)
         if (u.length() < 3 || u.length() > 16) {
             editUsername.setError(getString(R.string.error_username_length));
             editUsername.requestFocus();
             return;
         }
+        // Validar longitud máxima de 40 caracteres en nombres
+        if (fn.length() > 40) {
+            editFirstName.setError(getString(R.string.error_max_length));
+            editFirstName.requestFocus();
+            return;
+        }
+        if (ln.length() > 40) {
+            editLastName.setError(getString(R.string.error_max_length));
+            editLastName.requestFocus();
+            return;
+        }
+        if (sn.length() > 40) {
+            editSecondName.setError(getString(R.string.error_max_length));
+            editSecondName.requestFocus();
+            return;
+        }
+        // Validar caracteres permitidos en username
         if (!u.matches("[a-z0-9]+")) {
             editUsername.setError(getString(R.string.error_username_chars));
             editUsername.requestFocus();
             return;
         }
+        // Validar formato de email
         if (!Patterns.EMAIL_ADDRESS.matcher(em).matches()) {
             editEmail.setError(getString(R.string.error_invalid_email));
             editEmail.requestFocus();
             return;
         }
 
-        // 3) Validar unicidad de username
+        // Validar unicidad de username
         usersRef.orderByChild("username")
                 .equalTo(u)
                 .addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override public void onDataChange(@NonNull DataSnapshot snapU) {
-                        boolean conflict = false;
                         for (DataSnapshot ds : snapU.getChildren()) {
                             if (!ds.getKey().equals(user.getUid())) {
-                                conflict = true; break;
+                                editUsername.setError(getString(R.string.error_username_taken));
+                                editUsername.requestFocus();
+                                return;
                             }
                         }
-                        if (conflict) {
-                            editUsername.setError(getString(R.string.error_username_taken));
-                            editUsername.requestFocus();
-                            return;
-                        }
-                        // 4) Validar unicidad de email
+                        // Validar unicidad de email
                         usersRef.orderByChild("email")
                                 .equalTo(em)
                                 .addListenerForSingleValueEvent(new ValueEventListener() {
                                     @Override public void onDataChange(@NonNull DataSnapshot snapE) {
-                                        boolean conflictE = false;
                                         for (DataSnapshot ds : snapE.getChildren()) {
                                             if (!ds.getKey().equals(user.getUid())) {
-                                                conflictE = true; break;
+                                                editEmail.setError(getString(R.string.error_email_taken));
+                                                editEmail.requestFocus();
+                                                return;
                                             }
                                         }
-                                        if (conflictE) {
-                                            editEmail.setError(getString(R.string.error_email_taken));
-                                            editEmail.requestFocus();
-                                            return;
-                                        }
-                                        // 5) aplicar cambios
+                                        // aplicar cambios
                                         Map<String,Object> cambios = new HashMap<>();
                                         cambios.put("username", u);
                                         cambios.put("firstName", fn);

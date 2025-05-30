@@ -52,7 +52,7 @@ public class UsersActivity extends AppCompatActivity {
         followRef = FirebaseDatabase.getInstance().getReference("followers");
 
         // Referencias a vistas
-        searchView   = findViewById(R.id.search_view);
+        searchView = findViewById(R.id.search_view);
         recyclerView = findViewById(R.id.recyclerView);
 
         // FORZAR SearchView siempre expandido y con botón submit

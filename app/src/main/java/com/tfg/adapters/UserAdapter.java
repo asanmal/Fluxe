@@ -164,7 +164,6 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.VH> {
             img_off = v.findViewById(R.id.img_off);
             last_msg = v.findViewById(R.id.last_msg);
             btnFollow = v.findViewById(R.id.btnFollow);
-
         }
     }
 
@@ -193,14 +192,11 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.VH> {
                         last_msg.setText(theLastMessage);
                         break;
                 }
-
                 theLastMessage = "default";
             }
 
             @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
+            public void onCancelled(@NonNull DatabaseError error) {}
         });
     }
 }

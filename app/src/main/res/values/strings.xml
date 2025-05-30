@@ -184,6 +184,10 @@
     <string name="toast_error_fmt">Error: %1$s</string>
     <string name="toast_no_image_selected">No image selected</string>
     <string name="toast_upload_in_progress">Upload in progress</string>
+    <string name="error_no_spaces">Cannot contain spaces</string>
+    <string name="error_max_length">Cannot exceed 40 characters</string>
+    <string name="error_max_lengths">More than 3 and less than 17 characters</string>
+    <string name="error_only_letters">Only letters are allowed</string>
 
     <!-- HomeActivity -->
     <string name="title_home">Home</string>
