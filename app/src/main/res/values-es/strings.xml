@@ -231,4 +231,12 @@
     <!-- Textos para el ActionBar -->
     <string name="followers_title">Seguidores</string>
     <string name="following_title">Siguiendo</string>
+
+
+    <!-- NOTIFICACIONES -->
+    <string name="notification_title">Nuevo seguidor</string>
+    <string name="notification_text">%1$s te acaba de seguir</string>
+    <string name="channel_name">Seguidores</string>
+    <string name="channel_description">Notificaciones de nuevos seguidores</string>
+
 </resources>

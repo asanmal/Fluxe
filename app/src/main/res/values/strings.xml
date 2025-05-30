@@ -230,6 +230,10 @@
     <string name="followers_title">Followers</string>
     <string name="following_title">Following</string>
 
-
+    <!-- NOTIFICACIONES -->
+    <string name="notification_title">New follower</string>
+    <string name="notification_text">%1$s just followed you</string>
+    <string name="channel_name">Followers</string>
+    <string name="channel_description">Notifications of new followers</string>
 
 </resources>
