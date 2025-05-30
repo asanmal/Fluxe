@@ -8,7 +8,7 @@
     android:layout_height="wrap_content"
     android:fillViewport="true"
     android:background="#fff"
-    tools:context=".Registro">
+    tools:context=".SignUpActivity">
 
     <androidx.appcompat.widget.LinearLayoutCompat
         android:layout_width="match_parent"
@@ -22,26 +22,26 @@
         <androidx.appcompat.widget.AppCompatImageView
             android:layout_width="100dp"
             android:layout_height="100dp"
-            android:layout_marginTop="100dp"
             android:layout_gravity="center"
             android:src="@drawable/logofluxe"/>
 
         <!--Titulo-->
         <TextView
-            android:text="@string/registroTxt"
+            android:text="@string/registerTxt"
             android:textStyle="bold"
             android:textSize="17sp"
             android:textColor="#737373"
             android:gravity="center"
             android:layout_marginBottom="5dp"
             android:layout_width="400dp"
-            android:layout_height="50dp"/>
+            android:layout_height="100dp"/>
 
         <!--Usuario-->
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="400dp"
-            android:layout_height="50dp"
-            android:layout_marginBottom="5dp">
+            android:layout_height="60dp"
+            android:layout_marginBottom="5dp"
+            android:layout_marginTop="10dp">
 
 
             <EditText
@@ -50,16 +50,17 @@
                 android:inputType="textPersonName"
                 android:autofillHints="username"
                 android:layout_width="400dp"
-                android:layout_height="50dp"
-                android:layout_marginTop="10dp"
-                android:textColorHint="#000"/>
+                android:layout_height="60dp"
+                android:textColorHint="#000"
+                android:importantForAutofill="no"
+                android:background="#FFF"/>
 
         </com.google.android.material.textfield.TextInputLayout>
 
         <!--Nombre-->
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="400dp"
-            android:layout_height="50dp"
+            android:layout_height="60dp"
             android:layout_marginBottom="5dp">
 
             <EditText
@@ -68,15 +69,16 @@
                 android:importantForAutofill="no"
                 android:inputType="textCapWords|textAutoCorrect"
                 android:layout_width="400dp"
-                android:layout_height="50dp"
-                android:textColorHint="#000"/>
+                android:layout_height="60dp"
+                android:textColorHint="#000"
+                android:background="#FFF"/>
 
         </com.google.android.material.textfield.TextInputLayout>
 
         <!--Apellido1-->
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="400dp"
-            android:layout_height="50dp"
+            android:layout_height="60dp"
             android:layout_marginBottom="5dp">
 
             <EditText
@@ -85,15 +87,16 @@
                 android:importantForAutofill="no"
                 android:inputType="textCapWords|textAutoCorrect"
                 android:layout_width="400dp"
-                android:layout_height="50dp"
-                android:textColorHint="#000"/>
+                android:layout_height="60dp"
+                android:textColorHint="#000"
+                android:background="#FFF"/>
 
         </com.google.android.material.textfield.TextInputLayout>
 
         <!--Apellido2-->
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="400dp"
-            android:layout_height="50dp"
+            android:layout_height="60dp"
             android:layout_marginBottom="5dp">
 
             <EditText
@@ -102,32 +105,16 @@
                 android:importantForAutofill="no"
                 android:inputType="textCapWords|textAutoCorrect"
                 android:layout_width="400dp"
-                android:layout_height="50dp"
-                android:textColorHint="#000"/>
-
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <!--Fecha de nacimiento-->
-        <com.google.android.material.textfield.TextInputLayout
-            android:layout_width="400dp"
-            android:layout_height="50dp"
-            android:layout_marginBottom="5dp">
-
-            <EditText
-                android:id="@+id/birthdate"
-                android:hint="@string/birthdate"
-                android:importantForAutofill="no"
-                android:inputType="date"
-                android:layout_width="400dp"
-                android:layout_height="50dp"
-                android:textColorHint="#000"/>
+                android:layout_height="60dp"
+                android:textColorHint="#000"
+                android:background="#FFF"/>
 
         </com.google.android.material.textfield.TextInputLayout>
 
         <!--Correo-->
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="400dp"
-            android:layout_height="50dp"
+            android:layout_height="60dp"
             android:layout_marginBottom="5dp">
 
             <EditText
@@ -136,15 +123,18 @@
                 android:inputType="textEmailAddress"
                 android:autofillHints="emailAddress"
                 android:layout_width="400dp"
-                android:layout_height="50dp"
-                android:textColorHint="#000"/>
+                android:layout_height="60dp"
+                android:textColorHint="#000"
+                android:background="#FFF"/>
 
         </com.google.android.material.textfield.TextInputLayout>
 
         <!--Contrasena-->
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="400dp"
-            android:layout_height="50dp">
+            android:layout_height="60dp"
+            app:passwordToggleEnabled="true"
+            app:passwordToggleTint="@color/appGeneral">
 
             <EditText
                 android:id="@+id/pwd"
@@ -152,17 +142,18 @@
                 android:inputType="textPassword"
                 android:autofillHints="password"
                 android:layout_width="400dp"
-                android:layout_height="50dp"
+                android:layout_height="60dp"
                 android:textColorHint="#000"
-                app:passwordToggleEnabled="true"/>
+                app:passwordToggleEnabled="true"
+                android:background="#FFF"/>
 
         </com.google.android.material.textfield.TextInputLayout>
 
 
         <!--Registrar-->
         <Button
-            android:id="@+id/registrarUsuario"
-            android:text="@string/registrarUsuario"
+            android:id="@+id/singUpUser"
+            android:text="@string/singUpUser"
             android:backgroundTint="#3498db"
             android:textColor="#fff"
             app:cornerRadius="0dp"
