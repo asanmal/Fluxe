@@ -33,7 +33,11 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:hint="@string/hint_write_comment"/>
+            android:hint="@string/hint_write_comment"
+            android:maxLines="2"
+            android:scrollbars="vertical"
+            android:overScrollMode="always"
+            android:gravity="top|start"/>
 
         <Button
             android:id="@+id/btnPostComment"

@@ -53,7 +53,10 @@
                 android:layout_height="60dp"
                 android:textColorHint="#000"
                 android:importantForAutofill="no"
-                android:background="#FFF"/>
+                android:background="#FFF"
+                android:singleLine="true"
+                android:scrollHorizontally="true"
+                android:scrollbars="horizontal"/>
 
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -71,7 +74,10 @@
                 android:layout_width="400dp"
                 android:layout_height="60dp"
                 android:textColorHint="#000"
-                android:background="#FFF"/>
+                android:background="#FFF"
+                android:singleLine="true"
+                android:scrollHorizontally="true"
+                android:scrollbars="horizontal"/>
 
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -89,7 +95,10 @@
                 android:layout_width="400dp"
                 android:layout_height="60dp"
                 android:textColorHint="#000"
-                android:background="#FFF"/>
+                android:background="#FFF"
+                android:singleLine="true"
+                android:scrollHorizontally="true"
+                android:scrollbars="horizontal"/>
 
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -107,7 +116,10 @@
                 android:layout_width="400dp"
                 android:layout_height="60dp"
                 android:textColorHint="#000"
-                android:background="#FFF"/>
+                android:background="#FFF"
+                android:singleLine="true"
+                android:scrollHorizontally="true"
+                android:scrollbars="horizontal"/>
 
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -125,7 +137,10 @@
                 android:layout_width="400dp"
                 android:layout_height="60dp"
                 android:textColorHint="#000"
-                android:background="#FFF"/>
+                android:background="#FFF"
+                android:singleLine="true"
+                android:scrollHorizontally="true"
+                android:scrollbars="horizontal"/>
 
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -145,7 +160,10 @@
                 android:layout_height="60dp"
                 android:textColorHint="#000"
                 app:passwordToggleEnabled="true"
-                android:background="#FFF"/>
+                android:background="#FFF"
+                android:singleLine="true"
+                android:scrollHorizontally="true"
+                android:scrollbars="horizontal"/>
 
         </com.google.android.material.textfield.TextInputLayout>
 

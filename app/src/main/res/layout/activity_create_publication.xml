@@ -15,7 +15,11 @@
             android:layout_height="wrap_content"
             android:hint="@string/hint_what_to_share"
             android:inputType="textMultiLine"
-            android:minLines="3"/>
+            android:minLines="3"
+            android:maxLines="3"
+            android:scrollbars="vertical"
+            android:overScrollMode="always"
+            android:gravity="top|start"/>
 
         <Button
             android:id="@+id/btnChooseImage"
@@ -34,8 +38,10 @@
         <ImageView
             android:id="@+id/imgPreview"
             android:layout_width="match_parent"
-            android:layout_height="200dp"
+            android:layout_height="wrap_content"
             android:layout_marginTop="12dp"
+            android:adjustViewBounds="true"
+            android:maxHeight="500dp"
             android:scaleType="centerCrop"
             android:visibility="gone"
             android:background="#EEE"/>

@@ -31,7 +31,10 @@
                     android:id="@+id/editUsername"
                     android:background="@android:color/white"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"/>
+                    android:layout_height="wrap_content"
+                    android:singleLine="true"
+                    android:scrollHorizontally="true"
+                    android:scrollbars="horizontal"/>
             </com.google.android.material.textfield.TextInputLayout>
 
             <!-- NAME -->
@@ -45,7 +48,10 @@
                     android:id="@+id/editFirstName"
                     android:layout_width="match_parent"
                     android:background="@android:color/white"
-                    android:layout_height="wrap_content"/>
+                    android:layout_height="wrap_content"
+                    android:singleLine="true"
+                    android:scrollHorizontally="true"
+                    android:scrollbars="horizontal"/>
             </com.google.android.material.textfield.TextInputLayout>
 
             <!-- LAST NAME -->
@@ -59,7 +65,10 @@
                     android:id="@+id/editLastName"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@android:color/white"/>
+                    android:background="@android:color/white"
+                    android:singleLine="true"
+                    android:scrollHorizontally="true"
+                    android:scrollbars="horizontal"/>
             </com.google.android.material.textfield.TextInputLayout>
 
             <!-- SECOND LAST NAME -->
@@ -73,7 +82,10 @@
                     android:id="@+id/editSecondName"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@android:color/white"/>
+                    android:background="@android:color/white"
+                    android:singleLine="true"
+                    android:scrollHorizontally="true"
+                    android:scrollbars="horizontal"/>
             </com.google.android.material.textfield.TextInputLayout>
 
             <!-- EMAIL -->
@@ -88,7 +100,10 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:inputType="textEmailAddress"
-                    android:background="@android:color/white"/>
+                    android:background="@android:color/white"
+                    android:singleLine="true"
+                    android:scrollHorizontally="true"
+                    android:scrollbars="horizontal"/>
             </com.google.android.material.textfield.TextInputLayout>
 
         </LinearLayout>
