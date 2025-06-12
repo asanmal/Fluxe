@@ -66,6 +66,16 @@ public class HomeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
+        // Inicializar Firebase y verificar sesión ANTES de usar getUid()
+        firebaseAuth = FirebaseAuth.getInstance();
+        firebaseUser = firebaseAuth.getCurrentUser();
+        if (firebaseUser == null) {
+            // No hay usuario autenticado → redirigir al login y terminar
+            startActivity(new Intent(this, MainActivity.class));
+            finish();
+            return;
+        }
+
         // Crear canal de notificación
         createNotificationChannel();
         // Solicitar permiso POST_NOTIFICATIONS en Android 13+
@@ -83,9 +93,7 @@ public class HomeActivity extends AppCompatActivity {
             actionBar.setTitle(getString(R.string.title_home));
         }
 
-        // Inicializar Firebase
-        firebaseAuth = FirebaseAuth.getInstance();
-        firebaseUser = firebaseAuth.getCurrentUser();
+        // Inicializar referencia a la base de datos
         firebaseDatabase = FirebaseDatabase.getInstance();
         DATABASE = firebaseDatabase.getReference("users");
 
@@ -279,6 +287,8 @@ public class HomeActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
+        // Actualizar firebaseUser por si cambió la sesión
+        firebaseUser = firebaseAuth.getCurrentUser();
         verifyLogin();
     }
 
@@ -371,19 +381,23 @@ public class HomeActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        status("online");
+        if (firebaseUser != null) {
+            status("online");
+        }
     }
 
     @Override
     protected void onPause() {
         super.onPause();
-        status("offline");
+        if (firebaseUser != null) {
+            status("offline");
+        }
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        if (followersListener != null) {
+        if (followersListener != null && firebaseUser != null) {
             followRef.child(firebaseUser.getUid())
                     .child("followers")
                     .removeEventListener(followersListener);
